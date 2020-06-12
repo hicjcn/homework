@@ -38,7 +38,7 @@
                 <div>
                     <div style="margin-bottom: 15px;">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" onclick="add()">
                             添加
                         </button>
 
@@ -139,6 +139,20 @@
     <script src="/popper.min.js"></script>
     <script src="/bootstrap.min.js"></script>
     <script>
+        function add() {
+            console.log('add')
+            $('#exampleFormControlInput1').val("")
+            $('#exampleFormControlInput2').val("")
+            $('#exampleFormControlSelect1').val("")
+            $('#exampleFormControlInput3').val("")
+            $('#exampleFormControlInput4').val("")
+            $('#exampleFormControlInput5').val("")
+
+            // 学生号输入框重置
+            $('#exampleFormControlInput1').removeAttr("readonly")
+
+            $('#exampleModal').modal()
+        }
         function update(btn){
             let no = btn.getAttribute('no')
             let name = btn.getAttribute('name')
@@ -147,13 +161,16 @@
             let phone = btn.getAttribute('phone')
             let major = btn.getAttribute('major')
 
-            console.log(no, name, sex, birthday, phone, major)
+            console.log('update', no, name, sex, birthday, phone, major)
             $('#exampleFormControlInput1').val(no)
             $('#exampleFormControlInput2').val(name)
             $('#exampleFormControlSelect1').val(sex)
             $('#exampleFormControlInput3').val(birthday)
             $('#exampleFormControlInput4').val(phone)
             $('#exampleFormControlInput5').val(major)
+
+            // 学生号只读
+            $('#exampleFormControlInput1').attr("readonly","readonly")
 
             $('#exampleModal').modal()
         }
