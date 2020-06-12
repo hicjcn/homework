@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.stu.dao.IStudentDao;
 import com.demo.stu.entity.StudentDO;
+import com.demo.stu.entity.TeacherDO;
 import com.demo.stu.service.IStudentService;
+import com.demo.stu.service.ITeacherService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,9 @@ public class AdminController {
     @Resource
     private IStudentService studentService;
 
+    @Resource
+    private ITeacherService teacherService;
+
     /**
      * 学生管理
      * @return
@@ -38,7 +43,7 @@ public class AdminController {
 
         // 学生数据
         IPage<StudentDO> pages = studentService.page(pageNo, no, name, phone);
-        model.addAttribute("stuPage", pages);
+        model.addAttribute("page", pages);
 
         return "/admin/student";
     }
@@ -53,5 +58,31 @@ public class AdminController {
     public String delStudent(String no) {
         studentService.delete(no);
         return "redirect:/admin/student/list";
+    }
+
+    /**
+     * 教师管理
+     * @return
+     */
+    @GetMapping("/teacher/list")
+    public String teacherList(Integer pageNo, String no, String name, String phone, Model model) {
+
+        // 学生数据
+        IPage<TeacherDO> pages = teacherService.page(pageNo, no, name, phone);
+        model.addAttribute("page", pages);
+
+        return "/admin/teacher";
+    }
+
+    @PostMapping("/teacher/save")
+    public String saveTeacher(TeacherDO teacherDO) {
+        teacherService.save(teacherDO);
+        return "redirect:/admin/teacher/list";
+    }
+
+    @GetMapping("/teacher/del")
+    public String delTeacher(String no) {
+        teacherService.delete(no);
+        return "redirect:/admin/teacher/list";
     }
 }
