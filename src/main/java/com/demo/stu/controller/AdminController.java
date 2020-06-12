@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.stu.dao.IStudentDao;
+import com.demo.stu.entity.CourseDO;
 import com.demo.stu.entity.StudentDO;
 import com.demo.stu.entity.TeacherDO;
+import com.demo.stu.service.ICourseService;
 import com.demo.stu.service.IStudentService;
 import com.demo.stu.service.ITeacherService;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +35,9 @@ public class AdminController {
 
     @Resource
     private ITeacherService teacherService;
+
+    @Resource
+    private ICourseService courseService;
 
     /**
      * 学生管理
@@ -67,7 +72,7 @@ public class AdminController {
     @GetMapping("/teacher/list")
     public String teacherList(Integer pageNo, String no, String name, String phone, Model model) {
 
-        // 学生数据
+        // 数据
         IPage<TeacherDO> pages = teacherService.page(pageNo, no, name, phone);
         model.addAttribute("page", pages);
 
@@ -84,5 +89,31 @@ public class AdminController {
     public String delTeacher(String no) {
         teacherService.delete(no);
         return "redirect:/admin/teacher/list";
+    }
+
+    /**
+     * 课程管理
+     * @return
+     */
+    @GetMapping("/course/list")
+    public String courseList(Integer pageNo, String name, Model model) {
+
+        // 数据
+        IPage<CourseDO> pages = courseService.page(pageNo, name);
+        model.addAttribute("page", pages);
+
+        return "/admin/course";
+    }
+
+    @PostMapping("/course/save")
+    public String saveCourse(CourseDO courseDO) {
+        courseService.save(courseDO);
+        return "redirect:/admin/course/list";
+    }
+
+    @GetMapping("/course/del")
+    public String delCourse(String no) {
+        courseService.delete(no);
+        return "redirect:/admin/course/list";
     }
 }
