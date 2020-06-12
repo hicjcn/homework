@@ -30,6 +30,7 @@ public class AuthInterpretor implements HandlerInterceptor {
         if (null != session.getAttribute("username")) {
             return true;
         }
+        response.sendRedirect("login");
         return false;
     }
 
