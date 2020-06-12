@@ -2,10 +2,16 @@ package com.demo.stu.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import javafx.util.converter.LocalDateStringConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -24,14 +30,9 @@ public class StudentDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 编号
-     */
-    @TableId
-    private String id;
-
-    /**
      * 学号
      */
+    @TableId
     private String no;
 
     /**
@@ -47,7 +48,9 @@ public class StudentDO implements Serializable {
     /**
      * 生日
      */
-    private LocalDateTime birthday;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthday;
 
     /**
      * 手机号
@@ -55,9 +58,9 @@ public class StudentDO implements Serializable {
     private String phone;
 
     /**
-     * 专业号
+     * 专业
      */
-    private Integer majorId;
+    private String major;
 
     /**
      * 密码

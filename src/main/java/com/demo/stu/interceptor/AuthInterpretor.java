@@ -32,7 +32,7 @@ public class AuthInterpretor implements HandlerInterceptor {
         if (null != session.getAttribute(Constants.USERNAME)) {
             return true;
         }
-        response.sendRedirect("login");
+        response.sendRedirect("/login");
         return false;
     }
 

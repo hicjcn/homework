@@ -23,14 +23,9 @@ public class TeacherDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 编号
-     */
-    @TableId
-    private String id;
-
-    /**
      * 教工号
      */
+    @TableId
     private String no;
 
     /**
