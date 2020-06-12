@@ -7,6 +7,7 @@ import com.demo.stu.dao.IStudentDao;
 import com.demo.stu.entity.CourseDO;
 import com.demo.stu.entity.StudentDO;
 import com.demo.stu.entity.TeacherDO;
+import com.demo.stu.entity.vo.CourseVO;
 import com.demo.stu.service.ICourseService;
 import com.demo.stu.service.IStudentService;
 import com.demo.stu.service.ITeacherService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 首页相关控制器
@@ -99,8 +101,12 @@ public class AdminController {
     public String courseList(Integer pageNo, String name, Model model) {
 
         // 数据
-        IPage<CourseDO> pages = courseService.page(pageNo, name);
+        IPage<CourseVO> pages = courseService.page(pageNo, name);
         model.addAttribute("page", pages);
+
+        // 教师列表
+        List<TeacherDO> teacherDOS = teacherService.list();
+        model.addAttribute("teachers", teacherDOS);
 
         return "/admin/course";
     }

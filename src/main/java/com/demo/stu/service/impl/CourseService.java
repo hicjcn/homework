@@ -7,16 +7,25 @@ import com.demo.stu.dao.ICourseDao;
 import com.demo.stu.dao.ITeacherDao;
 import com.demo.stu.entity.CourseDO;
 import com.demo.stu.entity.TeacherDO;
+import com.demo.stu.entity.vo.CourseVO;
 import com.demo.stu.service.ICourseService;
 import com.demo.stu.service.ITeacherService;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService implements ICourseService {
+
+    @Resource
+    private ITeacherDao teacherDao;
 
     @Resource
     private ICourseDao courseDao;
@@ -28,7 +37,7 @@ public class CourseService implements ICourseService {
      * @return
      */
     @Override
-    public IPage<CourseDO> page(Integer pageNo, String name) {
+    public IPage<CourseVO> page(Integer pageNo, String name) {
         QueryWrapper<CourseDO> queryWrapper = new QueryWrapper<>();
         // 模糊搜索name
         if (StringUtils.isNotEmpty(name)) {
@@ -44,7 +53,31 @@ public class CourseService implements ICourseService {
         // 每页10条数据
         page.setSize(10);
 
-        return courseDao.page(page, queryWrapper);
+        IPage<CourseDO> courseDOIPage = courseDao.page(page, queryWrapper);
+
+        // 全部教师
+        List<TeacherDO> teacherDOList = teacherDao.list();
+        Map<String, String> teacherNameMap = teacherDOList.stream().collect(Collectors.toMap(TeacherDO::getNo, TeacherDO::getName));
+
+        // 补充教师姓名
+        IPage<CourseVO> courseVOIPage = new Page<>();
+        courseVOIPage.setSize(courseDOIPage.getSize());
+        courseVOIPage.setCurrent(courseDOIPage.getCurrent());
+        courseVOIPage.setTotal(courseDOIPage.getTotal());
+        courseVOIPage.setPages(courseDOIPage.getPages());
+
+        List<CourseVO> list = Lists.newArrayList();
+        courseDOIPage.getRecords().forEach(courseDO -> {
+            CourseVO courseVO = new CourseVO();
+            BeanUtils.copyProperties(courseDO, courseVO);
+            // 补充教师
+            courseVO.setTeacher(teacherNameMap.getOrDefault(courseVO.getTeacherId(), "未知"));
+            list.add(courseVO);
+        });
+
+        courseVOIPage.setRecords(list);
+
+        return courseVOIPage;
     }
 
     @Override

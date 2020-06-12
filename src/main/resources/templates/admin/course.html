@@ -62,6 +62,12 @@
                                                 <input type="text" name="name" class="form-control" required id="exampleFormControlInput2">
                                             </div>
                                             <div class="form-group">
+                                                <label for="exampleFormControlInput2">任课教师</label>
+                                                <select class="form-control" name="teacherId" required id="exampleFormControlSelect1">
+                                                    <option th:each="item : ${teachers}" th:value="${item.no}" th:text="${item.name}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="exampleFormControlInput4">描述</label>
                                                 <textarea type="text" name="description" class="form-control" id="exampleFormControlInput4"></textarea>
                                             </div>
@@ -80,6 +86,7 @@
                         <tr>
                             <th scope="col">编号</th>
                             <th scope="col">课程名称</th>
+                            <th scope="col">教师</th>
                             <th scope="col">描述</th>
                             <th scope="col">操作</th>
                         </tr>
@@ -88,9 +95,10 @@
                         <tr th:each="item : ${page.getRecords()}">
                             <td th:text="${item.id}"></td>
                             <td th:text="${item.name}"></td>
+                            <td th:text="${item.teacher}"></td>
                             <td th:text="${item.description}"></td>
                             <td>
-                                <button type="button" class="btn btn-primary" th:id="${item.id}" th:name="${item.name}"
+                                <button type="button" class="btn btn-primary" th:id="${item.id}" th:name="${item.name}" th:teacher-id="${item.teacherId}"
                                         th:description="${item.description}" onclick="update(this)">修改</button>
                                 <a type="button" th:href="${'/admin/course/del?no=' + item.id}" class="btn btn-danger">删除</a>
                             </td>
@@ -118,6 +126,7 @@
             console.log('add')
             $('#exampleFormControlInput1').val("")
             $('#exampleFormControlInput2').val("")
+            $('#exampleFormControlSelect1').val("")
             $('#exampleFormControlInput4').val("")
 
             $('#exampleModal').modal()
@@ -125,11 +134,13 @@
         function update(btn){
             let id = btn.getAttribute('id')
             let name = btn.getAttribute('name')
+            let teacherId = btn.getAttribute('teacher-id')
             let description = btn.getAttribute('description')
 
             console.log('update', id, name, description)
             $('#exampleFormControlInput1').val(id)
             $('#exampleFormControlInput2').val(name)
+            $('#exampleFormControlSelect1').val(teacherId)
             $('#exampleFormControlInput4').val(description)
 
             $('#exampleModal').modal()

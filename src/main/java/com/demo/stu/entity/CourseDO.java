@@ -39,5 +39,10 @@ public class CourseDO implements Serializable {
      */
     private String description;
 
+    /**
+     * 教师号
+     */
+    private String teacherId;
+
 
 }

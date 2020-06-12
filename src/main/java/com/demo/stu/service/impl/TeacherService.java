@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class TeacherService implements ITeacherService {
@@ -83,5 +84,15 @@ public class TeacherService implements ITeacherService {
     @Override
     public void delete(String no) {
         teacherDao.removeById(no);
+    }
+
+    /**
+     * 列出所有教师
+     *
+     * @return
+     */
+    @Override
+    public List<TeacherDO> list() {
+        return teacherDao.list();
     }
 }

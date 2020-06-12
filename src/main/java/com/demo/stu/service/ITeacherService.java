@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.demo.stu.entity.StudentDO;
 import com.demo.stu.entity.TeacherDO;
 
+import java.util.List;
+
 public interface ITeacherService {
 
     /**
@@ -27,4 +29,10 @@ public interface ITeacherService {
      * @param no
      */
     void delete(String no);
+
+    /**
+     * 列出所有教师
+     * @return
+     */
+    List<TeacherDO> list();
 }
