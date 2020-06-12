@@ -53,7 +53,8 @@ public class StudentService implements IStudentService {
         } else {
             page.setCurrent(1);
         }
-        page.setSize(2);
+        // 每页10条数据
+        page.setSize(10);
 
         return studentDao.page(page, queryWrapper);
     }
