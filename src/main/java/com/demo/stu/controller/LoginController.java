@@ -1,6 +1,7 @@
 package com.demo.stu.controller;
 
 import com.demo.stu.entity.enumcode.UserType;
+import com.demo.stu.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
 /**
  * 登录相关控制器
  */
@@ -17,6 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+    @Resource
+    private IUserService userService;
+
+    @Resource
+    private HttpSession session;
 
     @GetMapping("login")
     public String login() {
@@ -30,8 +40,9 @@ public class LoginController {
         if (StringUtils.isAnyEmpty(username, password)) {
             model.addAttribute("error", "请输入用户名/密码");
         }
-        if (type == UserType.STUDENT) {
-
+        if (userService.login(username, password, type)) {
+            session.setAttribute("username", username);
+            return "redirect:/index";
         }
         return "login";
     }
