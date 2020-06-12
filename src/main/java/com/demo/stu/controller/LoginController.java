@@ -1,5 +1,6 @@
 package com.demo.stu.controller;
 
+import com.demo.stu.entity.Constants;
 import com.demo.stu.entity.enumcode.UserType;
 import com.demo.stu.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +34,13 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("logout")
+    public String logout() {
+        // 清除session
+        session.invalidate();
+        return "redirect:/login";
+    }
+
     @PostMapping("login")
     public String loginAction(String username, String password, UserType type, Model model) {
         model.addAttribute("username", username);
@@ -41,7 +49,8 @@ public class LoginController {
             model.addAttribute("error", "请输入用户名/密码");
         }
         if (userService.login(username, password, type)) {
-            session.setAttribute("username", username);
+            session.setAttribute(Constants.USERNAME, username);
+            session.setAttribute(Constants.USER_TYPE, type);
             return "redirect:/index";
         }
         return "login";
