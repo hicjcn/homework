@@ -94,4 +94,29 @@ public class CourseService implements ICourseService {
     public void delete(String no) {
         courseDao.removeById(no);
     }
+
+    /**
+     * 获取课程信息
+     *
+     * @param courseId
+     * @return
+     */
+    @Override
+    public CourseVO getCourseVO(String courseId) {
+        CourseDO courseDO = courseDao.getById(courseId);
+
+        // 复制数据
+        CourseVO courseVO = new CourseVO();
+        BeanUtils.copyProperties(courseDO, courseVO);
+
+        // 补充教师信息
+        TeacherDO teacherDO = teacherDao.getById(courseVO.getTeacherId());
+        if (null != teacherDO) {
+            courseVO.setTeacher(teacherDO.getName());
+        } else {
+            courseVO.setTeacher("未知");
+        }
+
+        return courseVO;
+    }
 }

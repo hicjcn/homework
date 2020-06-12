@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class StudentService implements IStudentService {
@@ -82,5 +83,15 @@ public class StudentService implements IStudentService {
     @Override
     public void delete(String no) {
         studentDao.removeById(no);
+    }
+
+    /**
+     * 获取所有学生信息
+     *
+     * @return
+     */
+    @Override
+    public List<StudentDO> getStudents() {
+        return studentDao.list();
     }
 }

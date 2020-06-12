@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.demo.stu.entity.StudentDO;
 import com.demo.stu.entity.enumcode.UserType;
 
+import java.util.List;
+
 public interface IStudentService {
 
     /**
@@ -27,4 +29,10 @@ public interface IStudentService {
      * @param no
      */
     void delete(String no);
+
+    /**
+     * 获取所有学生信息
+     * @return
+     */
+    List<StudentDO> getStudents();
 }

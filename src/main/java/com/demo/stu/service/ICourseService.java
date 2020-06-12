@@ -26,4 +26,11 @@ public interface ICourseService {
      * @param no
      */
     void delete(String no);
+
+    /**
+     * 获取课程信息
+     * @param courseId
+     * @return
+     */
+    CourseVO getCourseVO(String courseId);
 }

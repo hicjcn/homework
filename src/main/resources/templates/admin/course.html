@@ -100,6 +100,7 @@
                             <td>
                                 <button type="button" class="btn btn-primary" th:id="${item.id}" th:name="${item.name}" th:teacher-id="${item.teacherId}"
                                         th:description="${item.description}" onclick="update(this)">修改</button>
+                                <a type="button" class="btn btn-primary" th:href="${'/admin/rel-course-student-do?courseId=' + item.id}">课程学生</a>
                                 <a type="button" th:href="${'/admin/course/del?no=' + item.id}" class="btn btn-danger">删除</a>
                             </td>
                         </tr>

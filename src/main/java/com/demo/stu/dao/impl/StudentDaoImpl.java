@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author MybatisPlus
- * @since 2020-06-12
+ * @since 2020-06-02
  */
 @Service
 public class StudentDaoImpl extends ServiceImpl<StudentDOMapper, StudentDO> implements IStudentDao {
