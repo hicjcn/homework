@@ -62,7 +62,7 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public void save(TeacherDO teacherDO) {
+    public boolean save(TeacherDO teacherDO) {
 
         // 查找是否存在该教工号 补充密码
         TeacherDO teacherDOById = teacherDao.getById(teacherDO.getNo());
@@ -73,7 +73,7 @@ public class TeacherServiceImpl implements ITeacherService {
         if (StringUtils.isEmpty(teacherDO.getPassword())) {
             teacherDO.setPassword(defaultPassword);
         }
-        teacherDao.saveOrUpdate(teacherDO);
+        return teacherDao.saveOrUpdate(teacherDO);
     }
 
     /**

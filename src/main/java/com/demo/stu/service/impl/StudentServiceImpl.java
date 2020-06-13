@@ -62,7 +62,7 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public void save(StudentDO studentDO) {
+    public boolean save(StudentDO studentDO) {
 
         // 查找是否存在该学号 补充密码
         StudentDO studentDOByDb = studentDao.getById(studentDO.getNo());
@@ -73,7 +73,7 @@ public class StudentServiceImpl implements IStudentService {
         if (StringUtils.isEmpty(studentDO.getPassword())) {
             studentDO.setPassword(defaultPassword);
         }
-        studentDao.saveOrUpdate(studentDO);
+        return studentDao.saveOrUpdate(studentDO);
     }
 
     /**

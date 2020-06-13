@@ -66,4 +66,41 @@ public class UserServiceImpl implements IUserService {
 //
 //        return res;
     }
+
+    @Override
+    public boolean resetPwd(String stuNo, String oldPwd, String newPwd, UserType type) {
+        if (StringUtils.isAnyEmpty(oldPwd, newPwd)) {
+            throw new BusinessException(null, "新/旧密码不应为空");
+        }
+
+        boolean res = false;
+
+        switch (type.value()) {
+            case 0:
+                StudentDO student = studentService.getStudentById(stuNo);
+                if (student != null && oldPwd.equals(student.getPassword())) {
+                    student.setPassword(newPwd);
+                    res = studentService.save(student);
+                }
+                break;
+            case 1:
+                TeacherDO teacher = teacherService.getTeacherById(stuNo);
+                if (teacher != null && oldPwd.equals(teacher.getPassword())) {
+                    teacher.setPassword(newPwd);
+                    res = teacherService.save(teacher);
+                }
+                break;
+            case 2:
+                ManagerDO manager = managerService.getManagerByUserName(stuNo);
+                if (manager != null && oldPwd.equals(manager.getPassword())) {
+                    manager.setPassword(newPwd);
+                    res = managerService.save(manager);
+                }
+                break;
+            default:
+                throw new BusinessException(null, "该账号类型不存在");
+        }
+
+        return res;
+    }
 }

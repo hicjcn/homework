@@ -22,8 +22,9 @@ public interface IStudentService {
     /**
      * 保存或更新
      * @param studentDO
+     * @return
      */
-    void save(StudentDO studentDO);
+    boolean save(StudentDO studentDO);
 
     /**
      * 删除

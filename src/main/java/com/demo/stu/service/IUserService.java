@@ -12,4 +12,14 @@ public interface IUserService {
      * @return
      */
     boolean login(String username, String password, UserType type);
+
+    /**
+     * 修改密码
+     * @param stuNo
+     * @param oldPwd
+     * @param newPwd
+     * @param type
+     * @return
+     */
+    boolean resetPwd(String stuNo, String oldPwd, String newPwd, UserType type);
 }

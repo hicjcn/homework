@@ -17,4 +17,10 @@ public interface IManagerService {
      */
     ManagerDO getManagerByUserName(String userName);
 
+    /**
+     * 保存或更新
+     * @param managerDO
+     */
+    boolean save(ManagerDO managerDO);
+
 }

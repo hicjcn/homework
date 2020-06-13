@@ -21,7 +21,7 @@ public interface ITeacherService {
      * 保存或更新
      * @param teacherDO
      */
-    void save(TeacherDO teacherDO);
+    boolean save(TeacherDO teacherDO);
 
     /**
      * 删除
