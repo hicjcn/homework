@@ -76,6 +76,11 @@ public class TeacherServiceImpl implements ITeacherService {
         return teacherDao.saveOrUpdate(teacherDO);
     }
 
+    @Override
+    public boolean update(TeacherDO teacherDO) {
+        return teacherDao.updateById(teacherDO);
+    }
+
     /**
      * 删除
      *

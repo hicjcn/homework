@@ -80,21 +80,21 @@ public class UserServiceImpl implements IUserService {
                 StudentDO student = studentService.getStudentById(stuNo);
                 if (student != null && oldPwd.equals(student.getPassword())) {
                     student.setPassword(newPwd);
-                    res = studentService.save(student);
+                    res = studentService.update(student);
                 }
                 break;
             case 1:
                 TeacherDO teacher = teacherService.getTeacherById(stuNo);
                 if (teacher != null && oldPwd.equals(teacher.getPassword())) {
                     teacher.setPassword(newPwd);
-                    res = teacherService.save(teacher);
+                    res = teacherService.update(teacher);
                 }
                 break;
             case 2:
                 ManagerDO manager = managerService.getManagerByUserName(stuNo);
                 if (manager != null && oldPwd.equals(manager.getPassword())) {
                     manager.setPassword(newPwd);
-                    res = managerService.save(manager);
+                    res = managerService.update(manager);
                 }
                 break;
             default:

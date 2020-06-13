@@ -21,6 +21,6 @@ public interface IManagerService {
      * 保存或更新
      * @param managerDO
      */
-    boolean save(ManagerDO managerDO);
+    boolean update(ManagerDO managerDO);
 
 }

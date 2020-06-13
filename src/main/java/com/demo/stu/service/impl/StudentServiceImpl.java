@@ -76,6 +76,11 @@ public class StudentServiceImpl implements IStudentService {
         return studentDao.saveOrUpdate(studentDO);
     }
 
+    @Override
+    public boolean update(StudentDO studentDO) {
+        return studentDao.updateById(studentDO);
+    }
+
     /**
      * 删除
      *

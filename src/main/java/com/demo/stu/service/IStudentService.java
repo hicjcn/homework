@@ -27,6 +27,11 @@ public interface IStudentService {
     boolean save(StudentDO studentDO);
 
     /**
+     * 更新
+     */
+    boolean update(StudentDO studentDO);
+
+    /**
      * 删除
      * @param no
      */

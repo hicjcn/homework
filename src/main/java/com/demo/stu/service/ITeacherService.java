@@ -20,8 +20,16 @@ public interface ITeacherService {
     /**
      * 保存或更新
      * @param teacherDO
+     * @return
      */
     boolean save(TeacherDO teacherDO);
+
+    /**
+     * 保存或更新
+     * @param teacherDO
+     * @return
+     */
+    boolean update(TeacherDO teacherDO);
 
     /**
      * 删除
