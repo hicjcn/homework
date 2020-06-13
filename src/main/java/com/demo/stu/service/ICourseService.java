@@ -5,6 +5,8 @@ import com.demo.stu.entity.CourseDO;
 import com.demo.stu.entity.TeacherDO;
 import com.demo.stu.entity.vo.CourseVO;
 
+import java.util.List;
+
 public interface ICourseService {
 
     /**
@@ -33,4 +35,11 @@ public interface ICourseService {
      * @return
      */
     CourseVO getCourseVO(String courseId);
+
+    /**
+     * 通过教师号获取其课程数据
+     * @param no
+     * @return
+     */
+    List<CourseDO> getCoursesByTeacherNo(String no);
 }
