@@ -122,4 +122,19 @@ public class CourseServiceImpl implements ICourseService {
 
         return courseVO;
     }
+
+    /**
+     * 通过教师号获取其课程数据
+     *
+     * @param no
+     * @return
+     */
+    @Override
+    public List<CourseDO> getCoursesByTeacherNo(String no) {
+
+        QueryWrapper<CourseDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(CourseDO::getTeacherId, no);
+
+        return courseDao.list(queryWrapper);
+    }
 }
