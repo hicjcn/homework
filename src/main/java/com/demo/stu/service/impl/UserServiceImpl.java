@@ -38,33 +38,33 @@ public class UserServiceImpl implements IUserService {
             throw new BusinessException(null, "账号或密码为空");
         }
 
-        return true;
-//        boolean res = false;
-//
-//        switch (type.value()) {
-//            case 0:
-//                StudentDO student = studentService.getStudentById(username);
-//                if (student != null && password.equals(student.getPassword())) {
-//                    res = true;
-//                }
-//                break;
-//            case 1:
-//                TeacherDO teacher = teacherService.getTeacherById(username);
-//                if (teacher != null && password.equals(teacher.getPassword())) {
-//                    res = true;
-//                }
-//                break;
-//            case 2:
-//                ManagerDO manager = managerService.getManagerByUserName(username);
-//                if (manager != null && password.equals(manager.getPassword())) {
-//                    res = true;
-//                }
-//                break;
-//            default:
-//                throw new BusinessException(null, "该账号类型不存在");
-//        }
-//
-//        return res;
+//        return true;
+        boolean res = false;
+
+        switch (type.value()) {
+            case 0:
+                StudentDO student = studentService.getStudentById(username);
+                if (student != null && password.equals(student.getPassword())) {
+                    res = true;
+                }
+                break;
+            case 1:
+                TeacherDO teacher = teacherService.getTeacherById(username);
+                if (teacher != null && password.equals(teacher.getPassword())) {
+                    res = true;
+                }
+                break;
+            case 2:
+                ManagerDO manager = managerService.getManagerByUserName(username);
+                if (manager != null && password.equals(manager.getPassword())) {
+                    res = true;
+                }
+                break;
+            default:
+                throw new BusinessException(null, "该账号类型不存在");
+        }
+
+        return res;
     }
 
     @Override
