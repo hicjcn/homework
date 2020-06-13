@@ -1,7 +1,6 @@
 package com.demo.stu.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.demo.stu.entity.StudentDO;
 import com.demo.stu.entity.TeacherDO;
 
 import java.util.List;
@@ -35,4 +34,12 @@ public interface ITeacherService {
      * @return
      */
     List<TeacherDO> list();
+
+    /**
+     * 根据账号获取教师
+     *
+     * @param id
+     * @return
+     */
+    TeacherDO getTeacherById(String id);
 }

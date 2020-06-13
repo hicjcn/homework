@@ -94,4 +94,9 @@ public class StudentServiceImpl implements IStudentService {
     public List<StudentDO> getStudents() {
         return studentDao.list();
     }
+
+    @Override
+    public StudentDO getStudentById(String id) {
+        return studentDao.getById(id);
+    }
 }

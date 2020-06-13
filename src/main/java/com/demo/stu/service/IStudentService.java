@@ -2,7 +2,6 @@ package com.demo.stu.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.demo.stu.entity.StudentDO;
-import com.demo.stu.entity.enumcode.UserType;
 
 import java.util.List;
 
@@ -35,4 +34,12 @@ public interface IStudentService {
      * @return
      */
     List<StudentDO> getStudents();
+
+    /**
+     * 根据账号获取学生
+     *
+     * @param id
+     * @return
+     */
+    StudentDO getStudentById(String id);
 }
