@@ -4,10 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.stu.dao.IStudentDao;
+import com.demo.stu.dao.ITeacherDao;
 import com.demo.stu.entity.StudentDO;
-import com.demo.stu.entity.enumcode.UserType;
+import com.demo.stu.entity.TeacherDO;
 import com.demo.stu.service.IStudentService;
-import com.demo.stu.service.IUserService;
+import com.demo.stu.service.ITeacherService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class StudentService implements IStudentService {
+public class TeacherServiceImpl implements ITeacherService {
 
     @Resource
-    private IStudentDao studentDao;
+    private ITeacherDao teacherDao;
 
     @Value("${stu.config.default.password}")
     private String defaultPassword;
@@ -33,22 +34,22 @@ public class StudentService implements IStudentService {
      * @return
      */
     @Override
-    public IPage<StudentDO> page(Integer pageNo, String no, String name, String phone) {
-        QueryWrapper<StudentDO> queryWrapper = new QueryWrapper<>();
+    public IPage<TeacherDO> page(Integer pageNo, String no, String name, String phone) {
+        QueryWrapper<TeacherDO> queryWrapper = new QueryWrapper<>();
         // 模糊搜索no
         if (StringUtils.isNotEmpty(no)) {
-            queryWrapper.lambda().eq(StudentDO::getNo, no);
+            queryWrapper.lambda().eq(TeacherDO::getNo, no);
         }
         // 模糊搜索name
         if (StringUtils.isNotEmpty(name)) {
-            queryWrapper.lambda().like(StudentDO::getName, name);
+            queryWrapper.lambda().like(TeacherDO::getName, name);
         }
         // 搜索phone
         if (StringUtils.isNotEmpty(phone)) {
-            queryWrapper.lambda().eq(StudentDO::getPhone, phone);
+            queryWrapper.lambda().eq(TeacherDO::getPhone, phone);
         }
 
-        IPage<StudentDO> page = new Page<>();
+        IPage<TeacherDO> page = new Page<>();
         if (null != pageNo) {
             page.setCurrent(pageNo);
         } else {
@@ -57,22 +58,22 @@ public class StudentService implements IStudentService {
         // 每页10条数据
         page.setSize(10);
 
-        return studentDao.page(page, queryWrapper);
+        return teacherDao.page(page, queryWrapper);
     }
 
     @Override
-    public void save(StudentDO studentDO) {
+    public void save(TeacherDO teacherDO) {
 
-        // 查找是否存在该学号 补充密码
-        StudentDO studentDOByDb = studentDao.getById(studentDO.getNo());
-        if (null != studentDOByDb) {
-            studentDO.setPassword(studentDOByDb.getPassword());
+        // 查找是否存在该教工号 补充密码
+        TeacherDO teacherDOById = teacherDao.getById(teacherDO.getNo());
+        if (null != teacherDOById) {
+            teacherDO.setPassword(teacherDOById.getPassword());
         }
 
-        if (StringUtils.isEmpty(studentDO.getPassword())) {
-            studentDO.setPassword(defaultPassword);
+        if (StringUtils.isEmpty(teacherDO.getPassword())) {
+            teacherDO.setPassword(defaultPassword);
         }
-        studentDao.saveOrUpdate(studentDO);
+        teacherDao.saveOrUpdate(teacherDO);
     }
 
     /**
@@ -82,16 +83,16 @@ public class StudentService implements IStudentService {
      */
     @Override
     public void delete(String no) {
-        studentDao.removeById(no);
+        teacherDao.removeById(no);
     }
 
     /**
-     * 获取所有学生信息
+     * 列出所有教师
      *
      * @return
      */
     @Override
-    public List<StudentDO> getStudents() {
-        return studentDao.list();
+    public List<TeacherDO> list() {
+        return teacherDao.list();
     }
 }

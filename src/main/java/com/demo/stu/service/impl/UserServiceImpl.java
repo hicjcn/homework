@@ -5,7 +5,7 @@ import com.demo.stu.service.IUserService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements IUserService {
     /**
      * 用户登录
      *

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RelCourseStudentService implements IRelCourseStudentService {
+public class RelCourseStudentServiceImpl implements IRelCourseStudentService {
 
     @Resource
     private IRelCourseStudentDao relCourseStudentDao;

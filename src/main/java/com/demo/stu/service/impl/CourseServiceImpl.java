@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class CourseService implements ICourseService {
+public class CourseServiceImpl implements ICourseService {
 
     @Resource
     private ITeacherDao teacherDao;
