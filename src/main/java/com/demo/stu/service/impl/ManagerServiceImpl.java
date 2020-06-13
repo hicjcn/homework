@@ -9,11 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-/**
- * @Description
- * @Author czc
- * @Date 2020/6/13 10:50
- */
 @Service
 public class ManagerServiceImpl implements IManagerService {
 
