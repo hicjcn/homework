@@ -52,6 +52,8 @@ public class LoginController {
             session.setAttribute(Constants.USERNAME, username);
             session.setAttribute(Constants.USER_TYPE, type);
             return "redirect:/index";
+        } else {
+            model.addAttribute("error", "用户名/密码错误");
         }
         return "login";
     }
