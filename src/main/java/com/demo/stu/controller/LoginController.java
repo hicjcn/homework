@@ -9,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -56,6 +58,38 @@ public class LoginController {
             model.addAttribute("error", "用户名/密码错误");
         }
         return "login";
+    }
+
+
+    @GetMapping("reset-password")
+    public String resetPwd(@ModelAttribute("msg") String msg, Model model) {
+
+        // 如果有提示信息则显示
+        if (StringUtils.isNotEmpty(msg)) {
+            model.addAttribute("msg", msg);
+        }
+
+        return "reset";
+    }
+
+    @PostMapping("reset-password")
+    public String resetPwd(String oldPwd, String newPwd, RedirectAttributes attributes) {
+
+        String username = String.valueOf(session.getAttribute(Constants.USERNAME));
+        UserType userType = UserType.valueOf(String.valueOf(session.getAttribute(Constants.USER_TYPE)));
+
+        if (StringUtils.isAnyEmpty(username, oldPwd, newPwd) || null == userType) {
+            attributes.addAttribute("msg", "信息不完整无法修改");
+        } else {
+            // 修改密码
+            if (userService.resetPwd(username, oldPwd, newPwd, userType)) {
+                attributes.addAttribute("msg", "修改成功");
+            } else {
+                attributes.addAttribute("msg", "修改失败");
+            }
+        }
+
+        return "redirect:/reset-password";
     }
 
 }
