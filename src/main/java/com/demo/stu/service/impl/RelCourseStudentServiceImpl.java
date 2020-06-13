@@ -3,6 +3,7 @@ package com.demo.stu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.demo.stu.dao.IRelCourseStudentDao;
 import com.demo.stu.entity.RelCourseStudentDO;
+import com.demo.stu.entity.vo.GradeVO;
 import com.demo.stu.service.IRelCourseStudentService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -64,5 +65,36 @@ public class RelCourseStudentServiceImpl implements IRelCourseStudentService {
             return Lists.newArrayList();
         }
         return relCourseStudentDOS.stream().map(RelCourseStudentDO::getStudentNo).collect(Collectors.toList());
+    }
+
+    /**
+     * 获取学生的成绩
+     *
+     * @param courseId
+     */
+    @Override
+    public List<GradeVO> getStudentGrades(String courseId) {
+        return relCourseStudentDao.getStudentGrades(courseId);
+    }
+
+    /**
+     * 保存学生课程成绩
+     *
+     * @param relId
+     * @param grade
+     */
+    @Override
+    public boolean saveGrade(String relId, int grade) {
+
+        // 查找数据
+        RelCourseStudentDO relCourseStudentDO = relCourseStudentDao.getById(relId);
+        if (null == relCourseStudentDO) {
+            return false;
+        }
+
+        relCourseStudentDO.setGrade(grade);
+
+        // 保存
+        return relCourseStudentDao.updateById(relCourseStudentDO);
     }
 }
