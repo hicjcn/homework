@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="/bootstrap.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">学生管理系统</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/logout" th:text="${username + ' 退出'}"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div th:replace="base/nav.html"></div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">学生管理</h1>
+<!--                    <div class="btn-toolbar mb-2 mb-md-0">-->
+<!--                        <div class="btn-group mr-2">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>-->
+<!--                        </div>-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">-->
+<!--                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>-->
+<!--                            This week-->
+<!--                        </button>-->
+<!--                    </div>-->
+                </div>
+                <div>
+                    <!--<div style="margin-bottom: 15px;">-->
+                        <!--&lt;!&ndash;&lt;!&ndash; Button trigger modal &ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button type="button" class="btn btn-primary" onclick="add()">&ndash;&gt;-->
+                            <!--&lt;!&ndash;添加&ndash;&gt;-->
+                        <!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash; Modal &ndash;&gt;-->
+                        <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                            <!--<div class="modal-dialog">-->
+                                <!--<div class="modal-content">-->
+                                    <!--<div class="modal-header">-->
+                                        <!--<h5 class="modal-title" id="exampleModalLabel">添加学生</h5>-->
+                                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                                            <!--<span aria-hidden="true">&times;</span>-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-body">-->
+                                        <!--<form method="post" action="/admin/student/save">-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="exampleFormControlInput1">学号</label>-->
+                                                <!--<input type="text" name="no" class="form-control" required id="exampleFormControlInput1">-->
+                                            <!--</div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="exampleFormControlInput2">姓名</label>-->
+                                                <!--<input type="text" name="name" class="form-control" required id="exampleFormControlInput2">-->
+                                            <!--</div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="exampleFormControlSelect1">性别</label>-->
+                                                <!--<select class="form-control" name="sex" required id="exampleFormControlSelect1">-->
+                                                    <!--<option value="1">男</option>-->
+                                                    <!--<option value="0">女</option>-->
+                                                <!--</select>-->
+                                            <!--</div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="exampleFormControlInput3">生日</label>-->
+                                                <!--<input type="date" name="birthday" class="form-control" id="exampleFormControlInput3">-->
+                                            <!--</div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="exampleFormControlInput4">手机号</label>-->
+                                                <!--<input type="text" name="phone" class="form-control" id="exampleFormControlInput4">-->
+                                            <!--</div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="exampleFormControlInput5">专业</label>-->
+                                                <!--<input type="text" name="major" class="form-control" id="exampleFormControlInput5">-->
+                                            <!--</div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<button type="submit" class="btn btn-primary">保存</button>-->
+                                                <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>-->
+                                            <!--</div>-->
+                                        <!--</form>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">教师</th>
+                            <th scope="col">课程</th>
+                            <th scope="col">成绩</th>
+                            <!--<th scope="col">生日</th>-->
+                            <!--<th scope="col">手机号</th>-->
+                            <!--<th scope="col">专业</th>-->
+                            <!--<th scope="col">操作</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${list}">
+                            <td th:text="${item.teacher}"></td>
+                            <td th:text="${item.course}"></td>
+                            <td th:text="${item.score}"></td>
+                            <!--<td th:text="${item.birthday}"></td>-->
+                            <!--<td th:text="${item.phone}"></td>-->
+                            <!--<td th:text="${item.major}"></td>-->
+                            <!--<td>-->
+                                <!--<button type="button" class="btn btn-primary" th:no="${item.no}" th:name="${item.name}"-->
+                                        <!--th:sex="${item.sex}" th:birthday="${item.birthday}"-->
+                                        <!--th:phone="${item.phone}" th:major="${item.major}"-->
+                                        <!--onclick="update(this)">修改</button>-->
+                                <!--<a type="button" th:href="${'/admin/student/del?no=' + item.no}" class="btn btn-danger">删除</a>-->
+                            <!--</td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--<nav aria-label="Page navigation example" th:if="${page.getTotal() > 0}">-->
+                        <!--<ul class="pagination">-->
+                            <!--<li class="page-item"><a class="page-link" th:href="${'/admin/student/list?pageNo=' + ((page.getCurrent() - 1) > 0 ? (page.getCurrent() - 1) : 1)}">上一页</a></li>-->
+                            <!--<li th:class="${item == page.getCurrent() ? 'page-item active' : 'page-item'}" th:each="item : ${#numbers.sequence(1, page.getPages())}">-->
+                                <!--<a class="page-link" th:href="${'/admin/student/list?pageNo=' + item}" th:text="${item}"></a>-->
+                            <!--</li>-->
+                            <!--<li class="page-item"><a class="page-link" th:href="${'/admin/student/list?pageNo=' + ((page.getCurrent() + 1) < page.getPages() ? (page.getCurrent() + 1) : page.getPages())}">下一页</a></li>-->
+                        <!--</ul>-->
+                    <!--</nav>-->
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="/jquery.slim.min.js" ></script>
+    <script src="/popper.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+    <!--<script>-->
+        <!--function add() {-->
+            <!--console.log('add')-->
+            <!--$('#exampleFormControlInput1').val("")-->
+            <!--$('#exampleFormControlInput2').val("")-->
+            <!--$('#exampleFormControlSelect1').val("")-->
+            <!--$('#exampleFormControlInput3').val("")-->
+            <!--$('#exampleFormControlInput4').val("")-->
+            <!--$('#exampleFormControlInput5').val("")-->
+
+            <!--// 学生号输入框重置-->
+            <!--$('#exampleFormControlInput1').removeAttr("readonly")-->
+
+            <!--$('#exampleModal').modal()-->
+        <!--}-->
+        <!--function update(btn){-->
+            <!--let no = btn.getAttribute('no')-->
+            <!--let name = btn.getAttribute('name')-->
+            <!--let sex = btn.getAttribute('sex')-->
+            <!--let birthday = btn.getAttribute('birthday')-->
+            <!--let phone = btn.getAttribute('phone')-->
+            <!--let major = btn.getAttribute('major')-->
+
+            <!--console.log('update', no, name, sex, birthday, phone, major)-->
+            <!--$('#exampleFormControlInput1').val(no)-->
+            <!--$('#exampleFormControlInput2').val(name)-->
+            <!--$('#exampleFormControlSelect1').val(sex)-->
+            <!--$('#exampleFormControlInput3').val(birthday)-->
+            <!--$('#exampleFormControlInput4').val(phone)-->
+            <!--$('#exampleFormControlInput5').val(major)-->
+
+            <!--// 学生号只读-->
+            <!--$('#exampleFormControlInput1').attr("readonly","readonly")-->
+
+            <!--$('#exampleModal').modal()-->
+        <!--}-->
+    <!--</script>-->
+</body>
+</html>

@@ -1,10 +1,13 @@
 package com.demo.stu.entity.vo;
 
+import lombok.Data;
+
 /**
  * @Description
  * @Author czc
  * @Date 2020/6/13 12:41
  */
+@Data
 public class CourseScoreVO {
 
     /**
@@ -15,7 +18,7 @@ public class CourseScoreVO {
     /**
      * 课程
      */
-    private String Course;
+    private String course;
 
     /**
      * 成绩

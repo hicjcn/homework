@@ -2,6 +2,8 @@ package com.demo.stu.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.demo.stu.entity.StudentDO;
+import com.demo.stu.entity.vo.CourseScoreVO;
+import com.demo.stu.entity.vo.CourseVO;
 
 import java.util.List;
 
@@ -42,4 +44,12 @@ public interface IStudentService {
      * @return
      */
     StudentDO getStudentById(String id);
+
+    /**
+     * 根据学生获取课程成绩列表
+     *
+     * @param stuNo
+     * @return
+     */
+    List<CourseScoreVO> getCourseScoresByStu(String stuNo);
 }
