@@ -85,7 +85,7 @@ public class LoginController {
             if (userService.resetPwd(username, oldPwd, newPwd, userType)) {
                 attributes.addAttribute("msg", "修改成功");
             } else {
-                attributes.addAttribute("msg", "修改失败");
+                attributes.addAttribute("msg", "旧密码错误，修改失败");
             }
         }
 
