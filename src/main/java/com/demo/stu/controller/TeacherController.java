@@ -1,9 +1,20 @@
 package com.demo.stu.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.demo.stu.entity.Constants;
+import com.demo.stu.entity.StudentDO;
+import com.demo.stu.entity.TeacherDO;
+import com.demo.stu.service.ITeacherService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -13,8 +24,42 @@ import org.springframework.web.bind.annotation.RestController;
  * @author MybatisPlus
  * @since 2020-06-02
  */
-@RestController
-@RequestMapping("/stu/teacher-do")
+@Controller
+@RequestMapping("/teacher")
 public class TeacherController {
+
+    @Resource
+    private ITeacherService teacherService;
+
+    @Resource
+    private HttpSession session;
+
+    /**
+     * 个人中心
+     * @return
+     */
+    @GetMapping("/info")
+    public String info(Model model, @ModelAttribute("msg") String msg) {
+
+        String username = String.valueOf(session.getAttribute(Constants.USERNAME));
+        if (StringUtils.isNotEmpty(username)) {
+            // 数据
+            TeacherDO teacherDO = teacherService.getTeacherById(username);
+            model.addAttribute("info", teacherDO);
+        }
+
+        if (StringUtils.isNotEmpty(msg)) {
+            model.addAttribute("msg", msg);
+        }
+
+        return "/teacher/info";
+    }
+
+    @PostMapping("/info")
+    public String saveTeacher(TeacherDO teacherDO, RedirectAttributes request) {
+        teacherService.save(teacherDO);
+        request.addAttribute("msg", "更新成功");
+        return "redirect:/teacher/info";
+    }
 
 }
