@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.stu.mapper.StudentDOMapper">
 
+    <select id="getCourseScoresByStu" resultType="com.demo.stu.entity.vo.CourseScoreVO">
+        SELECT
+          t.name AS teacher,
+          c.name AS course,
+          r.grade AS score
+        FROM rel_course_student r
+        LEFT JOIN course c On r.course_id = c.course_id
+        LEFT JOIN tescher t ON t.teacher_id = c.teacher_id
+        WHERE r.student_no = #{stuNo}
+    </select>
+
 </mapper>

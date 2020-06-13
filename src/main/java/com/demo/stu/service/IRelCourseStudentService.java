@@ -22,4 +22,8 @@ public interface IRelCourseStudentService {
      * @return
      */
     List<String> getRels(String courseId);
+
+    /**
+     * 获取学生的成绩
+     */
 }
