@@ -1,5 +1,6 @@
 package com.demo.stu.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class RelCourseStudentDO implements Serializable {
     /**
      * 编号
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private String id;
 
     /**
@@ -36,7 +37,7 @@ public class RelCourseStudentDO implements Serializable {
     /**
      * 学生号
      */
-    private Integer studentId;
+    private String studentNo;
 
     /**
      * 分数

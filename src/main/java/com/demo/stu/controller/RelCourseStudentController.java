@@ -9,6 +9,7 @@ import com.demo.stu.service.IStudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +49,20 @@ public class RelCourseStudentController {
         List<StudentDO> studentDOS = studentService.getStudents();
         model.addAttribute("students", studentDOS);
 
+        // 所有学生信息
+        List<String> rels = relCourseStudentService.getRels(courseId);
+        model.addAttribute("rels", rels);
+
         return "/admin/rel-course-student";
+    }
+
+    @PostMapping("/rel-course-student-do")
+    public String list(String courseId, String[] studentId, Model model) {
+
+        // 保存关联信息课程信息
+        relCourseStudentService.rel(courseId, studentId);
+
+        return "redirect:/admin/rel-course-student-do?courseId=" + courseId;
     }
 
 }

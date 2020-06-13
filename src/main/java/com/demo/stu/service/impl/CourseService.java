@@ -103,6 +103,9 @@ public class CourseService implements ICourseService {
      */
     @Override
     public CourseVO getCourseVO(String courseId) {
+        if (StringUtils.isEmpty(courseId)) {
+            return new CourseVO();
+        }
         CourseDO courseDO = courseDao.getById(courseId);
 
         // 复制数据
