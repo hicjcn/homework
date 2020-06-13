@@ -13,8 +13,13 @@ public class HomeController {
 
     Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+    @GetMapping("/")
+    public String toLogin() {
+        return "redirect:/login";
+    }
+
     @GetMapping("index")
-    public String login() {
+    public String index() {
         return "index";
     }
 
