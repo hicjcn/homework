@@ -8,8 +8,8 @@
           c.name AS course,
           r.grade AS score
         FROM rel_course_student r
-        LEFT JOIN course c On r.course_id = c.course_id
-        LEFT JOIN tescher t ON t.teacher_id = c.teacher_id
+        LEFT JOIN course c ON r.course_id = c.id
+        LEFT JOIN teacher t ON t.no = c.teacher_id
         WHERE r.student_no = #{stuNo}
     </select>
 

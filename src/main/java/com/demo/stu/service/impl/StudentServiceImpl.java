@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.stu.dao.IStudentDao;
 import com.demo.stu.entity.StudentDO;
 import com.demo.stu.entity.enumcode.UserType;
+import com.demo.stu.entity.vo.CourseScoreVO;
 import com.demo.stu.service.IStudentService;
 import com.demo.stu.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -98,5 +99,10 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public StudentDO getStudentById(String id) {
         return studentDao.getById(id);
+    }
+
+    @Override
+    public List<CourseScoreVO> getCourseScoresByStu(String stuNo) {
+        return studentDao.getCourseScoresByStu(stuNo);
     }
 }

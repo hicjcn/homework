@@ -3,6 +3,7 @@ package com.demo.stu.controller;
 
 import com.demo.stu.entity.Constants;
 import com.demo.stu.entity.StudentDO;
+import com.demo.stu.entity.vo.CourseScoreVO;
 import com.demo.stu.service.IStudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>
@@ -56,10 +58,20 @@ public class StudentController {
     }
 
     @PostMapping("/info")
-    public String saveTeacher(StudentDO studentDO, RedirectAttributes request) {
+    public String saveStudent(StudentDO studentDO, RedirectAttributes request) {
         studentService.save(studentDO);
         request.addAttribute("msg", "更新成功");
         return "redirect:/student/info";
+    }
+
+    @GetMapping("/scores")
+    public String getScores(Model model) {
+        String username = String.valueOf(session.getAttribute(Constants.USERNAME));
+
+        List<CourseScoreVO> list = studentService.getCourseScoresByStu(username);
+        model.addAttribute("list", list);
+
+        return "/student/scores";
     }
 
 }
