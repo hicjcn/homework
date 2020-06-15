@@ -1,6 +1,19 @@
 package com.demo;
 
+import com.demo.frame.LoginFrame;
+import com.demo.frame.MainFrame;
+
 public class Context {
+
+    /**
+     * 登录窗体句柄
+     */
+    public static LoginFrame loginFrame;
+
+    /**
+     * 主窗口句柄
+     */
+    public static MainFrame mainFrame;
 
     /**
      * 当前登录用户名
