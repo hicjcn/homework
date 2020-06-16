@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class GoodsEditFrame extends JFrame {
 
-    private EditType editType;
+    private EditType editType = EditType.add;
 
     private JTextField nameText;
     private JTextField normsText;
