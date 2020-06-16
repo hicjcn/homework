@@ -1,6 +1,7 @@
 package com.demo.panel;
 
 import com.demo.entity.MenuType;
+import com.demo.panel.admin.AdminPanel;
 import com.demo.panel.goods.GoodsPanel;
 
 import javax.swing.*;
@@ -14,6 +15,10 @@ public class ContentPanel extends JPanel {
      * 库存管理 Panel
      */
     private GoodsPanel goodsPanel = new GoodsPanel();
+    /**
+     * 用户管理 Panel
+     */
+    private AdminPanel adminPanel = new AdminPanel();
 
 
     public ContentPanel() {
@@ -32,6 +37,9 @@ public class ContentPanel extends JPanel {
         if (MenuType.amount == menuType) {
             add(goodsPanel);
             goodsPanel.refresh();
+        } else if (MenuType.admin == menuType) {
+            add(adminPanel);
+            adminPanel.refresh();
         }
     }
 }

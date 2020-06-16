@@ -18,6 +18,11 @@ public enum MenuType {
     user,
 
     /**
+     * 用户管理
+     */
+    admin,
+
+    /**
      * 个人信息
      */
     self
