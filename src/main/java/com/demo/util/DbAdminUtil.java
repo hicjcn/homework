@@ -1,5 +1,6 @@
 package com.demo.util;
 
+import com.demo.Context;
 import com.google.common.collect.Lists;
 
 import java.sql.Connection;
@@ -131,6 +132,55 @@ public class DbAdminUtil {
             System.out.println("执行sql语句成功");
         }else {
             System.out.println("删除失败，请检查数据库");
+        }
+
+        return resultLink > 0;
+    }
+
+    /**
+     * 修改密码
+     */
+    public static boolean changePassword(String oldPwd, String newPwd) throws SQLException {
+        MySqlUtil.Connect();
+        Connection connection = MySqlUtil.getConn();
+
+        // 使用PreparedStatement防止SQL注入
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE admin SET password=? WHERE username=? AND password=?"
+        );
+        preparedStatement.setString(1, newPwd);
+        preparedStatement.setString(2, Context.curUsername);
+        preparedStatement.setString(3, oldPwd);
+
+        int resultLink = preparedStatement.executeUpdate();
+        if (resultLink > 0) {
+            System.out.println("执行sql语句成功");
+        }else {
+            System.out.println("旧密码错误");
+        }
+
+        return resultLink > 0;
+    }
+
+    /**
+     * 修改密码
+     */
+    public static boolean resetPassword(String userName) throws SQLException {
+        MySqlUtil.Connect();
+        Connection connection = MySqlUtil.getConn();
+
+        // 使用PreparedStatement防止SQL注入
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "UPDATE admin SET password=? WHERE username=?"
+        );
+        preparedStatement.setString(1, defaultPwd);
+        preparedStatement.setString(2, userName);
+
+        int resultLink = preparedStatement.executeUpdate();
+        if (resultLink > 0) {
+            System.out.println("执行sql语句成功");
+        }else {
+            System.out.println("密码重置失败");
         }
 
         return resultLink > 0;
