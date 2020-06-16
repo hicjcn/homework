@@ -1,6 +1,7 @@
 package com.demo.frame;
 
 import com.demo.Context;
+import com.demo.util.DbQueryUtil;
 import com.demo.util.MySqlUtil;
 
 import javax.swing.*;
@@ -100,8 +101,7 @@ public class LoginFrame extends JFrame {
 
     private boolean login(String username, String password) throws SQLException {
 
-        MySqlUtil.Query("select * from admin where username = \'" + username + "\'");
-        ResultSet resultset = MySqlUtil.getResultSet();
+        ResultSet resultset = DbQueryUtil.login(username);
 
         if (null == resultset) {
             return false;
