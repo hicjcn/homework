@@ -86,7 +86,6 @@ public class LoginFrame extends JFrame {
                 try {
                     if (login(username, pwd)) {
                         // 登录成功 关闭此界面 开启main界面
-                        JOptionPane.showMessageDialog(context, "欢迎进入", "成功", JOptionPane.PLAIN_MESSAGE);
                         setVisible(false);
                         Context.mainFrame.setVisible(true);
                         return;

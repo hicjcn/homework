@@ -38,6 +38,18 @@ public class GoodsTableModel extends AbstractTableModel {
     }
 
     /**
+     * 获取一行数据
+     * @param rowIndex
+     * @return
+     */
+    public Object[] getRow(int rowIndex) {
+        if (null == data) {
+            return null;
+        }
+        return data[rowIndex];
+    }
+
+    /**
      * 从数据库加载数
      */
     public void refresh() {

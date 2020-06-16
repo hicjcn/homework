@@ -1,5 +1,8 @@
 package com.demo.panel.goods;
 
+import com.demo.Context;
+import com.demo.entity.EditType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -59,7 +62,38 @@ public class GoodsPanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editFrame.setVisible(true);
+                editFrame.show(EditType.add, null);
+            }
+        });
+
+        // 更新按钮事件
+        editBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 获取选中数据
+                int selected = dataTable.getSelectedRow();
+                if (selected < 0) {
+                    JOptionPane.showMessageDialog(Context.mainFrame, "请选择一行进行修改", "提示", JOptionPane.PLAIN_MESSAGE);
+                }
+                Object[] selectedData = tableModel.getRow(selected);
+                editFrame.show(EditType.update, selectedData);
+            }
+        });
+
+        // 删除按钮事件
+        delBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 获取选中数据
+                int selected = dataTable.getSelectedRow();
+                if (selected < 0) {
+                    JOptionPane.showMessageDialog(Context.mainFrame, "请选择一行进行删除", "提示", JOptionPane.PLAIN_MESSAGE);
+                }
+                int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认删除这一行吗？");
+                if (JOptionPane.YES_OPTION == i) {
+                    // TODO 删除一行数据
+
+                }
             }
         });
     }

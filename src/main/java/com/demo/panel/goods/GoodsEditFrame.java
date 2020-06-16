@@ -103,6 +103,32 @@ public class GoodsEditFrame extends JFrame {
     }
 
     /**
+     * 设置数据到组件中
+     * @param data
+     */
+    private void setData(Object[] data) {
+        if (null != data && data.length >= 7) {
+            nameText.setText(String.valueOf(data[1]));
+            normsText.setText(String.valueOf(data[2]));
+            unitPriceText.setText(String.valueOf(data[3]));
+            salePriceText.setText(String.valueOf(data[4]));
+            amountText.setText(String.valueOf(data[5]));
+            manufacturerText.setText(String.valueOf(data[6]));
+        }
+    }
+
+    /**
+     * 显示窗口
+     * @param type
+     * @param data
+     */
+    public void show(EditType type, Object[] data) {
+        this.editType = type;
+        this.data = data;
+        setVisible(true);
+    }
+
+    /**
      * 处理新增或者更新
      */
     private void ok() {
