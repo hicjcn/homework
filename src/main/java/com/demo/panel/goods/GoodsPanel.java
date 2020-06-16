@@ -15,7 +15,7 @@ public class GoodsPanel extends JPanel {
     private JButton editBtn = new JButton("修改");
     private JButton delBtn = new JButton("删除");
 
-    private GoodsEditFrame editFrame = new GoodsEditFrame();
+    private GoodsEditFrame editFrame = new GoodsEditFrame(this);
 
     /**
      * 数据表格
