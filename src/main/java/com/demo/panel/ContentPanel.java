@@ -4,6 +4,7 @@ import com.demo.entity.MenuType;
 import com.demo.panel.admin.AdminPanel;
 import com.demo.panel.goods.GoodsPanel;
 import com.demo.panel.self.SelfPanel;
+import com.demo.panel.user.UserPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +25,10 @@ public class ContentPanel extends JPanel {
      * 修改密码 Panel
      */
     private SelfPanel selfPanel = new SelfPanel();
+    /**
+     * 会员管理 Panel
+     */
+    private UserPanel userPanel = new UserPanel();
 
 
     public ContentPanel() {
@@ -47,6 +52,9 @@ public class ContentPanel extends JPanel {
             adminPanel.refresh();
         } else if (MenuType.self == menuType) {
             add(selfPanel);
+        } else if (MenuType.user == menuType) {
+            add(userPanel);
+            userPanel.refresh();
         }
     }
 }
