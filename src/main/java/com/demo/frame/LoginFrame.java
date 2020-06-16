@@ -23,7 +23,7 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame() {
         setTitle("登录");
-        setSize(300, 200);
+        setSize(280, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // 窗口在屏幕中间显示
         setLocationRelativeTo(null);
@@ -73,7 +73,7 @@ public class LoginFrame extends JFrame {
 
         // 创建登录按钮
         loginButton = new JButton("登录");
-        loginButton.setBounds(10, 80, 80, 25);
+        loginButton.setBounds(10, 80, 255, 50);
 
         // 登录事件
         loginButton.addActionListener(new ActionListener() {
