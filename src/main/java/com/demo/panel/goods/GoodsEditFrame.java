@@ -23,8 +23,8 @@ public class GoodsEditFrame extends JFrame {
     private Object[] data;
 
     GoodsEditFrame() {
-        setTitle("添加货物");
-        setSize(300, 500);
+        setTitle("编辑货物");
+        setSize(300, 300);
         // 窗口在屏幕中间显示
         setLocationRelativeTo(null);
 
@@ -125,6 +125,7 @@ public class GoodsEditFrame extends JFrame {
     public void show(EditType type, Object[] data) {
         this.editType = type;
         this.data = data;
+        setData(data);
         setVisible(true);
     }
 

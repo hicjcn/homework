@@ -74,6 +74,7 @@ public class GoodsPanel extends JPanel {
                 int selected = dataTable.getSelectedRow();
                 if (selected < 0) {
                     JOptionPane.showMessageDialog(Context.mainFrame, "请选择一行进行修改", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
                 }
                 Object[] selectedData = tableModel.getRow(selected);
                 editFrame.show(EditType.update, selectedData);
@@ -88,6 +89,7 @@ public class GoodsPanel extends JPanel {
                 int selected = dataTable.getSelectedRow();
                 if (selected < 0) {
                     JOptionPane.showMessageDialog(Context.mainFrame, "请选择一行进行删除", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
                 }
                 int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认删除这一行吗？");
                 if (JOptionPane.YES_OPTION == i) {
