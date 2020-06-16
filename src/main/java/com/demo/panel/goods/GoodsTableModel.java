@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class GoodsTableModel extends AbstractTableModel {
 
-    private Object[] columnNames = {"编号","名称","规格","单价","销售价","厂家"};
+    private Object[] columnNames = {"编号","名称","规格","单价","销售价","库存","厂家"};
 
     private Object[][] data = null;
 
@@ -55,6 +55,7 @@ public class GoodsTableModel extends AbstractTableModel {
     public void refresh() {
         try {
             this.data = DbQueryUtil.listGoods();
+            fireTableDataChanged();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             System.out.println("货物库存数据加载失败");

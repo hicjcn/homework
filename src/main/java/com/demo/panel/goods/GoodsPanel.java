@@ -54,7 +54,7 @@ public class GoodsPanel extends JPanel {
         refreshBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableModel.refresh();
+                refresh();
             }
         });
 
