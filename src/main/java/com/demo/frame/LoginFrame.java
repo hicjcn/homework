@@ -25,6 +25,8 @@ public class LoginFrame extends JFrame {
         setTitle("登录");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // 窗口在屏幕中间显示
+        setLocationRelativeTo(null);
 
         // 添加 登录的 panel
         JPanel panel = new JPanel();
@@ -52,6 +54,7 @@ public class LoginFrame extends JFrame {
          */
         userText = new JTextField(20);
         userText.setBounds(100,20,165,25);
+        userText.setText("admin");
         panel.add(userText);
 
         // 输入密码的文本域
@@ -65,6 +68,7 @@ public class LoginFrame extends JFrame {
          */
         passwordText = new JPasswordField(20);
         passwordText.setBounds(100,50,165,25);
+        passwordText.setText("123");
         panel.add(passwordText);
 
         // 创建登录按钮
@@ -109,6 +113,9 @@ public class LoginFrame extends JFrame {
 
         String pwd = resultset.getString("password");
         int type = resultset.getInt("type");
+
+        resultset.getStatement().close();
+        resultset.close();
 
         if (pwd.equals(password)) {
             Context.curUsername = username;

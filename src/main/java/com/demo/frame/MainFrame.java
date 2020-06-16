@@ -1,5 +1,6 @@
 package com.demo.frame;
 
+import com.demo.panel.ContentPanel;
 import com.demo.panel.MenuPanel;
 
 import javax.swing.*;
@@ -9,10 +10,14 @@ public class MainFrame extends JFrame {
 
     private MenuPanel menuPanel;
 
+    private ContentPanel contentPanel;
+
     public MainFrame() {
         setTitle("药店管理系统");
-        setSize(600, 700);
+        setSize(800, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // 窗口在屏幕中间显示
+        setLocationRelativeTo(null);
 
         // 设置为BorderLayout布局
         setLayout(new BorderLayout());
@@ -23,5 +28,7 @@ public class MainFrame extends JFrame {
         add(menuPanel, BorderLayout.WEST);
 
         // 右边是内容面板
+        contentPanel = new ContentPanel();
+        add(contentPanel, BorderLayout.CENTER);
     }
 }
