@@ -1,18 +1,11 @@
 package com.demo.panel.self;
 
 import com.demo.Context;
-import com.demo.adapter.NumberInput;
-import com.demo.entity.EditType;
-import com.demo.panel.goods.GoodsEditFrame;
-import com.demo.panel.goods.GoodsTableModel;
-import com.demo.util.DbGoodsUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class SelfPanel extends JPanel {
 
