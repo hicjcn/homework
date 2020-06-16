@@ -1,5 +1,6 @@
 package com.demo.frame;
 
+import com.demo.entity.MenuType;
 import com.demo.panel.ContentPanel;
 import com.demo.panel.MenuPanel;
 
@@ -30,5 +31,9 @@ public class MainFrame extends JFrame {
         // 右边是内容面板
         contentPanel = new ContentPanel();
         add(contentPanel, BorderLayout.CENTER);
+    }
+
+    public void changeMenu(MenuType menuType) {
+        this.contentPanel.changeContent(menuType);
     }
 }

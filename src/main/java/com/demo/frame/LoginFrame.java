@@ -1,6 +1,7 @@
 package com.demo.frame;
 
 import com.demo.Context;
+import com.demo.entity.UserType;
 import com.demo.util.DbQueryUtil;
 import com.demo.util.MySqlUtil;
 
@@ -119,7 +120,13 @@ public class LoginFrame extends JFrame {
 
         if (pwd.equals(password)) {
             Context.curUsername = username;
-            Context.curUserType = type;
+            if (0 == type) {
+                Context.curUserType = UserType.Admin;
+            } else if (1 == type) {
+                Context.curUserType = UserType.Inventory;
+            } else {
+                Context.curUserType = UserType.Sale;
+            }
             return true;
         }
 

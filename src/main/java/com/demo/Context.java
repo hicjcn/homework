@@ -1,5 +1,6 @@
 package com.demo;
 
+import com.demo.entity.UserType;
 import com.demo.frame.LoginFrame;
 import com.demo.frame.MainFrame;
 
@@ -26,6 +27,6 @@ public class Context {
      * 1 销售员
      * 2 采购员
      */
-    public static int curUserType;
+    public static UserType curUserType;
 
 }

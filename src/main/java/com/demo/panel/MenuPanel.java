@@ -1,7 +1,12 @@
 package com.demo.panel;
 
+import com.demo.Context;
+import com.demo.entity.MenuType;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel {
 
@@ -17,9 +22,33 @@ public class MenuPanel extends JPanel {
         // 设置为Card布局
         setLayout(new GridLayout(4,1,0,0));
 
+        // 点击事件
+        amountBtn.addActionListener(new BtnActionListener(MenuType.amount));
+        saleBtn.addActionListener(new BtnActionListener(MenuType.sale));
+        userBtn.addActionListener(new BtnActionListener(MenuType.user));
+        selfBtn.addActionListener(new BtnActionListener(MenuType.self));
+
         add(amountBtn);
         add(saleBtn);
         add(userBtn);
         add(selfBtn);
+    }
+
+    private class BtnActionListener implements ActionListener {
+
+        private MenuType menuType;
+
+        BtnActionListener(MenuType type) {
+            this.menuType = type;
+        }
+
+        /**
+         * 点击事件 切换成相应的菜单内容
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Context.mainFrame.changeMenu(this.menuType);
+        }
     }
 }
