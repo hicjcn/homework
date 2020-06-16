@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class UserTableModel extends AbstractTableModel {
 
-    private Object[] columnNames = {"编号","名称","规格","单价","销售价","库存","厂家"};
+    private Object[] columnNames = {"会员号","姓名","手机号","积分"};
 
     private Object[][] data = null;
 
@@ -55,10 +55,11 @@ public class UserTableModel extends AbstractTableModel {
     public void refresh() {
         try {
             this.data = DbGoodsUtil.listGoods();
+            // 触发表格更新数据界面
             fireTableDataChanged();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-            System.out.println("货物库存数据加载失败");
+            System.out.println("用户数据加载失败");
         }
     }
 }
