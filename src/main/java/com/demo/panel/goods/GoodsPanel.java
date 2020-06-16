@@ -2,11 +2,13 @@ package com.demo.panel.goods;
 
 import com.demo.Context;
 import com.demo.entity.EditType;
+import com.demo.util.DbGoodsUtil;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class GoodsPanel extends JPanel {
 
@@ -93,8 +95,15 @@ public class GoodsPanel extends JPanel {
                 }
                 int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认删除这一行吗？");
                 if (JOptionPane.YES_OPTION == i) {
-                    // TODO 删除一行数据
-
+                    // 删除一行数据
+                    Object[] selectedData = tableModel.getRow(selected);
+                    try {
+                        DbGoodsUtil.deleteGoods((Integer) selectedData[0]);
+                    } catch (SQLException sqlE) {
+                        sqlE.printStackTrace();
+                    } finally {
+                        refresh();
+                    }
                 }
             }
         });

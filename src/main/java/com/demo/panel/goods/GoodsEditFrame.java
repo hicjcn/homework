@@ -88,16 +88,16 @@ public class GoodsEditFrame extends JFrame {
         add(amountText);
 
         // 厂商
-        JLabel manufacturerLabel = new JLabel("库存:");
-        manufacturerLabel.setBounds(10,140,80,25);
+        JLabel manufacturerLabel = new JLabel("厂商:");
+        manufacturerLabel.setBounds(10,170,80,25);
         add(manufacturerLabel);
         manufacturerText = new JTextField(20);
-        manufacturerText.setBounds(100,140,165,25);
+        manufacturerText.setBounds(100,170,165,25);
         add(manufacturerText);
 
         // 创建登录按钮
         okBtn = new JButton("确定");
-        okBtn.setBounds(10, 170, 255, 50);
+        okBtn.setBounds(10, 200, 255, 50);
 
         okBtn.addActionListener(new ActionListener() {
             @Override

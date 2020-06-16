@@ -79,8 +79,11 @@ public class DbGoodsUtil {
     }
 
     /**
-     * 库存新增
+     * 库存更新
      *
+     * @param data
+     * @return
+     * @throws SQLException
      */
     public static boolean updateGoods(Object[] data) throws SQLException {
         MySqlUtil.Connect();
@@ -97,6 +100,29 @@ public class DbGoodsUtil {
         preparedStatement.setObject(5, data[5]);
         preparedStatement.setObject(6, data[6]);
         preparedStatement.setObject(7, data[0]);
+
+        int resultLink = preparedStatement.executeUpdate();
+        if (resultLink > 0) {
+            System.out.println("执行sql语句成功");
+        }else {
+            System.out.println("更新失败，请检查数据库");
+        }
+
+        return resultLink > 0;
+    }
+
+    /**
+     * 库存删除
+     */
+    public static boolean deleteGoods(int id) throws SQLException {
+        MySqlUtil.Connect();
+        Connection connection = MySqlUtil.getConn();
+
+        // 使用PreparedStatement防止SQL注入
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "DELETE FROM goods WHERE id=?"
+        );
+        preparedStatement.setInt(1, id);
 
         int resultLink = preparedStatement.executeUpdate();
         if (resultLink > 0) {
