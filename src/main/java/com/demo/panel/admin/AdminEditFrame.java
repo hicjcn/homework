@@ -3,7 +3,7 @@ package com.demo.panel.admin;
 import com.demo.Context;
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
-import com.demo.util.DbGoodsUtil;
+import com.demo.util.DbAdminUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,12 +16,10 @@ public class AdminEditFrame extends JFrame {
 
     private EditType editType = EditType.add;
 
+    private JTextField usernameText;
     private JTextField nameText;
-    private JTextField normsText;
-    private JTextField unitPriceText;
-    private JTextField salePriceText;
-    private JTextField amountText;
-    private JTextField manufacturerText;
+    private JTextField phoneText;
+    private JTextField typeText;
 
     private JButton okBtn;
 
@@ -43,59 +41,43 @@ public class AdminEditFrame extends JFrame {
 
         setLayout(null);
 
-        // 名称
-        JLabel userLabel = new JLabel("名称:");
+        // 用户名
+        JLabel userLabel = new JLabel("用户名:");
         userLabel.setBounds(10,20,80,25);
         add(userLabel);
-        nameText = new JTextField(20);
-        nameText.setBounds(100,20,165,25);
-        add(nameText);
+        usernameText = new JTextField(20);
+        usernameText.setBounds(100,20,165,25);
+        add(usernameText);
 
-        // 规格
-        JLabel normsLabel = new JLabel("规格:");
+        // 姓名
+        JLabel normsLabel = new JLabel("姓名:");
         normsLabel.setBounds(10,50,80,25);
         add(normsLabel);
-        normsText = new JTextField(20);
-        normsText.setBounds(100,50,165,25);
-        add(normsText);
+        nameText = new JTextField(20);
+        nameText.setBounds(100,50,165,25);
+        add(nameText);
 
-        // 单价
-        JLabel unitPriceLabel = new JLabel("单价:");
+        // 手机号
+        JLabel unitPriceLabel = new JLabel("手机号:");
         unitPriceLabel.setBounds(10,80,80,25);
         add(unitPriceLabel);
-        unitPriceText = new JTextField(20);
-        unitPriceText.setBounds(100,80,165,25);
+        phoneText = new JTextField(20);
+        phoneText.setBounds(100,80,165,25);
         // 限制输入数字
-        unitPriceText.addKeyListener(new NumberInput());
-        add(unitPriceText);
+        phoneText.addKeyListener(new NumberInput());
+        add(phoneText);
 
-        // 销售价
-        JLabel saleLabel = new JLabel("销售价:");
+        // 用户类型
+        JLabel saleLabel = new JLabel("用户类型:");
         saleLabel.setBounds(10,110,80,25);
         add(saleLabel);
-        salePriceText = new JTextField(20);
-        salePriceText.setBounds(100,110,165,25);
+        typeText = new JTextField(20);
+        typeText.setBounds(100,110,165,25);
         // 限制输入数字
-        salePriceText.addKeyListener(new NumberInput());
-        add(salePriceText);
+        typeText.addKeyListener(new NumberInput());
+        add(typeText);
 
-        // 库存
-        JLabel amountLabel = new JLabel("库存:");
-        amountLabel.setBounds(10,140,80,25);
-        add(amountLabel);
-        amountText = new JTextField(20);
-        amountText.setBounds(100,140,165,25);
-        add(amountText);
-
-        // 厂商
-        JLabel manufacturerLabel = new JLabel("库存:");
-        manufacturerLabel.setBounds(10,140,80,25);
-        add(manufacturerLabel);
-        manufacturerText = new JTextField(20);
-        manufacturerText.setBounds(100,140,165,25);
-        add(manufacturerText);
-
-        // 创建登录按钮
+        // 提交按钮
         okBtn = new JButton("确定");
         okBtn.setBounds(10, 170, 255, 50);
 
@@ -114,20 +96,16 @@ public class AdminEditFrame extends JFrame {
      * @param data
      */
     private void setData(Object[] data) {
-        if (null != data && data.length >= 7) {
+        if (null != data && data.length >= 4) {
+            usernameText.setText(String.valueOf(data[0]));
             nameText.setText(String.valueOf(data[1]));
-            normsText.setText(String.valueOf(data[2]));
-            unitPriceText.setText(String.valueOf(data[3]));
-            salePriceText.setText(String.valueOf(data[4]));
-            amountText.setText(String.valueOf(data[5]));
-            manufacturerText.setText(String.valueOf(data[6]));
+            phoneText.setText(String.valueOf(data[2]));
+            typeText.setText(String.valueOf(data[3]));
         } else {
+            usernameText.setText("");
             nameText.setText("");
-            normsText.setText("");
-            unitPriceText.setText("");
-            salePriceText.setText("");
-            amountText.setText("");
-            manufacturerText.setText("");
+            phoneText.setText("");
+            typeText.setText("");
         }
     }
 
@@ -148,22 +126,20 @@ public class AdminEditFrame extends JFrame {
      */
     private void ok() {
         if (null == data) {
-            data = new Object[7];
+            data = new Object[4];
         }
+        data[0] = usernameText.getText();
         data[1] = nameText.getText();
-        data[2] = normsText.getText();
-        data[3] = unitPriceText.getText();
-        data[4] = salePriceText.getText();
-        data[5] = amountText.getText();
-        data[6] = manufacturerText.getText();
+        data[2] = phoneText.getText();
+        data[3] = typeText.getText();
 
         try {
             if (EditType.add == editType) {
                 // 新增
-                DbGoodsUtil.saveGoods(data);
+                DbAdminUtil.saveAdmin(data);
             } else if (EditType.update == editType) {
                 // 更新
-                DbGoodsUtil.updateGoods(data);
+                DbAdminUtil.updateAdmin(data);
             }
             // 更新完关闭窗口
             setVisible(false);
