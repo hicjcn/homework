@@ -29,6 +29,17 @@ public class AdminTableModel extends AbstractTableModel {
         if (null == data) {
             return null;
         }
+        // 用户类型转换成中文
+        if (3 == columnIndex) {
+            switch ((int)data[rowIndex][columnIndex]) {
+                case 0:
+                    return "管理员";
+                case 1:
+                    return "库存管理员";
+                case 2:
+                    return "销售管理员";
+            }
+        }
         return data[rowIndex][columnIndex];
     }
 

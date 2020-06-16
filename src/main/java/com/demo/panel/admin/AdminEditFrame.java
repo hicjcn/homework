@@ -3,6 +3,7 @@ package com.demo.panel.admin;
 import com.demo.Context;
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
+import com.demo.entity.UserType;
 import com.demo.util.DbAdminUtil;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class AdminEditFrame extends JFrame {
     private JTextField usernameText;
     private JTextField nameText;
     private JTextField phoneText;
-    private JTextField typeText;
+    private JList typeText;
 
     private JButton okBtn;
 
@@ -71,15 +72,17 @@ public class AdminEditFrame extends JFrame {
         JLabel saleLabel = new JLabel("用户类型:");
         saleLabel.setBounds(10,110,80,25);
         add(saleLabel);
-        typeText = new JTextField(20);
-        typeText.setBounds(100,110,165,25);
-        // 限制输入数字
-        typeText.addKeyListener(new NumberInput());
+        DefaultListModel<String> defaultListModel = new DefaultListModel<>();
+        defaultListModel.addElement("管理员");
+        defaultListModel.addElement("库存管理员");
+        defaultListModel.addElement("销售管理员");
+        typeText = new JList(defaultListModel);
+        typeText.setBounds(100,110,165,70);
         add(typeText);
 
         // 提交按钮
         okBtn = new JButton("确定");
-        okBtn.setBounds(10, 170, 255, 50);
+        okBtn.setBounds(10, 190, 255, 50);
 
         okBtn.addActionListener(new ActionListener() {
             @Override
@@ -100,12 +103,12 @@ public class AdminEditFrame extends JFrame {
             usernameText.setText(String.valueOf(data[0]));
             nameText.setText(String.valueOf(data[1]));
             phoneText.setText(String.valueOf(data[2]));
-            typeText.setText(String.valueOf(data[3]));
+            typeText.setSelectedIndex((Integer) data[3]);
         } else {
             usernameText.setText("");
             nameText.setText("");
             phoneText.setText("");
-            typeText.setText("");
+            typeText.setSelectedIndex(0);
         }
     }
 
@@ -131,7 +134,7 @@ public class AdminEditFrame extends JFrame {
         data[0] = usernameText.getText();
         data[1] = nameText.getText();
         data[2] = phoneText.getText();
-        data[3] = typeText.getText();
+        data[3] = typeText.getSelectedIndex();
 
         try {
             if (EditType.add == editType) {
