@@ -16,6 +16,7 @@ public class AdminPanel extends JPanel {
     private JButton addBtn = new JButton("添加");
     private JButton editBtn = new JButton("修改");
     private JButton delBtn = new JButton("删除");
+    private JButton resetBtn = new JButton("重置密码");
 
     private AdminEditFrame editFrame = new AdminEditFrame(this);
 
@@ -38,6 +39,7 @@ public class AdminPanel extends JPanel {
         panel.add(addBtn);
         panel.add(editBtn);
         panel.add(delBtn);
+        panel.add(resetBtn);
 
         add(panel, BorderLayout.NORTH);
 
@@ -101,6 +103,34 @@ public class AdminPanel extends JPanel {
                         DbAdminUtil.deleteAdmin(selectedData[0].toString());
                     } catch (SQLException sqlE) {
                         sqlE.printStackTrace();
+                        JOptionPane.showMessageDialog(Context.mainFrame, "删除失败", "提示", JOptionPane.PLAIN_MESSAGE);
+                    } finally {
+                        refresh();
+                    }
+
+                }
+            }
+        });
+
+        // 重置密码按钮事件
+        resetBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 获取选中数据
+                int selected = dataTable.getSelectedRow();
+                if (selected < 0) {
+                    JOptionPane.showMessageDialog(Context.mainFrame, "请选择一行进行重置密码", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认这一行重置密码吗？");
+                if (JOptionPane.YES_OPTION == i) {
+                    // 重置密码
+                    Object[] selectedData = tableModel.getRow(selected);
+                    try {
+                        DbAdminUtil.resetPassword(selectedData[0].toString());
+                    } catch (SQLException sqlE) {
+                        sqlE.printStackTrace();
+                        JOptionPane.showMessageDialog(Context.mainFrame, "重置密码失败", "提示", JOptionPane.PLAIN_MESSAGE);
                     } finally {
                         refresh();
                     }

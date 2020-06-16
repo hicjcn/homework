@@ -43,6 +43,8 @@ public class ContentPanel extends JPanel {
     public void changeContent(MenuType menuType) {
         System.out.println("切换菜单内容：" + menuType);
         removeAll();
+        validate();
+        repaint();
         revalidate();
         if (MenuType.amount == menuType) {
             add(goodsPanel);

@@ -1,11 +1,13 @@
 package com.demo.panel.self;
 
 import com.demo.Context;
+import com.demo.util.DbAdminUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class SelfPanel extends JPanel {
 
@@ -89,8 +91,17 @@ public class SelfPanel extends JPanel {
         }
 
         // TODO 更新密码
-
-        // 更新完密码
-        reset();
+        try {
+            if (DbAdminUtil.changePassword(oldPwd, newPwd)){
+                JOptionPane.showMessageDialog(Context.mainFrame, "修改成功", "提示", JOptionPane.PLAIN_MESSAGE);
+                // 更新完密码
+                reset();
+            } else {
+                JOptionPane.showMessageDialog(Context.mainFrame, "旧密码错误", "提示", JOptionPane.PLAIN_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(Context.mainFrame, "修改失败", "提示", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 }
