@@ -2,10 +2,12 @@ package com.demo.panel.goods;
 
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
+import com.demo.util.DbGoodsUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class GoodsEditFrame extends JFrame {
 
@@ -37,7 +39,7 @@ public class GoodsEditFrame extends JFrame {
         setLayout(null);
 
         // 名称
-        JLabel userLabel = new JLabel("用户名:");
+        JLabel userLabel = new JLabel("名称:");
         userLabel.setBounds(10,20,80,25);
         add(userLabel);
         nameText = new JTextField(20);
@@ -134,7 +136,7 @@ public class GoodsEditFrame extends JFrame {
      */
     private void ok() {
         if (null == data) {
-            data = new String[7];
+            data = new Object[7];
         }
         data[1] = nameText.getText();
         data[2] = normsText.getText();
@@ -143,12 +145,17 @@ public class GoodsEditFrame extends JFrame {
         data[5] = amountText.getText();
         data[6] = manufacturerText.getText();
 
-        if (EditType.add == editType) {
-            // 新增
-
-        } else if (EditType.update == editType) {
-            // 更新
-
+        try {
+            if (EditType.add == editType) {
+                // 新增
+                DbGoodsUtil.saveGoods(data);
+            } else if (EditType.update == editType) {
+                // 更新
+                DbGoodsUtil.updateGoods(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
     }
 }

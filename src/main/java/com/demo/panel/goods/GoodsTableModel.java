@@ -1,6 +1,6 @@
 package com.demo.panel.goods;
 
-import com.demo.util.DbQueryUtil;
+import com.demo.util.DbGoodsUtil;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
@@ -54,7 +54,7 @@ public class GoodsTableModel extends AbstractTableModel {
      */
     public void refresh() {
         try {
-            this.data = DbQueryUtil.listGoods();
+            this.data = DbGoodsUtil.listGoods();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             System.out.println("货物库存数据加载失败");

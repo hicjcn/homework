@@ -3,7 +3,6 @@ package com.demo.frame;
 import com.demo.Context;
 import com.demo.entity.UserType;
 import com.demo.util.DbQueryUtil;
-import com.demo.util.MySqlUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
