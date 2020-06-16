@@ -26,6 +26,10 @@ public class MySqlUtil {
 
 	}
 
+	public static Connection getConn() {
+		return conn;
+	}
+
 	public static boolean next() {
 		if(resultSet == null){
 			System.err.println("还没有执行过sql查询");
