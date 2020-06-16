@@ -24,6 +24,7 @@ public class DbQueryUtil {
             resultSet = null;
             System.out.println("没有查询到任何数据，请检查数据库");
         }
+        preparedStatement.close();
 
         return resultSet;
     }
