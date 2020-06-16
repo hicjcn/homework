@@ -12,6 +12,8 @@ public class DbQueryUtil {
         MySqlUtil.Connect();
 
         Connection connection = MySqlUtil.getConn();
+
+        // 使用PreparedStatement防止SQL注入
         PreparedStatement preparedStatement = connection.prepareStatement("select * from admin where username = ?");
         preparedStatement.setString(1, username);
 
