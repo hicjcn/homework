@@ -1,4 +1,4 @@
-package com.demo.table;
+package com.demo.panel.goods;
 
 import com.demo.util.DbQueryUtil;
 

@@ -1,6 +1,7 @@
 package com.demo.panel;
 
 import com.demo.entity.MenuType;
+import com.demo.panel.goods.GoodsPanel;
 
 import javax.swing.*;
 import java.awt.*;

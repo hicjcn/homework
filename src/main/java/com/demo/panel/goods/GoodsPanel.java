@@ -1,15 +1,9 @@
-package com.demo.panel;
-
-import com.demo.table.GoodsTableModel;
-import com.demo.util.DbQueryUtil;
+package com.demo.panel.goods;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GoodsPanel extends JPanel {
 
@@ -24,7 +18,7 @@ public class GoodsPanel extends JPanel {
     private JTable dataTable;
     private GoodsTableModel tableModel = new GoodsTableModel();
 
-    GoodsPanel() {
+    public GoodsPanel() {
         setSize(600, 400);
 
         setLayout(new BorderLayout());
@@ -32,14 +26,7 @@ public class GoodsPanel extends JPanel {
         JPanel panel = new JPanel();
         panel.setSize(600, 50);
 
-        // 刷新按钮事件
-        refreshBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tableModel.refresh();
-            }
-        });
-
+        bindBtnAction();
         panel.add(refreshBtn);
         panel.add(addBtn);
         panel.add(editBtn);
@@ -55,6 +42,17 @@ public class GoodsPanel extends JPanel {
          * 用JScrollPane装载JTable，这样超出范围的列就可以通过滚动条来查看
          */
         add(new JScrollPane(dataTable), BorderLayout.CENTER);
+    }
+
+    private void bindBtnAction() {
+        // 刷新按钮事件
+        refreshBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableModel.refresh();
+            }
+        });
+
     }
 
     /**
