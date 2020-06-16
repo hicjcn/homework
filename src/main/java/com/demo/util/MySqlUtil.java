@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class MySqlUtil {
 
 
-	private static String MYSQL_URL = "jdbc:mysql://106.13.10.5:32767/pharmacy";
+	private static String MYSQL_URL = "jdbc:mysql://106.13.10.5:32767/pharmacy?useUnicode=true&useSSL=false&characterEncoding=utf8";
 	//MySQL配置时的用户名
 	private static String MYSQL_USER = "root";
 	//MySQL配置时的密码

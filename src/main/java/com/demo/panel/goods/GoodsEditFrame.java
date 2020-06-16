@@ -1,5 +1,6 @@
 package com.demo.panel.goods;
 
+import com.demo.Context;
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
 import com.demo.util.DbGoodsUtil;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 
 public class GoodsEditFrame extends JFrame {
 
-    private JPanel parentContext = null;
+    private GoodsPanel parentContext = null;
 
     private EditType editType = EditType.add;
 
@@ -26,7 +27,7 @@ public class GoodsEditFrame extends JFrame {
 
     private Object[] data;
 
-    GoodsEditFrame(JPanel parentCtx) {
+    GoodsEditFrame(GoodsPanel parentCtx) {
         // 保存父窗口的句柄以便更新表格
         this.parentContext = parentCtx;
         setTitle("编辑货物");
@@ -120,6 +121,13 @@ public class GoodsEditFrame extends JFrame {
             salePriceText.setText(String.valueOf(data[4]));
             amountText.setText(String.valueOf(data[5]));
             manufacturerText.setText(String.valueOf(data[6]));
+        } else {
+            nameText.setText("");
+            normsText.setText("");
+            unitPriceText.setText("");
+            salePriceText.setText("");
+            amountText.setText("");
+            manufacturerText.setText("");
         }
     }
 
@@ -157,8 +165,13 @@ public class GoodsEditFrame extends JFrame {
                 // 更新
                 DbGoodsUtil.updateGoods(data);
             }
+            // 更新完关闭窗口
+            setVisible(false);
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(Context.mainFrame, "更新失败", "提示", JOptionPane.PLAIN_MESSAGE);
             e.printStackTrace();
+        } finally {
+            parentContext.refresh();
         }
 
     }
