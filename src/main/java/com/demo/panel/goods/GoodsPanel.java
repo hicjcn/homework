@@ -12,6 +12,8 @@ public class GoodsPanel extends JPanel {
     private JButton editBtn = new JButton("修改");
     private JButton delBtn = new JButton("删除");
 
+    private GoodsEditFrame editFrame = new GoodsEditFrame();
+
     /**
      * 数据表格
      */
@@ -53,6 +55,13 @@ public class GoodsPanel extends JPanel {
             }
         });
 
+        // 添加按钮事件
+        addBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editFrame.setVisible(true);
+            }
+        });
     }
 
     /**

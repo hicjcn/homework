@@ -24,7 +24,7 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame() {
         setTitle("登录");
-        setSize(280, 200);
+        setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // 窗口在屏幕中间显示
         setLocationRelativeTo(null);
