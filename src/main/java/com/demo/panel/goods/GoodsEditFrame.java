@@ -11,6 +11,8 @@ import java.sql.SQLException;
 
 public class GoodsEditFrame extends JFrame {
 
+    private JPanel parentContext = null;
+
     private EditType editType = EditType.add;
 
     private JTextField nameText;
@@ -24,7 +26,9 @@ public class GoodsEditFrame extends JFrame {
 
     private Object[] data;
 
-    GoodsEditFrame() {
+    GoodsEditFrame(JPanel parentCtx) {
+        // 保存父窗口的句柄以便更新表格
+        this.parentContext = parentCtx;
         setTitle("编辑货物");
         setSize(300, 300);
         // 窗口在屏幕中间显示
@@ -132,7 +136,7 @@ public class GoodsEditFrame extends JFrame {
     }
 
     /**
-     * 处理新增或者更新
+     * 处理新增或者更新 更新完父窗口的表格刷新
      */
     private void ok() {
         if (null == data) {
