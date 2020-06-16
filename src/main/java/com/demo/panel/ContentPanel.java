@@ -30,6 +30,7 @@ public class ContentPanel extends JPanel {
         revalidate();
         if (MenuType.amount == menuType) {
             add(goodsPanel);
+            goodsPanel.refresh();
         }
     }
 }
