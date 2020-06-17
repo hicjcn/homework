@@ -55,7 +55,7 @@ public class SaleService {
     }
 
     /**
-     * 新增 处理积分
+     * 新增 处理积分减去相应库存
      *
      */
     public static boolean saveSaleRecord(Object[] data) throws SQLException {
@@ -83,7 +83,6 @@ public class SaleService {
             System.out.println("新增失败，请检查数据库");
             return false;
         }
-
         // 关闭资源
         preparedStatement.close();
 
@@ -107,7 +106,25 @@ public class SaleService {
             System.out.println("新增失败，请检查数据库");
             return false;
         }
+        // 关闭资源
+        preparedStatement.close();
 
+        // 减去相应库存
+        preparedStatement = connection.prepareStatement(
+                "update goods set amount = amount - ? where id = ?"
+        );
+        // 数量
+        preparedStatement.setObject(1, data[2]);
+        // 货物
+        preparedStatement.setObject(2, data[1]);
+
+        resultLink = preparedStatement.executeUpdate();
+        if (resultLink > 0) {
+            System.out.println("执行sql语句成功");
+        }else {
+            System.out.println("新增失败，请检查数据库");
+            return false;
+        }
         // 关闭资源
         preparedStatement.close();
 
@@ -168,7 +185,6 @@ public class SaleService {
             System.out.println("删除失败，请检查数据库");
             return false;
         }
-
         // 关闭资源
         preparedStatement.close();
 
@@ -192,7 +208,25 @@ public class SaleService {
             System.out.println("新增失败，请检查数据库");
             return false;
         }
+        // 关闭资源
+        preparedStatement.close();
 
+        // 加上相应库存
+        preparedStatement = connection.prepareStatement(
+                "update goods set amount = amount + ? where id = ?"
+        );
+        // 数量
+        preparedStatement.setObject(1, data[3]);
+        // 货物
+        preparedStatement.setObject(2, data[8]);
+
+        resultLink = preparedStatement.executeUpdate();
+        if (resultLink > 0) {
+            System.out.println("执行sql语句成功");
+        }else {
+            System.out.println("新增失败，请检查数据库");
+            return false;
+        }
         // 关闭资源
         preparedStatement.close();
 
