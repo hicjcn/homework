@@ -9,11 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * @Description
- * @Author czc
- * @Date 2020/6/16 18:47
- */
 public class DbAdminUtil {
 
     private static String defaultPwd = "123456";

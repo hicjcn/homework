@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DbQueryUtil {
+public class DbLoginUtil {
 
     /**
      * 登录查询用户信息
