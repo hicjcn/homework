@@ -18,9 +18,19 @@ public class SaleEditFrame extends JFrame {
 
     private EditType editType = EditType.add;
 
-    private JTextField nameText;
+    /**
+     * 药品选择框及其数据Model
+     */
+    private JList<String> nameText;
+    private GoodsListModel goodsListModel;
+
     private JTextField amountText;
-    private JTextField userText;
+
+    /**
+     * 会员选择框及其数据Model
+     */
+    private JList<String> userText;
+    private UserListModel userListModel;
 
     private JButton okBtn;
 
@@ -30,7 +40,7 @@ public class SaleEditFrame extends JFrame {
         // 保存父窗口的句柄以便更新表格
         this.parentContext = parentCtx;
         setTitle("编辑货物");
-        setSize(300, 300);
+        setSize(300, 350);
         // 窗口在屏幕中间显示
         setLocationRelativeTo(null);
 
@@ -46,31 +56,33 @@ public class SaleEditFrame extends JFrame {
         JLabel nameLabel = new JLabel("药品:");
         nameLabel.setBounds(10,20,80,25);
         add(nameLabel);
-        nameText = new JTextField(20);
-        nameText.setBounds(100,20,165,25);
+        goodsListModel = new GoodsListModel();
+        nameText = new JList<>(goodsListModel);
+        nameText.setBounds(100,20,165,100);
         add(nameText);
 
         // 数量
         JLabel unitPriceLabel = new JLabel("数量:");
-        unitPriceLabel.setBounds(10,80,80,25);
+        unitPriceLabel.setBounds(10,130,80,25);
         add(unitPriceLabel);
         amountText = new JTextField(20);
-        amountText.setBounds(100,80,165,25);
+        amountText.setBounds(100,130,165,25);
         // 限制输入数字
         amountText.addKeyListener(new NumberInput());
         add(amountText);
 
         // 会员
         JLabel userLabel = new JLabel("会员:");
-        userLabel.setBounds(10,170,80,25);
+        userLabel.setBounds(10,160,80,100);
         add(userLabel);
-        userText = new JTextField(20);
-        userText.setBounds(100,170,165,25);
+        userListModel = new UserListModel();
+        userText = new JList<>(userListModel);
+        userText.setBounds(100,160,165,100);
         add(userText);
 
         // 创建登录按钮
         okBtn = new JButton("确定");
-        okBtn.setBounds(10, 200, 255, 50);
+        okBtn.setBounds(10, 270, 255, 50);
 
         okBtn.addActionListener(new ActionListener() {
             @Override
@@ -88,13 +100,13 @@ public class SaleEditFrame extends JFrame {
      */
     private void setData(Object[] data) {
         if (null != data && data.length >= 7) {
-            nameText.setText(String.valueOf(data[8]));
+            nameText.setSelectedIndex(goodsListModel.searchIndex((Integer) data[8]));
             amountText.setText(String.valueOf(data[3]));
-            userText.setText(String.valueOf(data[9]));
+            userText.setSelectedIndex(userListModel.searchIndex((Integer) data[9]));
         } else {
-            nameText.setText("");
+            nameText.setSelectedIndex(0);
             amountText.setText("");
-            userText.setText("");
+            userText.setSelectedIndex(0);
         }
     }
 
@@ -117,14 +129,20 @@ public class SaleEditFrame extends JFrame {
         if (null == data) {
             data = new Object[7];
         }
-        data[1] = nameText.getText();
+        // 药品ID
+        data[1] = goodsListModel.getIndex(nameText.getSelectedIndex())[0];
         data[2] = amountText.getText();
-        // TODO 销售价
-        data[3] = data[4];
+        // 销售价 内部SQL处理
+        data[3] = null;
         // 会员ID
-        data[4] = userText.getText();
+        data[4] = userListModel.getIndex(userText.getSelectedIndex())[0];
         // 时间
         data[5] = new Date(System.currentTimeMillis());
+
+        if (null == data[1] || null == data[4]) {
+            JOptionPane.showMessageDialog(Context.mainFrame, "请输入完整", "提示", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
 
         try {
             if (EditType.add == editType) {
