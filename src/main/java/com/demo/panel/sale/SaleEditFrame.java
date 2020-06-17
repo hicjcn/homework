@@ -152,7 +152,10 @@ public class SaleEditFrame extends JFrame {
                 DbSaleUtil.saveSaleRecord(data);
             } else if (EditType.update == editType) {
                 // 更新
-                DbSaleUtil.updateSaleRecord(data);
+                int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认更新这一行吗？原则上不允许更新销售记录，系统不处理已发放积分！！");
+                if (JOptionPane.YES_OPTION == i) {
+                    DbSaleUtil.updateSaleRecord(data);
+                }
             }
             // 更新完关闭窗口
             setVisible(false);

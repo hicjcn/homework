@@ -54,7 +54,7 @@ public class DbSaleUtil {
     }
 
     /**
-     * 新增
+     * 新增 处理积分
      *
      */
     public static boolean saveSaleRecord(Object[] data) throws SQLException {
@@ -114,7 +114,7 @@ public class DbSaleUtil {
     }
 
     /**
-     * 更新
+     * 更新 不处理积分
      *
      * @param data
      * @return
@@ -145,10 +145,10 @@ public class DbSaleUtil {
     }
 
     /**
-     * 删除
-     * @param id
+     * 删除 并回收积分
+     * @param data
      */
-    public static boolean deleteSaleRecord(Integer id) throws SQLException {
+    public static boolean deleteSaleRecord(Object[] data) throws SQLException {
         MySqlUtil.Connect();
         Connection connection = MySqlUtil.getConn();
 
@@ -156,16 +156,46 @@ public class DbSaleUtil {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "DELETE FROM sale_record WHERE id = ?"
         );
-        preparedStatement.setInt(1, id);
+        preparedStatement.setInt(1, (Integer) data[0]);
+
+
 
         int resultLink = preparedStatement.executeUpdate();
         if (resultLink > 0) {
             System.out.println("执行sql语句成功");
         }else {
             System.out.println("删除失败，请检查数据库");
+            return false;
         }
 
-        return resultLink > 0;
+        // 关闭资源
+        preparedStatement.close();
+
+        // 给相应用户减积分
+        preparedStatement = connection.prepareStatement(
+                "update user set points = points - (" +
+                        "select ? * sale_price from goods where id = ?" +
+                        ") where id = ?"
+        );
+        // 数量 根据listSaleRecord 查询结果的顺序
+        preparedStatement.setObject(1, data[3]);
+        // 货物
+        preparedStatement.setObject(2, data[8]);
+        // 会员
+        preparedStatement.setObject(3, data[9]);
+
+        resultLink = preparedStatement.executeUpdate();
+        if (resultLink > 0) {
+            System.out.println("执行sql语句成功");
+        }else {
+            System.out.println("新增失败，请检查数据库");
+            return false;
+        }
+
+        // 关闭资源
+        preparedStatement.close();
+
+        return true;
     }
 
 }

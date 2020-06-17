@@ -94,12 +94,12 @@ public class SalePanel extends JPanel {
                     JOptionPane.showMessageDialog(Context.mainFrame, "请选择一行进行删除", "提示", JOptionPane.PLAIN_MESSAGE);
                     return;
                 }
-                int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认删除这一行吗？");
+                int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认删除这一行吗？删除将回收对应用户的积分！！");
                 if (JOptionPane.YES_OPTION == i) {
                     // 删除一行数据
                     Object[] selectedData = tableModel.getRow(selected);
                     try {
-                        DbSaleUtil.deleteSaleRecord((Integer) selectedData[0]);
+                        DbSaleUtil.deleteSaleRecord(selectedData);
                     } catch (SQLException sqlE) {
                         sqlE.printStackTrace();
                     } finally {
