@@ -40,7 +40,7 @@ public class SaleEditFrame extends JFrame {
         // 保存父窗口的句柄以便更新表格
         this.parentContext = parentCtx;
         setTitle("编辑货物");
-        setSize(300, 350);
+        setSize(300, 380);
         // 窗口在屏幕中间显示
         setLocationRelativeTo(null);
 
@@ -141,7 +141,7 @@ public class SaleEditFrame extends JFrame {
         // 时间
         data[5] = new Date(System.currentTimeMillis());
 
-        if (null == data[1] || null == data[4]) {
+        if (null == data[1] || null == data[4] || "".equals(data[2])) {
             JOptionPane.showMessageDialog(Context.mainFrame, "请输入完整", "提示", JOptionPane.PLAIN_MESSAGE);
             return;
         }

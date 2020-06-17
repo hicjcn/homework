@@ -13,7 +13,7 @@ public class MenuPanel extends JPanel {
     private JButton amountBtn = new JButton("库存管理");
     private JButton saleBtn = new JButton("销售管理");
     private JButton userBtn = new JButton("会员管理");
-    private JButton adminBtn = new JButton("用户管理");
+    private JButton adminBtn = new JButton("员工管理");
     private JButton selfBtn = new JButton("个人信息");
 
     public MenuPanel() {
