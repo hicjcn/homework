@@ -120,6 +120,11 @@ public class AdminEditFrame extends JFrame {
         this.editType = type;
         this.data = data;
         setData(data);
+        if (EditType.update == type) {
+            usernameText.setEnabled(false);
+        } else {
+            usernameText.setEnabled(true);
+        }
         setVisible(true);
     }
 

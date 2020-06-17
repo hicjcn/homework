@@ -2,6 +2,7 @@ package com.demo.panel.goods;
 
 import com.demo.Context;
 import com.demo.entity.EditType;
+import com.demo.entity.UserType;
 import com.demo.service.GoodsService;
 
 import javax.swing.*;
@@ -37,7 +38,10 @@ public class GoodsPanel extends JPanel {
         panel.add(refreshBtn);
         panel.add(addBtn);
         panel.add(editBtn);
-        panel.add(delBtn);
+        // 管理员才能删除数据
+        if (Context.curUserType == UserType.Admin) {
+            panel.add(delBtn);
+        }
 
         add(panel, BorderLayout.NORTH);
 

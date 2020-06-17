@@ -2,6 +2,7 @@ package com.demo.panel;
 
 import com.demo.Context;
 import com.demo.entity.MenuType;
+import com.demo.entity.UserType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,10 +31,19 @@ public class MenuPanel extends JPanel {
         adminBtn.addActionListener(new BtnActionListener(MenuType.admin));
         selfBtn.addActionListener(new BtnActionListener(MenuType.self));
 
-        add(amountBtn);
-        add(saleBtn);
-        add(userBtn);
-        add(adminBtn);
+        // 只有销售不能看
+        if (Context.curUserType != UserType.Sale) {
+            add(amountBtn);
+        }
+        // 只有库存管理员不能看
+        if (Context.curUserType != UserType.Inventory) {
+            add(saleBtn);
+            add(userBtn);
+        }
+        // 只有管理员能看
+        if (Context.curUserType == UserType.Admin) {
+            add(adminBtn);
+        }
         add(selfBtn);
     }
 

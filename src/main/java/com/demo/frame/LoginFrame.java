@@ -85,6 +85,7 @@ public class LoginFrame extends JFrame {
                 try {
                     if (login(username, pwd)) {
                         // 登录成功 关闭此界面 开启main界面
+                        Context.mainFrame = new MainFrame();
                         setVisible(false);
                         Context.mainFrame.setVisible(true);
                         return;

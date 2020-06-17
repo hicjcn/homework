@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
 
         Context.loginFrame = new LoginFrame();
-        Context.mainFrame = new MainFrame();
 
     }
 

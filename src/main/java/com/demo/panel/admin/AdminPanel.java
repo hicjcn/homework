@@ -2,6 +2,7 @@ package com.demo.panel.admin;
 
 import com.demo.Context;
 import com.demo.entity.EditType;
+import com.demo.entity.UserType;
 import com.demo.service.AdminService;
 
 import javax.swing.*;
