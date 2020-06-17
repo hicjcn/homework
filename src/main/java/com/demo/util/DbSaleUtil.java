@@ -62,23 +62,55 @@ public class DbSaleUtil {
         Connection connection = MySqlUtil.getConn();
 
         // 使用PreparedStatement防止SQL注入
+        // 给销售新加一条记录 价格记录当前货物价格
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into sale_record(goods_id, amount, sale_price, user_id, sale_time) values(?,?,?,?,?)"
+            "insert into sale_record(goods_id, amount, sale_price, user_id, sale_time) values(?,?,(" +
+                    "select sale_price from goods where id = ?" +
+                    "),?,?)"
         );
-        preparedStatement.setObject(1, data[0]);
-        preparedStatement.setObject(2, data[1]);
-        preparedStatement.setObject(3, data[2]);
-        preparedStatement.setObject(4, data[3]);
-        preparedStatement.setObject(5, data[4]);
+        preparedStatement.setObject(1, data[1]);
+        preparedStatement.setObject(2, data[2]);
+        // 通过货物Id获取当前销售价
+        preparedStatement.setObject(3, data[1]);
+        preparedStatement.setObject(4, data[4]);
+        preparedStatement.setObject(5, data[5]);
 
         int resultLink = preparedStatement.executeUpdate();
         if (resultLink > 0) {
             System.out.println("执行sql语句成功");
         }else {
             System.out.println("新增失败，请检查数据库");
+            return false;
         }
 
-        return resultLink > 0;
+        // 关闭资源
+        preparedStatement.close();
+
+        // 给相应用户加积分
+        preparedStatement = connection.prepareStatement(
+                "update user set points = points + (" +
+                        "select ? * sale_price from goods where id = ?" +
+                        ") where id = ?"
+        );
+        // 数量
+        preparedStatement.setObject(1, data[2]);
+        // 货物
+        preparedStatement.setObject(2, data[1]);
+        // 会员
+        preparedStatement.setObject(3, data[4]);
+
+        resultLink = preparedStatement.executeUpdate();
+        if (resultLink > 0) {
+            System.out.println("执行sql语句成功");
+        }else {
+            System.out.println("新增失败，请检查数据库");
+            return false;
+        }
+
+        // 关闭资源
+        preparedStatement.close();
+
+        return true;
     }
 
     /**
