@@ -119,6 +119,8 @@ public class SaleEditFrame extends JFrame {
         this.editType = type;
         this.data = data;
         setData(data);
+        userListModel.refresh();
+        goodsListModel.refresh();
         setVisible(true);
     }
 
@@ -149,7 +151,8 @@ public class SaleEditFrame extends JFrame {
                 // 新增
                 DbSaleUtil.saveSaleRecord(data);
             } else if (EditType.update == editType) {
-                // TODO 更新
+                // 更新
+                DbSaleUtil.updateSaleRecord(data);
             }
             // 更新完关闭窗口
             setVisible(false);

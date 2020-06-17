@@ -120,18 +120,18 @@ public class DbSaleUtil {
      * @return
      * @throws SQLException
      */
-    public static boolean updateAdmin(Object[] data) throws SQLException {
+    public static boolean updateSaleRecord(Object[] data) throws SQLException {
         MySqlUtil.Connect();
         Connection connection = MySqlUtil.getConn();
 
         // 使用PreparedStatement防止SQL注入
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE admin SET username=?, name=?, phone=?, type=? WHERE username=?"
+                "UPDATE sale_record SET good_id=?, amount=?, user_id=?, sale_time=? WHERE id=?"
         );
-        preparedStatement.setObject(1, data[0]);
-        preparedStatement.setObject(2, data[1]);
-        preparedStatement.setObject(3, data[2]);
-        preparedStatement.setObject(4, data[3]);
+        preparedStatement.setObject(1, data[1]);
+        preparedStatement.setObject(2, data[2]);
+        preparedStatement.setObject(3, data[4]);
+        preparedStatement.setObject(4, data[5]);
         preparedStatement.setObject(5, data[0]);
 
         int resultLink = preparedStatement.executeUpdate();
@@ -146,16 +146,17 @@ public class DbSaleUtil {
 
     /**
      * 删除
+     * @param id
      */
-    public static boolean deleteAdmin(String userName) throws SQLException {
+    public static boolean deleteSaleRecord(Integer id) throws SQLException {
         MySqlUtil.Connect();
         Connection connection = MySqlUtil.getConn();
 
         // 使用PreparedStatement防止SQL注入
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "DELETE FROM admin WHERE username=?"
+                "DELETE FROM sale_record WHERE id = ?"
         );
-        preparedStatement.setString(1, userName);
+        preparedStatement.setInt(1, id);
 
         int resultLink = preparedStatement.executeUpdate();
         if (resultLink > 0) {
