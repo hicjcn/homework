@@ -1,6 +1,7 @@
-package com.demo.util;
+package com.demo.service;
 
 import com.demo.Context;
+import com.demo.util.MySqlUtil;
 import com.google.common.collect.Lists;
 
 import java.sql.Connection;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DbAdminUtil {
+public class AdminService {
 
     private static String defaultPwd = "123456";
 

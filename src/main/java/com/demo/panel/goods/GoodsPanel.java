@@ -2,7 +2,7 @@ package com.demo.panel.goods;
 
 import com.demo.Context;
 import com.demo.entity.EditType;
-import com.demo.util.DbGoodsUtil;
+import com.demo.service.GoodsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,7 +98,7 @@ public class GoodsPanel extends JPanel {
                     // 删除一行数据
                     Object[] selectedData = tableModel.getRow(selected);
                     try {
-                        DbGoodsUtil.deleteGoods((Integer) selectedData[0]);
+                        GoodsService.deleteGoods((Integer) selectedData[0]);
                     } catch (SQLException sqlE) {
                         sqlE.printStackTrace();
                     } finally {

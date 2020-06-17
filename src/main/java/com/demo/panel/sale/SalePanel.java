@@ -2,8 +2,7 @@ package com.demo.panel.sale;
 
 import com.demo.Context;
 import com.demo.entity.EditType;
-import com.demo.util.DbGoodsUtil;
-import com.demo.util.DbSaleUtil;
+import com.demo.service.SaleService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,7 +98,7 @@ public class SalePanel extends JPanel {
                     // 删除一行数据
                     Object[] selectedData = tableModel.getRow(selected);
                     try {
-                        DbSaleUtil.deleteSaleRecord(selectedData);
+                        SaleService.deleteSaleRecord(selectedData);
                     } catch (SQLException sqlE) {
                         sqlE.printStackTrace();
                     } finally {

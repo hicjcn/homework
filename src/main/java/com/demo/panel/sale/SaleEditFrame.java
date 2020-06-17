@@ -3,8 +3,7 @@ package com.demo.panel.sale;
 import com.demo.Context;
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
-import com.demo.util.DbGoodsUtil;
-import com.demo.util.DbSaleUtil;
+import com.demo.service.SaleService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -149,12 +148,12 @@ public class SaleEditFrame extends JFrame {
         try {
             if (EditType.add == editType) {
                 // 新增
-                DbSaleUtil.saveSaleRecord(data);
+                SaleService.saveSaleRecord(data);
             } else if (EditType.update == editType) {
                 // 更新
                 int i = JOptionPane.showConfirmDialog(Context.mainFrame, "确认更新这一行吗？原则上不允许更新销售记录，系统不处理已发放积分！！");
                 if (JOptionPane.YES_OPTION == i) {
-                    DbSaleUtil.updateSaleRecord(data);
+                    SaleService.updateSaleRecord(data);
                 }
             }
             // 更新完关闭窗口

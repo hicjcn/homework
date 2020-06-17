@@ -2,7 +2,7 @@ package com.demo.panel.admin;
 
 import com.demo.Context;
 import com.demo.entity.EditType;
-import com.demo.util.DbAdminUtil;
+import com.demo.service.AdminService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,7 +100,7 @@ public class AdminPanel extends JPanel {
                     // 删除一行数据
                     Object[] selectedData = tableModel.getRow(selected);
                     try {
-                        DbAdminUtil.deleteAdmin(selectedData[0].toString());
+                        AdminService.deleteAdmin(selectedData[0].toString());
                     } catch (SQLException sqlE) {
                         sqlE.printStackTrace();
                         JOptionPane.showMessageDialog(Context.mainFrame, "删除失败", "提示", JOptionPane.PLAIN_MESSAGE);
@@ -127,7 +127,7 @@ public class AdminPanel extends JPanel {
                     // 重置密码
                     Object[] selectedData = tableModel.getRow(selected);
                     try {
-                        DbAdminUtil.resetPassword(selectedData[0].toString());
+                        AdminService.resetPassword(selectedData[0].toString());
                     } catch (SQLException sqlE) {
                         sqlE.printStackTrace();
                         JOptionPane.showMessageDialog(Context.mainFrame, "重置密码失败", "提示", JOptionPane.PLAIN_MESSAGE);

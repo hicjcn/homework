@@ -2,7 +2,7 @@ package com.demo.frame;
 
 import com.demo.Context;
 import com.demo.entity.UserType;
-import com.demo.util.DbLoginUtil;
+import com.demo.service.LoginService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -104,7 +104,7 @@ public class LoginFrame extends JFrame {
 
     private boolean login(String username, String password) throws SQLException {
 
-        ResultSet resultset = DbLoginUtil.login(username);
+        ResultSet resultset = LoginService.login(username);
 
         if (null == resultset) {
             return false;

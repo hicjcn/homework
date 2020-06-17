@@ -1,6 +1,6 @@
 package com.demo.panel.goods;
 
-import com.demo.util.DbGoodsUtil;
+import com.demo.service.GoodsService;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
@@ -54,7 +54,7 @@ public class GoodsTableModel extends AbstractTableModel {
      */
     public void refresh() {
         try {
-            this.data = DbGoodsUtil.listGoods();
+            this.data = GoodsService.listGoods();
             fireTableDataChanged();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();

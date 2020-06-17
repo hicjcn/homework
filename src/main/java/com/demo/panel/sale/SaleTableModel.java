@@ -1,7 +1,6 @@
 package com.demo.panel.sale;
 
-import com.demo.util.DbGoodsUtil;
-import com.demo.util.DbSaleUtil;
+import com.demo.service.SaleService;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
@@ -55,7 +54,7 @@ public class SaleTableModel extends AbstractTableModel {
      */
     public void refresh() {
         try {
-            this.data = DbSaleUtil.listSaleRecord();
+            this.data = SaleService.listSaleRecord();
             fireTableDataChanged();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();

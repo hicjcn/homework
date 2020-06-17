@@ -3,8 +3,7 @@ package com.demo.panel.admin;
 import com.demo.Context;
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
-import com.demo.entity.UserType;
-import com.demo.util.DbAdminUtil;
+import com.demo.service.AdminService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -139,10 +138,10 @@ public class AdminEditFrame extends JFrame {
         try {
             if (EditType.add == editType) {
                 // 新增
-                DbAdminUtil.saveAdmin(data);
+                AdminService.saveAdmin(data);
             } else if (EditType.update == editType) {
                 // 更新
-                DbAdminUtil.updateAdmin(data);
+                AdminService.updateAdmin(data);
             }
             // 更新完关闭窗口
             setVisible(false);

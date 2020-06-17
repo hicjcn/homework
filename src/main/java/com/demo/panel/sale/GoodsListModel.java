@@ -1,7 +1,6 @@
 package com.demo.panel.sale;
 
-import com.demo.util.DbGoodsUtil;
-import com.demo.util.DbUserUtil;
+import com.demo.service.GoodsService;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -54,7 +53,7 @@ public class GoodsListModel extends AbstractListModel<String> {
     public void refresh() {
         try {
             // 数据顺序 id name norms unit_price sale_price amount
-            this.data = DbGoodsUtil.listGoods();
+            this.data = GoodsService.listGoods();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             System.out.println("用户数据加载失败");

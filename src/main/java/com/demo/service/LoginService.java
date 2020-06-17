@@ -1,11 +1,13 @@
-package com.demo.util;
+package com.demo.service;
+
+import com.demo.util.MySqlUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DbLoginUtil {
+public class LoginService {
 
     /**
      * 登录查询用户信息

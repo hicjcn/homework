@@ -2,7 +2,7 @@ package com.demo.panel.user;
 
 import com.demo.Context;
 import com.demo.entity.EditType;
-import com.demo.util.DbUserUtil;
+import com.demo.service.UserService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,7 +98,7 @@ public class UserPanel extends JPanel {
                     // 删除一行数据
                     Object[] selectedData = tableModel.getRow(selected);
                     try {
-                        DbUserUtil.deleteUser((Integer) selectedData[0]);
+                        UserService.deleteUser((Integer) selectedData[0]);
                     } catch (SQLException sqlE) {
                         sqlE.printStackTrace();
                     } finally {

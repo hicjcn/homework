@@ -3,7 +3,7 @@ package com.demo.panel.user;
 import com.demo.Context;
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
-import com.demo.util.DbUserUtil;
+import com.demo.service.UserService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -124,10 +124,10 @@ public class UserEditFrame extends JFrame {
         try {
             if (EditType.add == editType) {
                 // 新增
-                DbUserUtil.saveUser(data);
+                UserService.saveUser(data);
             } else if (EditType.update == editType) {
                 // 更新
-                DbUserUtil.updateUser(data);
+                UserService.updateUser(data);
             }
             // 更新完关闭窗口
             setVisible(false);

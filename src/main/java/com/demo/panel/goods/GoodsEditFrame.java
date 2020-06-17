@@ -3,7 +3,7 @@ package com.demo.panel.goods;
 import com.demo.Context;
 import com.demo.adapter.NumberInput;
 import com.demo.entity.EditType;
-import com.demo.util.DbGoodsUtil;
+import com.demo.service.GoodsService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -160,10 +160,10 @@ public class GoodsEditFrame extends JFrame {
         try {
             if (EditType.add == editType) {
                 // 新增
-                DbGoodsUtil.saveGoods(data);
+                GoodsService.saveGoods(data);
             } else if (EditType.update == editType) {
                 // 更新
-                DbGoodsUtil.updateGoods(data);
+                GoodsService.updateGoods(data);
             }
             // 更新完关闭窗口
             setVisible(false);

@@ -1,6 +1,6 @@
 package com.demo.panel.admin;
 
-import com.demo.util.DbAdminUtil;
+import com.demo.service.AdminService;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
@@ -65,7 +65,7 @@ public class AdminTableModel extends AbstractTableModel {
      */
     public void refresh() {
         try {
-            this.data = DbAdminUtil.listAdmin();
+            this.data = AdminService.listAdmin();
             fireTableDataChanged();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();

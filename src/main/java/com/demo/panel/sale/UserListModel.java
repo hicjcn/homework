@@ -1,6 +1,6 @@
 package com.demo.panel.sale;
 
-import com.demo.util.DbUserUtil;
+import com.demo.service.UserService;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -53,7 +53,7 @@ public class UserListModel extends AbstractListModel<String> {
     public void refresh() {
         try {
             // 数据顺序 id name phone points
-            this.data = DbUserUtil.listUser();
+            this.data = UserService.listUser();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             System.out.println("用户数据加载失败");

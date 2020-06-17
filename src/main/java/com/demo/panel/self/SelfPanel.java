@@ -1,7 +1,7 @@
 package com.demo.panel.self;
 
 import com.demo.Context;
-import com.demo.util.DbAdminUtil;
+import com.demo.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
@@ -92,7 +92,7 @@ public class SelfPanel extends JPanel {
 
         // TODO 更新密码
         try {
-            if (DbAdminUtil.changePassword(oldPwd, newPwd)){
+            if (AdminService.changePassword(oldPwd, newPwd)){
                 JOptionPane.showMessageDialog(Context.mainFrame, "修改成功", "提示", JOptionPane.PLAIN_MESSAGE);
                 // 更新完密码
                 reset();

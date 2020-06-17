@@ -1,6 +1,6 @@
 package com.demo.panel.user;
 
-import com.demo.util.DbUserUtil;
+import com.demo.service.UserService;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
@@ -54,7 +54,7 @@ public class UserTableModel extends AbstractTableModel {
      */
     public void refresh() {
         try {
-            this.data = DbUserUtil.listUser();
+            this.data = UserService.listUser();
             // 触发表格更新数据界面
             fireTableDataChanged();
         } catch (SQLException sqlException) {

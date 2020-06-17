@@ -1,5 +1,6 @@
-package com.demo.util;
+package com.demo.service;
 
+import com.demo.util.MySqlUtil;
 import com.google.common.collect.Lists;
 
 import java.sql.Connection;
@@ -8,24 +9,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DbGoodsUtil {
+public class UserService {
     /**
      * 获取列表
      * @return
      * @throws SQLException
      */
-    public static Object[][] listGoods() throws SQLException {
+    public static Object[][] listUser() throws SQLException {
         MySqlUtil.Connect();
         Connection connection = MySqlUtil.getConn();
 
         // 使用PreparedStatement防止SQL注入
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from goods");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from user");
         ResultSet resultSet = preparedStatement.executeQuery();
 
         // 循环获取数据
         List<Object[]> list = Lists.newArrayList();
         while (resultSet.next()) {
-            Object[] row = new Object[7];
+            Object[] row = new Object[4];
             for (int i = 0; i < row.length; i++) {
                 row[i] = resultSet.getObject(i + 1);
             }
@@ -37,7 +38,7 @@ public class DbGoodsUtil {
         preparedStatement.close();
 
         // 转换结果
-        Object[][] result = new Object[list.size()][7];
+        Object[][] result = new Object[list.size()][4];
         for (int i = 0; i < list.size(); i++) {
             result[i] = list.get(i);
         }
@@ -48,20 +49,17 @@ public class DbGoodsUtil {
      * 新增
      *
      */
-    public static boolean saveGoods(Object[] data) throws SQLException {
+    public static boolean saveUser(Object[] data) throws SQLException {
         MySqlUtil.Connect();
         Connection connection = MySqlUtil.getConn();
 
         // 使用PreparedStatement防止SQL注入
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into goods(name, norms, unit_price, sale_price, amount, manufacturer) values(?,?,?,?,?,?)"
+                "insert into user(name, phone, points) values(?,?,?)"
         );
         preparedStatement.setObject(1, data[1]);
         preparedStatement.setObject(2, data[2]);
         preparedStatement.setObject(3, data[3]);
-        preparedStatement.setObject(4, data[4]);
-        preparedStatement.setObject(5, data[5]);
-        preparedStatement.setObject(6, data[6]);
 
         int resultLink = preparedStatement.executeUpdate();
         if (resultLink > 0) {
@@ -80,21 +78,18 @@ public class DbGoodsUtil {
      * @return
      * @throws SQLException
      */
-    public static boolean updateGoods(Object[] data) throws SQLException {
+    public static boolean updateUser(Object[] data) throws SQLException {
         MySqlUtil.Connect();
         Connection connection = MySqlUtil.getConn();
 
         // 使用PreparedStatement防止SQL注入
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE goods SET name=?, norms=?, unit_price=?, sale_price=?, amount=?, manufacturer=? WHERE id=?"
+                "UPDATE user SET name=?, phone=?, points=? WHERE id=?"
         );
         preparedStatement.setObject(1, data[1]);
         preparedStatement.setObject(2, data[2]);
         preparedStatement.setObject(3, data[3]);
-        preparedStatement.setObject(4, data[4]);
-        preparedStatement.setObject(5, data[5]);
-        preparedStatement.setObject(6, data[6]);
-        preparedStatement.setObject(7, data[0]);
+        preparedStatement.setObject(4, data[0]);
 
         int resultLink = preparedStatement.executeUpdate();
         if (resultLink > 0) {
@@ -109,13 +104,13 @@ public class DbGoodsUtil {
     /**
      * 删除
      */
-    public static boolean deleteGoods(int id) throws SQLException {
+    public static boolean deleteUser(int id) throws SQLException {
         MySqlUtil.Connect();
         Connection connection = MySqlUtil.getConn();
 
         // 使用PreparedStatement防止SQL注入
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "DELETE FROM goods WHERE id=?"
+                "DELETE FROM user WHERE id=?"
         );
         preparedStatement.setInt(1, id);
 
