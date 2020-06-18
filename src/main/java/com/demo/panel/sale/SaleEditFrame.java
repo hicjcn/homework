@@ -38,7 +38,7 @@ public class SaleEditFrame extends JFrame {
     SaleEditFrame(SalePanel parentCtx) {
         // 保存父窗口的句柄以便更新表格
         this.parentContext = parentCtx;
-        setTitle("编辑货物");
+        setTitle("编辑销售");
         setSize(300, 380);
         // 窗口在屏幕中间显示
         setLocationRelativeTo(null);
