@@ -54,7 +54,6 @@ public class LoginFrame extends JFrame {
          */
         userText = new JTextField(20);
         userText.setBounds(100,20,165,25);
-        userText.setText("admin");
         panel.add(userText);
 
         // 输入密码的文本域
@@ -68,7 +67,6 @@ public class LoginFrame extends JFrame {
          */
         passwordText = new JPasswordField(20);
         passwordText.setBounds(100,50,165,25);
-        passwordText.setText("123");
         panel.add(passwordText);
 
         // 创建登录按钮
