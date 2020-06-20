@@ -23,4 +23,9 @@
     <string name="hint_input_twice_diff">两次密码输入不一致</string>
     <string name="reg_success">注册成功，请登录</string>
     <string name="reg_username_exist">注册失败，用户名已存在</string>
+    <string name="action_menu">主菜单</string>
+    <string name="action_title">简易购物系统</string>
+    <string name="action_goods_list">商品列表</string>
+    <string name="action_order">全部订单</string>
+    <string name="action_my_info">个人信息</string>
 </resources>

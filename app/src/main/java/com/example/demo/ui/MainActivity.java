@@ -9,28 +9,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.demo.R;
+import com.example.demo.model.AppContext;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    /**
-     * 调用MainActivity内的退出方法
-     *
-     * @param flag
-     */
-    public static List<Activity> activityList = new LinkedList();
-
-    /**
-     * 退出方法
-     */
-    public static void exitApp() {
-        for (Activity act : activityList) {
-            act.finish();
-        }
-        System.exit(0);
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 添加自身 退出时统一关闭
-        activityList.add(this);
+        // 添加 退出时统一关闭
+        AppContext.activityList.add(this);
     }
 }

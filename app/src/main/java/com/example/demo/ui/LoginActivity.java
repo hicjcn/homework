@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // 新建的Activity添加到列表以便退出时关闭
-        MainActivity.activityList.add(this);
+        AppContext.activityList.add(this);
 
         // 绑定视图
         username = findViewById(R.id.loginUsername);
@@ -53,8 +53,12 @@ public class LoginActivity extends AppCompatActivity {
                             UserService.login(usernameStr, pwdStr, isSuccess -> {
                                 runOnUiThread(() -> {
                                     if (isSuccess) {
-                                        // TODO 跳转主界面
+                                        //  跳转主界面
                                         Toast.makeText(LoginActivity.this, R.string.welcome, 3).show();
+                                        // 跳转主界面
+                                        Intent intent = new Intent(LoginActivity.this, ActionActivity.class);
+                                        startActivity(intent);
+
                                         return;
                                     }
                                     Toast.makeText(LoginActivity.this, R.string.login_error, 3).show();

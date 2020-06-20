@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
         // 新建的Activity添加到列表以便退出时关闭
-        MainActivity.activityList.add(this);
+        AppContext.activityList.add(this);
 
         // 绑定视图
         username = findViewById(R.id.regUsername);
