@@ -1,5 +1,6 @@
 package com.example.demo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -21,8 +22,9 @@ public class ActionActivity extends AppCompatActivity {
         AppContext.activityList.add(this);
 
         findViewById(R.id.actionGoodsList).setOnClickListener(view -> {
-            // TODO 商品列表
-
+            // 商品列表
+            Intent intent = new Intent(ActionActivity.this, GoodsListActivity.class);
+            startActivity(intent);
         });
         findViewById(R.id.actionOrder).setOnClickListener(view -> {
             // TODO 全部订单
