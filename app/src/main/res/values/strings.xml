@@ -14,4 +14,13 @@
     <string name="login_reg">"还没账号? 前往注册"</string>
     <string name="login_input">请输入用户名/密码</string>
     <string name="login_error">用户名/密码错误</string>
+    <string name="reg_again_pwd">再次输入密码</string>
+    <string name="reg_name">姓名</string>
+    <string name="reg_phone">手机号</string>
+    <string name="reg_login">已有账号？前往登录</string>
+    <string name="reg_reg">注册</string>
+    <string name="hint_input_complete">请输入完整</string>
+    <string name="hint_input_twice_diff">两次密码输入不一致</string>
+    <string name="reg_success">注册成功，请登录</string>
+    <string name="reg_username_exist">注册失败，用户名已存在</string>
 </resources>

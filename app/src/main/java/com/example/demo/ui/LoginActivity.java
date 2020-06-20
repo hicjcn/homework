@@ -1,5 +1,6 @@
 package com.example.demo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.demo.R;
 import com.example.demo.data.UserService;
-import com.example.demo.data.callback.LoginCallback;
 import com.example.demo.model.AppContext;
 
 import org.apache.commons.lang3.StringUtils;
@@ -62,7 +62,9 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         } catch (Exception e) {
                             e.printStackTrace();
-                            Toast.makeText(LoginActivity.this, R.string.db_error, 3).show();
+                            runOnUiThread(() -> {
+                                Toast.makeText(LoginActivity.this, R.string.db_error, 3).show();
+                            });
                         }
                     }
                 });
@@ -71,7 +73,9 @@ public class LoginActivity extends AppCompatActivity {
         toReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // 切到登录界面
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
