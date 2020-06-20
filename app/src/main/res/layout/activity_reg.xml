@@ -91,7 +91,7 @@
 
     <Button
         android:id="@+id/regReg"
-        android:layout_width="wrap_content"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"

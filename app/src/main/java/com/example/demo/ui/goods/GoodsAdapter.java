@@ -34,7 +34,7 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsViewHoder> {
         Goods goods = list.get(position);
         holder.id = goods.id;
         holder.name.setText(goods.name);
-        holder.price.setText(String.valueOf(goods.price));
+        holder.price.setText("￥" + goods.price);
         holder.desc.setText(goods.description);
     }
 

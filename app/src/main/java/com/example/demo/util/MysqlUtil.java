@@ -18,7 +18,7 @@ public class MysqlUtil {
     private static Statement statement = null;
     private static ResultSet  resultSet = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         Connect();
         Query( "select * from user where uaername = 'admin'");
@@ -73,7 +73,7 @@ public class MysqlUtil {
         return resultSet;
     }
 
-    public static int Update(String sql) {   //执行错误返回-1
+    public static int Update(String sql) throws SQLException {   //执行错误返回-1
         Connect();
         if(statement != null){
             try {
@@ -91,7 +91,7 @@ public class MysqlUtil {
         }
     }
 
-    public static void Query(String sql) {
+    public static void Query(String sql) throws SQLException {
         Connect();
         if(statement != null){
             try {
@@ -115,8 +115,8 @@ public class MysqlUtil {
     }
 
 
-    public static void Connect() {
-        if(statement == null){
+    public static void Connect() throws SQLException {
+        if(statement == null || conn.isClosed()){
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 conn = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD);
