@@ -32,4 +32,6 @@
     <string name="goods_shopping_buy">立即结算</string>
     <string name="goods_shopping_add">增加</string>
     <string name="goods_shopping_rdu">减少</string>
+    <string name="goods_shopping_buy_success">购买成功</string>
+    <string name="goods_shopping_buy_fail">购买失败</string>
 </resources>

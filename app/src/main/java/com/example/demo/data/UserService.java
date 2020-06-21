@@ -1,6 +1,6 @@
 package com.example.demo.data;
 
-import com.example.demo.data.callback.LoginAndRegisterCallback;
+import com.example.demo.data.callback.SuccessCallback;
 import com.example.demo.model.AppContext;
 import com.example.demo.model.User;
 import com.example.demo.util.MysqlUtil;
@@ -12,7 +12,14 @@ import java.sql.SQLException;
 
 public class UserService {
 
-    public static void login(String usernameStr, String pwdStr, LoginAndRegisterCallback loginAndRegisterCallback) throws Exception {
+    /**
+     * 登录
+     * @param usernameStr
+     * @param pwdStr
+     * @param successCallback
+     * @throws Exception
+     */
+    public static void login(String usernameStr, String pwdStr, SuccessCallback successCallback) throws Exception {
 
         MysqlUtil.Connect();
         Connection connection = MysqlUtil.getConn();
@@ -36,16 +43,25 @@ public class UserService {
             AppContext.curUser.name = resultSet.getString("name");
             AppContext.curUser.phone = resultSet.getString("phone");
 
-            loginAndRegisterCallback.success(true);
+            successCallback.success(true);
         } else {
-            loginAndRegisterCallback.success(false);
+            successCallback.success(false);
         }
 
         // 关闭资源
         preparedStatement.close();
     }
 
-    public static void register(String usernameStr, String pwdStr, String nameStr, String phoneStr, LoginAndRegisterCallback loginAndRegisterCallback) throws Exception {
+    /**
+     * 注册
+     * @param usernameStr
+     * @param pwdStr
+     * @param nameStr
+     * @param phoneStr
+     * @param successCallback
+     * @throws Exception
+     */
+    public static void register(String usernameStr, String pwdStr, String nameStr, String phoneStr, SuccessCallback successCallback) throws Exception {
 
         MysqlUtil.Connect();
         Connection connection = MysqlUtil.getConn();
@@ -61,14 +77,14 @@ public class UserService {
             int i = preparedStatement.executeUpdate();
             if(i > 0){
                 System.out.println("执行sql语句成功");
-                loginAndRegisterCallback.success(true);
+                successCallback.success(true);
             }else {
-                loginAndRegisterCallback.success(false);
+                successCallback.success(false);
                 System.out.println("用户名密码重复");
             }
         }catch (SQLException e) {
             e.printStackTrace();
-            loginAndRegisterCallback.success(false);
+            successCallback.success(false);
         }
 
         // 关闭资源

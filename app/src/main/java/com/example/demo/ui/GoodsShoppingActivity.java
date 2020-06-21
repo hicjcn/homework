@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.demo.R;
+import com.example.demo.data.GoodsService;
+import com.example.demo.data.RecordService;
+import com.example.demo.data.UserService;
 import com.example.demo.model.AppContext;
 import com.example.demo.model.Goods;
 
@@ -78,7 +82,31 @@ public class GoodsShoppingActivity extends AppCompatActivity {
         });
         // 结算
         btnBuy.setOnClickListener(view -> {
-            // TODO 结算
+            //  结算
+            AppContext.executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        RecordService.shopping(AppContext.curUser.username, goods.id, shoppingCount, (shoppingCount * goods.price), isSuccess -> {
+                            runOnUiThread(() -> {
+                                if (isSuccess) {
+                                    // 切到商品列表界面
+                                    Toast.makeText(GoodsShoppingActivity.this, R.string.goods_shopping_buy_success, 3).show();
+                                    Intent intent = new Intent(GoodsShoppingActivity.this, GoodsListActivity.class);
+                                    startActivity(intent);
+                                    return;
+                                }
+                                Toast.makeText(GoodsShoppingActivity.this, R.string.goods_shopping_buy_fail, 3).show();
+                            });
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        runOnUiThread(() -> {
+                            Toast.makeText(GoodsShoppingActivity.this, R.string.db_error, 3).show();
+                        });
+                    }
+                }
+            });
         });
     }
 }

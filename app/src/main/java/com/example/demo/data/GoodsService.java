@@ -1,10 +1,7 @@
 package com.example.demo.data;
 
 import com.example.demo.data.callback.GoodsCallback;
-import com.example.demo.data.callback.LoginAndRegisterCallback;
-import com.example.demo.model.AppContext;
 import com.example.demo.model.Goods;
-import com.example.demo.model.User;
 import com.example.demo.util.MysqlUtil;
 
 import java.sql.Connection;

@@ -1,5 +1,5 @@
 package com.example.demo.data.callback;
 
-public interface LoginAndRegisterCallback {
+public interface SuccessCallback {
     void success(boolean isSuccess);
 }
