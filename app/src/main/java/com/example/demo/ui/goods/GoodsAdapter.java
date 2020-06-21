@@ -12,7 +12,7 @@ import com.example.demo.model.Goods;
 
 import java.util.List;
 
-public class GoodsAdapter extends RecyclerView.Adapter<GoodsViewHoder> {
+public class GoodsAdapter extends RecyclerView.Adapter<GoodsViewHolder> {
 
     private Activity activity;
     private List<Goods> list;
@@ -24,15 +24,15 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsViewHoder> {
 
     @NonNull
     @Override
-    public GoodsViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GoodsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(activity, R.layout.item_goods, null);
-        return new GoodsViewHoder(view);
+        return new GoodsViewHolder(activity, view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GoodsViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull GoodsViewHolder holder, int position) {
         Goods goods = list.get(position);
-        holder.id = goods.id;
+        holder.goods = goods;
         holder.name.setText(goods.name);
         holder.price.setText("￥" + goods.price);
         holder.desc.setText(goods.description);
