@@ -5,6 +5,8 @@ import com.example.demo.model.AppContext;
 import com.example.demo.model.User;
 import com.example.demo.util.MysqlUtil;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,6 +83,44 @@ public class UserService {
             }else {
                 successCallback.success(false);
                 System.out.println("用户名密码重复");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+            successCallback.success(false);
+        }
+
+        // 关闭资源
+        preparedStatement.close();
+    }
+
+    /**
+     * 更新用户信息
+     * @param pwdStr
+     * @param nameStr
+     * @param phoneStr
+     * @param successCallback
+     * @throws Exception
+     */
+    public static void update(String pwdStr, String nameStr, String phoneStr, SuccessCallback successCallback) throws Exception {
+
+        MysqlUtil.Connect();
+        Connection connection = MysqlUtil.getConn();
+
+        // 使用PreparedStatement防止SQL注入
+        PreparedStatement preparedStatement = connection.prepareStatement("update user set name = ?, phone = ?, password = ? where username = ?");
+        preparedStatement.setString(1, StringUtils.isEmpty(nameStr) ? AppContext.curUser.name : nameStr);
+        preparedStatement.setString(2, StringUtils.isEmpty(phoneStr) ? AppContext.curUser.phone : phoneStr);
+        preparedStatement.setString(3, StringUtils.isEmpty(pwdStr) ? AppContext.curUser.password : pwdStr);
+        preparedStatement.setString(4, AppContext.curUser.username);
+
+        try {
+            int i = preparedStatement.executeUpdate();
+            if(i > 0){
+                System.out.println("执行sql语句成功");
+                successCallback.success(true);
+            }else {
+                successCallback.success(false);
+                System.out.println("更新用户信息失败");
             }
         }catch (SQLException e) {
             e.printStackTrace();

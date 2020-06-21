@@ -34,4 +34,8 @@
     <string name="goods_shopping_rdu">减少</string>
     <string name="goods_shopping_buy_success">购买成功</string>
     <string name="goods_shopping_buy_fail">购买失败</string>
+    <string name="btn_ok">确定</string>
+    <string name="btn_canel">取消</string>
+    <string name="info_success">更新成功</string>
+    <string name="info_fail">更新失败</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +19,11 @@ import org.apache.commons.lang3.StringUtils;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private TextView username;
-    private TextView password;
-    private TextView password2;
-    private TextView name;
-    private TextView phone;
+    private EditText username;
+    private EditText password;
+    private EditText password2;
+    private EditText name;
+    private EditText phone;
     private Button reg;
     private TextView toLogin;
 

@@ -32,8 +32,9 @@ public class ActionActivity extends AppCompatActivity {
             startActivity(intent);
         });
         findViewById(R.id.actionMyInfo).setOnClickListener(view -> {
-            // TODO 个人信息
-
+            // 个人信息
+            Intent intent = new Intent(ActionActivity.this, InfoActivity.class);
+            startActivity(intent);
         });
     }
 }
