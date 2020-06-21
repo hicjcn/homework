@@ -90,10 +90,10 @@ public class GoodsShoppingActivity extends AppCompatActivity {
                         RecordService.shopping(AppContext.curUser.username, goods.id, shoppingCount, (shoppingCount * goods.price), isSuccess -> {
                             runOnUiThread(() -> {
                                 if (isSuccess) {
-                                    // 切到商品列表界面
+                                    // 结束当前界面 切到商品列表界面
                                     Toast.makeText(GoodsShoppingActivity.this, R.string.goods_shopping_buy_success, 3).show();
-                                    Intent intent = new Intent(GoodsShoppingActivity.this, GoodsListActivity.class);
-                                    startActivity(intent);
+                                    AppContext.activityList.remove(AppContext.activityList.size() - 1);
+                                    finish();
                                     return;
                                 }
                                 Toast.makeText(GoodsShoppingActivity.this, R.string.goods_shopping_buy_fail, 3).show();
