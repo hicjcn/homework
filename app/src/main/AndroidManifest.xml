@@ -22,6 +22,7 @@
         <activity android:name=".ui.ActionActivity"></activity>
         <activity android:name=".ui.GoodsListActivity"></activity>
         <activity android:name=".ui.GoodsShoppingActivity"></activity>
+        <activity android:name=".ui.RecordListActivity"></activity>
     </application>
 
 </manifest>

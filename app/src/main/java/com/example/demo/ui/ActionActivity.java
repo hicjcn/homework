@@ -27,8 +27,9 @@ public class ActionActivity extends AppCompatActivity {
             startActivity(intent);
         });
         findViewById(R.id.actionOrder).setOnClickListener(view -> {
-            // TODO 全部订单
-
+            //  全部订单
+            Intent intent = new Intent(ActionActivity.this, RecordListActivity.class);
+            startActivity(intent);
         });
         findViewById(R.id.actionMyInfo).setOnClickListener(view -> {
             // TODO 个人信息
