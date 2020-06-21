@@ -14,6 +14,7 @@ import com.example.demo.ui.goods.GoodsViewHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordViewHolder> {
 
@@ -40,7 +41,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordViewHolder> {
         holder.desc.setText(record.description);
         holder.cnt.setText("x" + record.count);
         holder.amount.setText("￥" + record.amount);
-        holder.time.setText(new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(record.time));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        holder.time.setText(simpleDateFormat.format(record.time));
     }
 
     @Override
