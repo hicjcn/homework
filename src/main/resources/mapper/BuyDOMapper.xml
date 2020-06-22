@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mapper.BuyDOMapper">
 
+    <select id="getMaxIdByPartition" resultType="java.lang.Integer">
+        select ifnull(max(substring(BuyID, 11, 4) + 0), 0) seq from BUY where BuyID like #{partition}
+    </select>
 </mapper>

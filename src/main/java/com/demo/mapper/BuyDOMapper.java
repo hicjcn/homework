@@ -12,4 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface BuyDOMapper extends BaseMapper<BuyDO> {
 
+    int getMaxIdByPartition(String partition);
 }

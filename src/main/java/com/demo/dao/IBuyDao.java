@@ -12,4 +12,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBuyDao extends IService<BuyDO> {
 
+    /**
+     * 获取分区最大流水号
+     * @param partition
+     * @return
+     */
+    int getMaxIdByPartition(String partition);
 }

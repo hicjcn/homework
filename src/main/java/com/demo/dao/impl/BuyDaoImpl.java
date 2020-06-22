@@ -16,4 +16,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class BuyDaoImpl extends ServiceImpl<BuyDOMapper, BuyDO> implements IBuyDao {
 
+    /**
+     * 获取分区最大流水号
+     *
+     * @param partition
+     * @return
+     */
+    @Override
+    public int getMaxIdByPartition(String partition) {
+        String key = partition + "%";
+        return this.baseMapper.getMaxIdByPartition(key);
+    }
 }

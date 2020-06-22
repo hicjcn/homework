@@ -3,19 +3,22 @@ package com.demo.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.demo.dao.IBuyDao;
 import com.demo.dao.ISaleDao;
+import com.demo.dao.IStaffDao;
 import com.demo.dao.IWareDao;
-import com.demo.entity.SaleDO;
-import com.demo.entity.WareDO;
+import com.demo.entity.*;
+import com.demo.entity.vo.BuyVO;
 import com.demo.entity.vo.SaleVO;
+import com.demo.service.IBuyService;
 import com.demo.service.ISaleService;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -25,13 +28,19 @@ import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 @Service
-public class SaleServiceImpl implements ISaleService {
+public class BuyServiceImpl implements IBuyService {
 
     @Resource
-    private ISaleDao saleDao;
+    private IBuyDao buyDao;
 
     @Resource
     private IWareDao wareDao;
+
+    @Resource
+    private IStaffDao staffDao;
+
+    @Resource
+    private HttpSession httpSession;
 
     /**
      * 分页获取列表
@@ -40,8 +49,8 @@ public class SaleServiceImpl implements ISaleService {
      * @return
      */
     @Override
-    public IPage<SaleVO> page(Integer pageNo) {
-        IPage<SaleDO> page = new Page<>();
+    public IPage<BuyVO> page(Integer pageNo) {
+        IPage<BuyDO> page = new Page<>();
         if (null != pageNo) {
             page.setCurrent(pageNo);
         } else {
@@ -50,30 +59,36 @@ public class SaleServiceImpl implements ISaleService {
         // 每页10条数据
         page.setSize(10);
 
-        IPage<SaleDO> saleDOIPage = saleDao.page(page, new QueryWrapper<>());
+        IPage<BuyDO> buyDOIPage = buyDao.page(page, new QueryWrapper<>());
 
         // 补充商品名称
         List<WareDO> list = wareDao.list();
         Map<String, String> wareNameMap = list.stream().collect(Collectors.toMap(WareDO::getWareID, WareDO::getWareName));
 
-        List<SaleDO> saleDOList = saleDOIPage.getRecords();
-        List<SaleVO> saleVOList = Lists.newArrayList();
-        saleDOList.forEach(saleDO -> {
-            SaleVO saleVO = new SaleVO();
-            BeanUtils.copyProperties(saleDO, saleVO);
+        // 补充商品名称
+        List<StaffDO> staffDOList = staffDao.list();
+        Map<String, String> staffNameMap = staffDOList.stream().collect(Collectors.toMap(StaffDO::getStaffID, StaffDO::getStaffName));
+
+        List<BuyDO> buyDOS = buyDOIPage.getRecords();
+        List<BuyVO> buyVOS = Lists.newArrayList();
+        buyDOS.forEach(buyDO -> {
+            BuyVO buyVO = new BuyVO();
+            BeanUtils.copyProperties(buyDO, buyVO);
             // 补充名称
-            saleVO.setWareName(wareNameMap.getOrDefault(saleVO.getWareID(), "未知商品"));
-            saleVOList.add(saleVO);
+            buyVO.setWareName(wareNameMap.getOrDefault(buyVO.getWareID(), "未知商品"));
+            // 补充采购员名称
+            buyVO.setBuyPersonName(staffNameMap.getOrDefault(buyVO.getBuyPerson(), "未知员工"));
+            buyVOS.add(buyVO);
         });
 
-        IPage<SaleVO> saleVOIPage = new Page<>();
-        saleVOIPage.setPages(saleDOIPage.getPages());
-        saleVOIPage.setSize(saleDOIPage.getSize());
-        saleVOIPage.setCurrent(saleDOIPage.getCurrent());
-        saleVOIPage.setTotal(saleDOIPage.getTotal());
-        saleVOIPage.setRecords(saleVOList);
+        IPage<BuyVO> buyDOPage = new Page<>();
+        buyDOPage.setPages(buyDOIPage.getPages());
+        buyDOPage.setSize(buyDOIPage.getSize());
+        buyDOPage.setCurrent(buyDOIPage.getCurrent());
+        buyDOPage.setTotal(buyDOIPage.getTotal());
+        buyDOPage.setRecords(buyVOS);
 
-        return saleVOIPage;
+        return buyDOPage;
 
     }
 
@@ -83,16 +98,19 @@ public class SaleServiceImpl implements ISaleService {
      * @return
      */
     @Override
-    public boolean save(SaleDO saleDO) {
-        if (StringUtils.isEmpty(saleDO.getSaleID())) {
-            String id = generateSaleId();
-            saleDO.setSaleID(id);
+    public boolean save(BuyDO buyDO) {
+        if (StringUtils.isEmpty(buyDO.getBuyID())) {
+            String id = generateBuyId();
+            buyDO.setBuyID(id);
         }
-        saleDO.setSaleDate(LocalDateTime.now());
-        return saleDao.saveOrUpdate(saleDO);
+        buyDO.setBuyDate(LocalDateTime.now());
+        // 用户名
+        StaffDO staffDO = (StaffDO) httpSession.getAttribute(Constants.USER);
+        buyDO.setBuyPerson(staffDO.getStaffID());
+        return buyDao.saveOrUpdate(buyDO);
     }
 
-    private String generateSaleId() {
+    private String generateBuyId() {
         // 默认仓库 01
         String warehouse = "01";
         // 日期
@@ -100,7 +118,7 @@ public class SaleServiceImpl implements ISaleService {
         dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         String date = dateFormat.format(new Date(System.currentTimeMillis()));
         // 流水号
-        int id = saleDao.getMaxIdByPartition(warehouse + date);
+        int id = buyDao.getMaxIdByPartition(warehouse + date);
         // 保证四位
         String idStr = String.valueOf(++id);
         StringBuilder builder = new StringBuilder();
@@ -119,6 +137,6 @@ public class SaleServiceImpl implements ISaleService {
      */
     @Override
     public void delete(String no) {
-        saleDao.removeById(no);
+        buyDao.removeById(no);
     }
 }
