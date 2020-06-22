@@ -1,6 +1,7 @@
 package com.demo.interceptor;
 
 import com.demo.entity.Constants;
+import com.demo.entity.StaffDO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +29,7 @@ public class AuthInterpretor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (null != session.getAttribute(Constants.USERNAME)) {
+        if (null != session.getAttribute(Constants.USER)) {
             return true;
         }
         response.sendRedirect("/login");
@@ -49,8 +50,7 @@ public class AuthInterpretor implements HandlerInterceptor {
         // 视图注入 用户名
         if (null != modelAndView) {
             Map<String, Object> model = modelAndView.getModel();
-            model.put("username", session.getAttribute(Constants.USERNAME));
-            model.put("user_type", session.getAttribute(Constants.USER_TYPE));
+            model.put("user", session.getAttribute(Constants.USER));
         }
     }
 }

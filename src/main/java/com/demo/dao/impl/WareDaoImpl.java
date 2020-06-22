@@ -1,8 +1,8 @@
-package com.demo.service.impl;
+package com.demo.dao.impl;
 
 import com.demo.entity.WareDO;
 import com.demo.mapper.WareDOMapper;
-import com.demo.service.IWareDao;
+import com.demo.dao.IWareDao;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

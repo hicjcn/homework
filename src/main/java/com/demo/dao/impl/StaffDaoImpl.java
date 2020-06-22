@@ -1,8 +1,8 @@
-package com.demo.service.impl;
+package com.demo.dao.impl;
 
 import com.demo.entity.StaffDO;
 import com.demo.mapper.StaffDOMapper;
-import com.demo.service.IStaffDao;
+import com.demo.dao.IStaffDao;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

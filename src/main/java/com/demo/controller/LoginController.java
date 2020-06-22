@@ -1,7 +1,7 @@
 package com.demo.controller;
 
 import com.demo.entity.Constants;
-import com.demo.entity.enumcode.UserType;
+import com.demo.entity.StaffDO;
 import com.demo.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -43,15 +43,12 @@ public class LoginController {
     }
 
     @PostMapping("login")
-    public String loginAction(String username, String password, UserType type, Model model) {
+    public String loginAction(String username, String password, Model model) {
         model.addAttribute("username", username);
-        assert null != type;
         if (StringUtils.isAnyEmpty(username, password)) {
             model.addAttribute("error", "请输入用户名/密码");
         }
-        if (userService.login(username, password, type)) {
-            session.setAttribute(Constants.USERNAME, username);
-            session.setAttribute(Constants.USER_TYPE, type);
+        if (userService.login(username, password)) {
             return "redirect:/index";
         } else {
             model.addAttribute("error", "用户名/密码错误");
@@ -74,14 +71,13 @@ public class LoginController {
     @PostMapping("reset-password")
     public String resetPwd(String oldPwd, String newPwd, RedirectAttributes attributes) {
 
-        String username = String.valueOf(session.getAttribute(Constants.USERNAME));
-        UserType userType = UserType.valueOf(String.valueOf(session.getAttribute(Constants.USER_TYPE)));
+        StaffDO user = (StaffDO) session.getAttribute(Constants.USER);
 
-        if (StringUtils.isAnyEmpty(username, oldPwd, newPwd) || null == userType) {
+        if (StringUtils.isAnyEmpty(user.getStaffID(), oldPwd, newPwd)) {
             attributes.addAttribute("msg", "信息不完整无法修改");
         } else {
             // 修改密码
-            if (userService.resetPwd(username, oldPwd, newPwd, userType)) {
+            if (userService.resetPwd(user.getStaffID(), oldPwd, newPwd)) {
                 attributes.addAttribute("msg", "修改成功");
             } else {
                 attributes.addAttribute("msg", "旧密码错误，修改失败");

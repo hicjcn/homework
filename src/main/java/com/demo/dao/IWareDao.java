@@ -1,16 +1,16 @@
-package com.demo.service;
+package com.demo.dao;
 
-import com.demo.entity.BuyDO;
+import com.demo.entity.WareDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 商品登记表 服务类
  * </p>
  *
  * @author MybatisPlus
  * @since 2020-06-22
  */
-public interface IBuyDao extends IService<BuyDO> {
+public interface IWareDao extends IService<WareDO> {
 
 }

@@ -3,11 +3,11 @@ package com.demo.entity.enumcode;
 public enum UserType {
 
     /**
-     * 销售
+     * 销售员
      */
     Sale(0),
     /**
-     * 库存管理员
+     * 采购员
      */
     Stock(1),
     /**

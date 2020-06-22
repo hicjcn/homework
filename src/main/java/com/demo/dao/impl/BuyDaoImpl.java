@@ -1,8 +1,8 @@
-package com.demo.service.impl;
+package com.demo.dao.impl;
 
 import com.demo.entity.BuyDO;
 import com.demo.mapper.BuyDOMapper;
-import com.demo.service.IBuyDao;
+import com.demo.dao.IBuyDao;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

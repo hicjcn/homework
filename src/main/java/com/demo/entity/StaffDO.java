@@ -53,5 +53,17 @@ public class StaffDO implements Serializable {
     @TableField("Wage")
     private BigDecimal Wage;
 
+    /**
+     * 工资
+     */
+    @TableField("StaffType")
+    private Integer StaffType;
+
+    /**
+     * 工资
+     */
+    @TableField("Password")
+    private String Password;
+
 
 }

@@ -1,4 +1,4 @@
-package com.demo.service;
+package com.demo.dao;
 
 import com.demo.entity.StaffDO;
 import com.baomidou.mybatisplus.extension.service.IService;

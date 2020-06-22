@@ -1,6 +1,6 @@
-package com.demo.service;
+package com.demo.dao;
 
-import com.demo.entity.SaleDO;
+import com.demo.entity.BuyDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author MybatisPlus
  * @since 2020-06-22
  */
-public interface ISaleDao extends IService<SaleDO> {
+public interface IBuyDao extends IService<BuyDO> {
 
 }
