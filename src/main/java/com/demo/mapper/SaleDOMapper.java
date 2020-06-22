@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  *  Mapper 接口
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 public interface SaleDOMapper extends BaseMapper<SaleDO> {
 
+    int getMaxIdByPartition(String partition);
 }

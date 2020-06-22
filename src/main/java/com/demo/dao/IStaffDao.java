@@ -8,8 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 员工登记表 服务类
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 public interface IStaffDao extends IService<StaffDO> {
 

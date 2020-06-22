@@ -13,8 +13,7 @@ import lombok.EqualsAndHashCode;
  * 员工登记表
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

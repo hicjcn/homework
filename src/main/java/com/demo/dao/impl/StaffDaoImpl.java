@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
  * 员工登记表 服务实现类
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 @Service
 public class StaffDaoImpl extends ServiceImpl<StaffDOMapper, StaffDO> implements IStaffDao {

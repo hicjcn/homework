@@ -14,8 +14,7 @@ import lombok.EqualsAndHashCode;
  *
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

@@ -8,8 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 员工登记表 Mapper 接口
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 public interface StaffDOMapper extends BaseMapper<StaffDO> {
 

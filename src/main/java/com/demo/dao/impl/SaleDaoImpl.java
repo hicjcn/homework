@@ -11,10 +11,20 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 @Service
 public class SaleDaoImpl extends ServiceImpl<SaleDOMapper, SaleDO> implements ISaleDao {
 
+    /**
+     * 获取目前最大的流水号
+     *
+     * @param s
+     * @return
+     */
+    @Override
+    public int getMaxIdByPartition(String partition) {
+        String key = partition + '%';
+        return this.baseMapper.getMaxIdByPartition(key);
+    }
 }

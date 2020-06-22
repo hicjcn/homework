@@ -8,9 +8,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author MybatisPlus
- * @since 2020-06-22
+
  */
 public interface ISaleDao extends IService<SaleDO> {
 
+    /**
+     * 获取目前最大的流水号
+     * @param s
+     * @return
+     */
+    int getMaxIdByPartition(String s);
 }

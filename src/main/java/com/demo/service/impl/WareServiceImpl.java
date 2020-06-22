@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class WareServiceImpl implements IWareService {
@@ -75,5 +76,15 @@ public class WareServiceImpl implements IWareService {
     @Override
     public void delete(String no) {
         wareDao.removeById(no);
+    }
+
+    /**
+     * 获取全部商品
+     *
+     * @return
+     */
+    @Override
+    public List<WareDO> list() {
+        return wareDao.list();
     }
 }
