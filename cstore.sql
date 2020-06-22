@@ -76,7 +76,7 @@ CREATE TABLE `STAFF` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `STAFF` VALUES ('01011', '采购员', 1, '1', 1.00, 1, '123456');
-INSERT INTO `STAFF` VALUES ('01021', '销售员', 0, '2', 2.00, 0, '123456');
+INSERT INTO `STAFF` VALUES ('01022', '销售员', 0, '2', 2.00, 0, '123456');
 INSERT INTO `STAFF` VALUES ('admin', 'admin', 1, '2516666665657766', 6.66, 2, '123123');
 COMMIT;
 
