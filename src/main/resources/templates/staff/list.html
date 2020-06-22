@@ -10,7 +10,7 @@
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">便利店管理系统</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="/logout" th:text="${username + ' 退出'}"></a>
+                <a class="nav-link" href="/logout" th:text="${user.StaffID + ' 退出'}"></a>
             </li>
         </ul>
     </nav>
@@ -23,7 +23,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">教师管理</h1>
+                    <h1 class="h2">员工管理</h1>
 <!--                    <div class="btn-toolbar mb-2 mb-md-0">-->
 <!--                        <div class="btn-group mr-2">-->
 <!--                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
@@ -47,31 +47,43 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">添加教师</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">添加</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="/admin/teacher/save">
+                                        <form method="post" action="/staff/save">
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput1">教工号</label>
-                                                <input type="text" name="no" class="form-control" required id="exampleFormControlInput1">
+                                                <label for="exampleFormControlInput1">工号</label>
+                                                <input type="text" name="StaffID" class="form-control" readonly id="exampleFormControlInput1">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput2">姓名</label>
-                                                <input type="text" name="name" class="form-control" required id="exampleFormControlInput2">
+                                                <input type="text" name="StaffName" class="form-control" required id="exampleFormControlInput2">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleFormControlSelect1">性别</label>
-                                                <select class="form-control" name="sex" required id="exampleFormControlSelect1">
+                                                <select class="form-control" name="StaffSex" required id="exampleFormControlSelect1">
                                                     <option value="1">男</option>
                                                     <option value="0">女</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput4">手机号</label>
-                                                <input type="text" name="phone" class="form-control" id="exampleFormControlInput4">
+                                                <label for="exampleFormControlInput4">身份证号</label>
+                                                <input type="text" name="IDNumber" class="form-control" id="exampleFormControlInput4">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlInput5">工资</label>
+                                                <input type="text" name="Wage" class="form-control" id="exampleFormControlInput5">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect2">员工类型</label>
+                                                <select class="form-control" name="StaffType" required id="exampleFormControlSelect2">
+                                                    <option value="2">管理员</option>
+                                                    <option value="1">采购员</option>
+                                                    <option value="0">销售员</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">保存</button>
@@ -86,35 +98,40 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">教工号</th>
+                            <th scope="col">工号</th>
                             <th scope="col">姓名</th>
                             <th scope="col">性别</th>
-                            <th scope="col">手机号</th>
+                            <th scope="col">身份证</th>
+                            <th scope="col">工资</th>
+                            <th scope="col">员工类型</th>
                             <th scope="col">操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="item : ${page.getRecords()}">
-                            <td th:text="${item.no}"></td>
-                            <td th:text="${item.name}"></td>
-                            <td th:text="${item.sex == 0 ? '女' : '男'}"></td>
-                            <td th:text="${item.phone}"></td>
+                            <td th:text="${item.staffID}"></td>
+                            <td th:text="${item.staffName}"></td>
+                            <td th:text="${item.staffSex == 0 ? '女' : '男'}"></td>
+                            <td th:text="${item.IDNumber}"></td>
+                            <td th:text="${item.wage}"></td>
+                            <td th:text="${item.staffType == 0 ? '销售员' : (item.staffType == 1 ? '采购员' : '管理员')}"></td>
                             <td>
-                                <button type="button" class="btn btn-primary" th:no="${item.no}" th:name="${item.name}"
-                                        th:sex="${item.sex}" th:phone="${item.phone}"
+                                <button type="button" class="btn btn-primary" th:staffID="${item.staffID}" th:staffName="${item.staffName}"
+                                        th:staffSex="${item.staffSex}" th:IDNumber="${item.IDNumber}"
+                                        th:wage="${item.wage}" th:staffType="${item.staffType}"
                                         onclick="update(this)">修改</button>
-                                <a type="button" th:href="${'/admin/teacher/del?no=' + item.no}" class="btn btn-danger">删除</a>
+                                <a type="button" th:href="${'/staff/del?staffID=' + item.staffID}" class="btn btn-danger">删除</a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example" th:if="${page.getTotal() > 0}">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" th:href="${'/admin/teacher/list?pageNo=' + ((page.getCurrent() - 1) > 0 ? (page.getCurrent() - 1) : 1)}">上一页</a></li>
+                            <li class="page-item"><a class="page-link" th:href="${'/staff/list?pageNo=' + ((page.getCurrent() - 1) > 0 ? (page.getCurrent() - 1) : 1)}">上一页</a></li>
                             <li th:class="${item == page.getCurrent() ? 'page-item active' : 'page-item'}" th:each="item : ${#numbers.sequence(1, page.getPages())}">
-                                <a class="page-link" th:href="${'/admin/teacher/list?pageNo=' + item}" th:text="${item}"></a>
+                                <a class="page-link" th:href="${'/staff/list?pageNo=' + item}" th:text="${item}"></a>
                             </li>
-                            <li class="page-item"><a class="page-link" th:href="${'/admin/teacher/list?pageNo=' + ((page.getCurrent() + 1) < page.getPages() ? (page.getCurrent() + 1) : page.getPages())}">下一页</a></li>
+                            <li class="page-item"><a class="page-link" th:href="${'/staff/list?pageNo=' + ((page.getCurrent() + 1) < page.getPages() ? (page.getCurrent() + 1) : page.getPages())}">下一页</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -131,26 +148,26 @@
             $('#exampleFormControlInput2').val("")
             $('#exampleFormControlSelect1').val("")
             $('#exampleFormControlInput4').val("")
-
-            // 教师号输入框重置
-            $('#exampleFormControlInput1').removeAttr("readonly")
+            $('#exampleFormControlInput5').val("")
+            $('#exampleFormControlSelect2').val("")
 
             $('#exampleModal').modal()
         }
         function update(btn){
-            let no = btn.getAttribute('no')
-            let name = btn.getAttribute('name')
-            let sex = btn.getAttribute('sex')
-            let phone = btn.getAttribute('phone')
+            let staffID = btn.getAttribute('staffID')
+            let staffName = btn.getAttribute('staffName')
+            let staffSex = btn.getAttribute('staffSex')
+            let IDNumber = btn.getAttribute('IDNumber')
+            let wage = btn.getAttribute('wage')
+            let staffType = btn.getAttribute('staffType')
 
-            console.log('update', no, name, sex, phone)
-            $('#exampleFormControlInput1').val(no)
-            $('#exampleFormControlInput2').val(name)
-            $('#exampleFormControlSelect1').val(sex)
-            $('#exampleFormControlInput4').val(phone)
-
-            // 教师号只读
-            $('#exampleFormControlInput1').attr("readonly","readonly")
+            console.log('update', staffID, staffName, staffSex, IDNumber, wage, staffType)
+            $('#exampleFormControlInput1').val(staffID)
+            $('#exampleFormControlInput2').val(staffName)
+            $('#exampleFormControlSelect1').val(staffSex)
+            $('#exampleFormControlInput4').val(IDNumber)
+            $('#exampleFormControlInput5').val(wage)
+            $('#exampleFormControlSelect2').val(staffType)
 
             $('#exampleModal').modal()
         }

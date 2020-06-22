@@ -54,13 +54,13 @@ public class StaffDO implements Serializable {
     private BigDecimal Wage;
 
     /**
-     * 工资
+     * 员工类型
      */
     @TableField("StaffType")
     private Integer StaffType;
 
     /**
-     * 工资
+     * 密码
      */
     @TableField("Password")
     private String Password;

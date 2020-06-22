@@ -1,5 +1,8 @@
 package com.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.dao.IStaffDao;
 import com.demo.entity.Constants;
 import com.demo.entity.StaffDO;
@@ -57,5 +60,26 @@ public class UserServiceImpl implements IUserService {
             return staffDao.updateById(staffDO);
         }
         return false;
+    }
+
+    /**
+     * 分页获取员工列表
+     *
+     * @param pageNo
+     * @return
+     */
+    @Override
+    public IPage<StaffDO> page(Integer pageNo) {
+        IPage<StaffDO> page = new Page<>();
+        if (null != pageNo) {
+            page.setCurrent(pageNo);
+        } else {
+            page.setCurrent(1);
+        }
+        // 每页10条数据
+        page.setSize(10);
+
+        return staffDao.page(page, new QueryWrapper<>());
+
     }
 }

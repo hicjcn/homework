@@ -1,5 +1,7 @@
 package com.demo.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.demo.entity.StaffDO;
 import com.demo.entity.enumcode.UserType;
 
 public interface IUserService {
@@ -20,4 +22,11 @@ public interface IUserService {
      * @return
      */
     boolean resetPwd(String stuNo, String oldPwd, String newPwd);
+
+    /**
+     * 分页获取员工列表
+     * @param pageNo
+     * @return
+     */
+    IPage<StaffDO> page(Integer pageNo);
 }
