@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWareDao extends IService<WareDO> {
 
+    /**
+     * 获取目前商品最大编号
+     * @param wareType
+     * @return
+     */
+    int getMaxIdByWareType(int wareType);
 }

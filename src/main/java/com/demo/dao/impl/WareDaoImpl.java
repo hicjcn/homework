@@ -17,4 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class WareDaoImpl extends ServiceImpl<WareDOMapper, WareDO> implements IWareDao {
 
+    /**
+     * 获取目前商品最大编号
+     *
+     * @param wareType
+     * @return
+     */
+    @Override
+    public int getMaxIdByWareType(int wareType) {
+        String key = wareType + "%";
+        return this.baseMapper.getMaxIdByWareType(key);
+    }
 }

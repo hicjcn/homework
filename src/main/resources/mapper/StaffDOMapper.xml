@@ -3,6 +3,6 @@
 <mapper namespace="com.demo.mapper.StaffDOMapper">
 
     <select id="getMaxIdByJobType" resultType="java.lang.Integer">
-        select max(substring(StaffID, 3, 2) + 0) seq from STAFF where StaffID like #{jobType}
+        select ifnull(max(substring(StaffID, 3, 2) + 0), 0) seq from STAFF where StaffID like #{jobType}
     </select>
 </mapper>

@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mapper.WareDOMapper">
 
+    <select id="getMaxIdByWareType" resultType="java.lang.Integer">
+        select ifnull(max(substring(WareID, 3, 6) + 0), 0) seq from WARE where WareID like #{wareType}
+    </select>
 </mapper>

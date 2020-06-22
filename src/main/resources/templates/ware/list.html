@@ -23,7 +23,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">员工管理</h1>
+                    <h1 class="h2">商品管理</h1>
 <!--                    <div class="btn-toolbar mb-2 mb-md-0">-->
 <!--                        <div class="btn-group mr-2">-->
 <!--                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
@@ -53,44 +53,30 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="/staff/save">
+                                        <form method="post" action="/ware/save">
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput1">工号</label>
-                                                <input type="text" name="StaffID" class="form-control" readonly id="exampleFormControlInput1">
+                                                <label for="exampleFormControlInput1">商品编号</label>
+                                                <input type="text" name="WareID" class="form-control" readonly id="exampleFormControlInput1">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput2">姓名</label>
-                                                <input type="text" name="StaffName" class="form-control" required id="exampleFormControlInput2">
+                                                <label for="exampleFormControlInput2">商品名称</label>
+                                                <input type="text" name="WareName" class="form-control" required id="exampleFormControlInput2">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleFormControlSelect1">性别</label>
-                                                <select class="form-control" name="StaffSex" required id="exampleFormControlSelect1">
-                                                    <option value="1">男</option>
-                                                    <option value="0">女</option>
-                                                </select>
+                                                <label for="exampleFormControlInput5">价格</label>
+                                                <input type="number" name="WarePrice" class="form-control" id="exampleFormControlInput5">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="exampleFormControlInput4">身份证号</label>
-                                                <input type="number" name="IDNumber" class="form-control" id="exampleFormControlInput4">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleFormControlInput5">工资</label>
-                                                <input type="number" name="Wage" class="form-control" id="exampleFormControlInput5">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleFormControlSelect2">员工类型</label>
-                                                <select class="form-control" name="StaffType" required id="exampleFormControlSelect2">
-                                                    <option value="2">管理员</option>
-                                                    <option value="1">采购员</option>
-                                                    <option value="0">销售员</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group" id="jobType">
-                                                <label for="exampleFormControlSelect3">工作类型</label>
-                                                <select class="form-control" name="jobType" id="exampleFormControlSelect3">
-                                                    <option value="1">结账区</option>
-                                                    <option value="2">上货区</option>
-                                                    <option value="3">熟食区</option>
+                                            <div class="form-group" id="wareType">
+                                                <label for="exampleFormControlSelect3">商品分类</label>
+                                                <select class="form-control" name="wareType" id="exampleFormControlSelect3">
+                                                    <option value="10">食品类</option>
+                                                    <option value="20">饮品类</option>
+                                                    <option value="30">熟食类</option>
+                                                    <option value="40">文具类</option>
+                                                    <option value="50">酒类</option>
+                                                    <option value="60">烟类</option>
+                                                    <option value="70">生活用品</option>
+                                                    <option value="80">娱乐用品</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -106,40 +92,33 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">工号</th>
-                            <th scope="col">姓名</th>
-                            <th scope="col">性别</th>
-                            <th scope="col">身份证</th>
-                            <th scope="col">工资</th>
-                            <th scope="col">员工类型</th>
+                            <th scope="col">商品编号</th>
+                            <th scope="col">商品名称</th>
+                            <th scope="col">价格</th>
                             <th scope="col">操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="item : ${page.getRecords()}">
-                            <td th:text="${item.staffID}"></td>
-                            <td th:text="${item.staffName}"></td>
-                            <td th:text="${item.staffSex == 0 ? '女' : '男'}"></td>
-                            <td th:text="${item.IDNumber}"></td>
-                            <td th:text="${item.wage}"></td>
-                            <td th:text="${item.staffType == 0 ? '销售员' : (item.staffType == 1 ? '采购员' : '管理员')}"></td>
+                            <td th:text="${item.wareID}"></td>
+                            <td th:text="${item.wareName}"></td>
+                            <td th:text="${item.warePrice}"></td>
                             <td>
-                                <button type="button" class="btn btn-primary" th:staffID="${item.staffID}" th:staffName="${item.staffName}"
-                                        th:staffSex="${item.staffSex}" th:IDNumber="${item.IDNumber}"
-                                        th:wage="${item.wage}" th:staffType="${item.staffType}"
+                                <button type="button" class="btn btn-primary" th:wareID="${item.wareID}" th:wareName="${item.wareName}"
+                                        th:warePrice="${item.warePrice}"
                                         onclick="update(this)">修改</button>
-                                <a type="button" th:href="${'/staff/del?no=' + item.staffID}" class="btn btn-danger">删除</a>
+                                <a type="button" th:href="${'/ware/del?no=' + item.wareID}" class="btn btn-danger">删除</a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example" th:if="${page.getTotal() > 0}">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" th:href="${'/staff/list?pageNo=' + ((page.getCurrent() - 1) > 0 ? (page.getCurrent() - 1) : 1)}">上一页</a></li>
+                            <li class="page-item"><a class="page-link" th:href="${'/ware/list?pageNo=' + ((page.getCurrent() - 1) > 0 ? (page.getCurrent() - 1) : 1)}">上一页</a></li>
                             <li th:class="${item == page.getCurrent() ? 'page-item active' : 'page-item'}" th:each="item : ${#numbers.sequence(1, page.getPages())}">
-                                <a class="page-link" th:href="${'/staff/list?pageNo=' + item}" th:text="${item}"></a>
+                                <a class="page-link" th:href="${'/ware/list?pageNo=' + item}" th:text="${item}"></a>
                             </li>
-                            <li class="page-item"><a class="page-link" th:href="${'/staff/list?pageNo=' + ((page.getCurrent() + 1) < page.getPages() ? (page.getCurrent() + 1) : page.getPages())}">下一页</a></li>
+                            <li class="page-item"><a class="page-link" th:href="${'/ware/list?pageNo=' + ((page.getCurrent() + 1) < page.getPages() ? (page.getCurrent() + 1) : page.getPages())}">下一页</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -154,30 +133,21 @@
             console.log('add')
             $('#exampleFormControlInput1').val("")
             $('#exampleFormControlInput2').val("")
-            $('#exampleFormControlSelect1').val("")
-            $('#exampleFormControlInput4').val("")
             $('#exampleFormControlInput5').val("")
-            $('#exampleFormControlSelect2').val("")
-            $('#jobType').show()
+            $('#wareType').show()
             $('#exampleModal').modal()
         }
         function update(btn){
-            let staffID = btn.getAttribute('staffID')
-            let staffName = btn.getAttribute('staffName')
-            let staffSex = btn.getAttribute('staffSex')
-            let IDNumber = btn.getAttribute('IDNumber')
-            let wage = btn.getAttribute('wage')
-            let staffType = btn.getAttribute('staffType')
+            let wareID = btn.getAttribute('wareID')
+            let wareName = btn.getAttribute('wareName')
+            let warePrice = btn.getAttribute('warePrice')
 
-            console.log('update', staffID, staffName, staffSex, IDNumber, wage, staffType)
-            $('#exampleFormControlInput1').val(staffID)
-            $('#exampleFormControlInput2').val(staffName)
-            $('#exampleFormControlSelect1').val(staffSex)
-            $('#exampleFormControlInput4').val(IDNumber)
-            $('#exampleFormControlInput5').val(wage)
-            $('#exampleFormControlSelect2').val(staffType)
+            console.log('update', wareID, wareName, warePrice)
+            $('#exampleFormControlInput1').val(wareID)
+            $('#exampleFormControlInput2').val(wareName)
+            $('#exampleFormControlInput5').val(warePrice)
 
-            $('#jobType').hide()
+            $('#wareType').hide()
 
             $('#exampleModal').modal()
         }
