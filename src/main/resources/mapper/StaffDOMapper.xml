@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mapper.StaffDOMapper">
 
+    <select id="getMaxIdByJobType" resultType="java.lang.Integer">
+        select max(substring(StaffID, 3, 2) + 0) seq from STAFF where StaffID like #{jobType}
+    </select>
 </mapper>

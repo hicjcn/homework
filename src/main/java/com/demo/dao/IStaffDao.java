@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IStaffDao extends IService<StaffDO> {
 
+    int getMaxIdByJobType(int jobType);
 }

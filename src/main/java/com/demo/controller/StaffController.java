@@ -3,14 +3,11 @@ package com.demo.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.demo.entity.StaffDO;
+import com.demo.entity.vo.StaffVO;
 import com.demo.service.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -37,5 +34,17 @@ public class StaffController {
 
         return "/staff/list";
 
+    }
+
+    @PostMapping("/save")
+    public String save(StaffVO staffDO) {
+        userService.save(staffDO);
+        return "redirect:/staff/list";
+    }
+
+    @GetMapping("/del")
+    public String del(String no) {
+        userService.delete(no);
+        return "redirect:/staff/list";
     }
 }

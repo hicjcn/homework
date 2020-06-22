@@ -17,4 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class StaffDaoImpl extends ServiceImpl<StaffDOMapper, StaffDO> implements IStaffDao {
 
+    @Override
+    public int getMaxIdByJobType(int jobType) {
+        // '01%' like条件
+        String key = "0" + jobType + "%";
+        return this.baseMapper.getMaxIdByJobType(key);
+    }
 }

@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface StaffDOMapper extends BaseMapper<StaffDO> {
 
+    int getMaxIdByJobType(String jobType);
 }

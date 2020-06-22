@@ -2,7 +2,7 @@ package com.demo.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.demo.entity.StaffDO;
-import com.demo.entity.enumcode.UserType;
+import com.demo.entity.vo.StaffVO;
 
 public interface IUserService {
 
@@ -29,4 +29,17 @@ public interface IUserService {
      * @return
      */
     IPage<StaffDO> page(Integer pageNo);
+
+    /**
+     * 创建或者保存
+     * @param staffDO
+     * @return
+     */
+    boolean save(StaffVO staffDO);
+
+    /**
+     * 删除
+     * @param no
+     */
+    void delete(String no);
 }
