@@ -38,14 +38,17 @@ public class BuyController {
     private IBuyService buyService;
 
     @GetMapping("/list")
-    public String list(Integer pageNo, Model model) {
+    public String list(String wareId, Integer pageNo, Model model) {
         // 数据
-        IPage<BuyVO> pages = buyService.page(pageNo);
+        IPage<BuyVO> pages = buyService.page(wareId, pageNo);
         model.addAttribute("page", pages);
 
         // 商品数据
         List<WareDO> wareDOS = wareService.list();
         model.addAttribute("wares", wareDOS);
+
+        // 选中的商品
+        model.addAttribute("wareId", wareId);
 
         return "/buy/list";
 

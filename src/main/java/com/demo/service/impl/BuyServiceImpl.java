@@ -4,14 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.dao.IBuyDao;
-import com.demo.dao.ISaleDao;
 import com.demo.dao.IStaffDao;
 import com.demo.dao.IWareDao;
 import com.demo.entity.*;
 import com.demo.entity.vo.BuyVO;
-import com.demo.entity.vo.SaleVO;
 import com.demo.service.IBuyService;
-import com.demo.service.ISaleService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -45,11 +42,13 @@ public class BuyServiceImpl implements IBuyService {
     /**
      * 分页获取列表
      *
+     *
+     * @param wareId
      * @param pageNo
      * @return
      */
     @Override
-    public IPage<BuyVO> page(Integer pageNo) {
+    public IPage<BuyVO> page(String wareId, Integer pageNo) {
         IPage<BuyDO> page = new Page<>();
         if (null != pageNo) {
             page.setCurrent(pageNo);
@@ -59,7 +58,12 @@ public class BuyServiceImpl implements IBuyService {
         // 每页10条数据
         page.setSize(10);
 
-        IPage<BuyDO> buyDOIPage = buyDao.page(page, new QueryWrapper<>());
+        QueryWrapper<BuyDO> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotEmpty(wareId)) {
+            queryWrapper.eq("WareID", wareId);
+        }
+
+        IPage<BuyDO> buyDOIPage = buyDao.page(page, queryWrapper);
 
         // 补充商品名称
         List<WareDO> list = wareDao.list();
