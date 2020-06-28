@@ -10,7 +10,6 @@ import com.demo.entity.WareDO;
 import com.demo.entity.vo.SaleVO;
 import com.demo.service.ISaleService;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -36,11 +35,13 @@ public class SaleServiceImpl implements ISaleService {
     /**
      * 分页获取列表
      *
+     *
+     * @param wareId
      * @param pageNo
      * @return
      */
     @Override
-    public IPage<SaleVO> page(Integer pageNo) {
+    public IPage<SaleVO> page(String wareId, Integer pageNo) {
         IPage<SaleDO> page = new Page<>();
         if (null != pageNo) {
             page.setCurrent(pageNo);
@@ -50,7 +51,12 @@ public class SaleServiceImpl implements ISaleService {
         // 每页10条数据
         page.setSize(10);
 
-        IPage<SaleDO> saleDOIPage = saleDao.page(page, new QueryWrapper<>());
+        QueryWrapper<SaleDO> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotEmpty(wareId)) {
+            queryWrapper.eq("WareID", wareId);
+        }
+
+        IPage<SaleDO> saleDOIPage = saleDao.page(page, queryWrapper);
 
         // 补充商品名称
         List<WareDO> list = wareDao.list();

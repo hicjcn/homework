@@ -2,18 +2,18 @@ package com.demo.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.demo.entity.SaleDO;
-import com.demo.entity.WareDO;
 import com.demo.entity.vo.SaleVO;
-import com.demo.entity.vo.WareVO;
 
 public interface ISaleService {
 
     /**
      * 分页获取列表
+     *
+     * @param wareId
      * @param pageNo
      * @return
      */
-    IPage<SaleVO> page(Integer pageNo);
+    IPage<SaleVO> page(String wareId, Integer pageNo);
 
     /**
      * 创建或者保存
