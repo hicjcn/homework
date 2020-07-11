@@ -1,6 +1,13 @@
 package com.demo.core.db.entity.VO;
 
-public class ClassStudentVO {
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class ClassStudentVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 关联ID
