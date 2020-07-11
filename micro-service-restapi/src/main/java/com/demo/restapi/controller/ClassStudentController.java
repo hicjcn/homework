@@ -49,7 +49,7 @@ public class ClassStudentController {
      * 审批通过
      */
     @PostMapping("/agreeApply")
-    public ResultBean agreeApply(String id) {
+    public ResultBean agreeApply(@RequestParam String id) {
         iClassStudentDao.changeStudentStatus(Integer.valueOf(id), 0);
         return ResultBean.success(null);
     }
@@ -58,7 +58,7 @@ public class ClassStudentController {
      * 审批驳回
      */
     @PostMapping("/disagreeApply")
-    public ResultBean disagreeApply(String id) {
+    public ResultBean disagreeApply(@RequestParam String id) {
         iClassStudentDao.changeStudentStatus(Integer.valueOf(id), 2);
         return ResultBean.success(null);
     }
