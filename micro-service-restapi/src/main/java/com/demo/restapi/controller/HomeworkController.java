@@ -32,7 +32,7 @@ public class HomeworkController {
      * 发布作业
      */
     @PostMapping("/releaseHomework")
-    public ResultBean releaseHomework(HttpServletRequest request, @RequestBody HomeworkDO homeworkDO, MultipartFile file) {
+    public ResultBean releaseHomework(HttpServletRequest request, HomeworkDO homeworkDO, MultipartFile file) {
         homeworkDO.setTeacherCode(request.getHeader("User-Token"));
         iHomeworkDao.releaseHomework(homeworkDO, file);
         return ResultBean.success(null);
