@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,12 +30,14 @@ public class HomeworkDO implements Serializable {
     /**
      * 作业ID
      */
+    @JsonProperty("hId")
     @TableId(value = "h_id", type = IdType.AUTO)
     private Integer hId;
 
     /**
      * 作业主题
      */
+    @JsonProperty("hTopic")
     private String hTopic;
 
     /**
