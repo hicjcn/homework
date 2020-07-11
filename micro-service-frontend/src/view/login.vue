@@ -38,6 +38,8 @@
         },
         methods: {
             onSubmit() {
+                this.$cookies.set("username", '123123123',60 * 60 * 24)
+                this.$cookies.set("usertype", 's',60 * 60 * 24)
                 console.log(this.formInline);
                 request.get("/login", this.formInline)
                 .then(res => {

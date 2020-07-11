@@ -7,7 +7,7 @@
 
 <script>
 
-import Layout from "@/page/layout";
+import Layout from "@/components/layout";
 export default {
   name: 'App',
   components: {

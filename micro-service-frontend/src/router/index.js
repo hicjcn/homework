@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueCookies from 'vue-cookies'
-import Layout from '@/page/layout'
+import Layout from '@/components/layout'
 import Login from '@/view/login'
 import Register from '@/view/register'
+import Home from '@/view/Home'
 
 Vue.use(Router)
 
@@ -26,15 +27,23 @@ const router = new Router({
             name: 'Teacher',
             component: Layout,
             children: [
-
+                {
+                    path: '/',
+                    name: 'THome',
+                    component: Home
+                }
             ]
         },
         {
             path: '/student',
             name: 'Student',
-            component: Login,
+            component: Layout,
             children: [
-
+                {
+                    path: '/',
+                    name: 'SHome',
+                    component: Home
+                }
             ]
         }
     ]
