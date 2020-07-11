@@ -1,6 +1,6 @@
 package com.demo.core.util;
 
-import com.demo.core.exception.ServerInnerException;
+import com.demo.core.exception.BusinessException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -37,7 +37,7 @@ public class JsonUtil {
         try {
             return staticObjectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            throw new ServerInnerException(object, "json转换失败", e);
+            throw new BusinessException(object, "json转换失败");
         }
     }
 
