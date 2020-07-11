@@ -65,7 +65,7 @@ public class ClassStudentDaoImpl extends ServiceImpl<ClassStudentDOMapper, Class
             throw new BusinessException(null, "非法操作");
         }
 
-        ClassStudentDO applyInfo = this.getOne(new QueryWrapper<ClassStudentDO>().eq("cd_id", id));
+        ClassStudentDO applyInfo = this.getOne(new QueryWrapper<ClassStudentDO>().eq("cs_id", id));
         if (applyInfo == null) {
             throw new BusinessException(null, "该申请不存在");
         }
