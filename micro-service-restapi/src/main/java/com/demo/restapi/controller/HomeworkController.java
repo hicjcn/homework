@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -32,7 +33,8 @@ public class HomeworkController {
      * 发布作业
      */
     @PostMapping("/releaseHomework")
-    public ResultBean releaseHomework(@RequestBody HomeworkDO homeworkDO, MultipartFile file) {
+    public ResultBean releaseHomework(HttpServletRequest request, @RequestBody HomeworkDO homeworkDO, MultipartFile file) {
+        homeworkDO.setTeacherCode(request.getHeader("User-Token"));
         iHomeworkDao.releaseHomework(homeworkDO, file);
         return ResultBean.success(null);
     }
