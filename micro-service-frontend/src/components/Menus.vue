@@ -42,6 +42,8 @@
                 } else {
                     if (key === '2') {
                         this.$router.push({name: "THome"})
+                    } else if (key === '3') {
+                        this.$router.push({name: "TClass"})
                     }
                 }
             }
