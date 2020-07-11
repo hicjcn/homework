@@ -10,7 +10,7 @@
             , t2.name AS studentName
             , t1.status AS status
         FROM class_student t1, user t2
-        WHERE t1.user_code = t2.student_code
+        WHERE t1.student_code = t2.user_code
         AND t1.class_id = #{classId}
         AND t1.status = #{status}
     </select>
