@@ -36,6 +36,8 @@
                 if ("s" === this.$cookies.get("usertype")) {
                     if (key === '2') {
                         this.$router.push({name: "SHome"})
+                    } else if (key === '3') {
+                        this.$router.push({name: "SClass"})
                     }
                 } else {
                     if (key === '2') {
