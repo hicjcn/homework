@@ -1,12 +1,18 @@
 package com.demo.core.db.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.demo.core.db.entity.ClassDO;
 import com.demo.core.db.entity.ClassStudentDO;
+import com.demo.core.db.entity.VO.ClassStudentVO;
 import com.demo.core.db.mapper.ClassStudentDOMapper;
+import com.demo.core.db.service.IClassDao;
 import com.demo.core.db.service.IClassStudentDao;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.core.exception.BusinessException;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -18,6 +24,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ClassStudentDaoImpl extends ServiceImpl<ClassStudentDOMapper, ClassStudentDO> implements IClassStudentDao {
+
+    @Resource
+    private IClassDao iClassDao;
 
     @Override
     public void applyForClass(ClassStudentDO classStudentDO) {
@@ -63,5 +72,15 @@ public class ClassStudentDaoImpl extends ServiceImpl<ClassStudentDOMapper, Class
         applyInfo.setStatus(type);
         this.updateById(applyInfo);
 
+    }
+
+    @Override
+    public List<ClassStudentVO> getClassStudentList(String teacherCode, Integer classId, Integer type) {
+        ClassDO classDO = iClassDao.getClassByIdAndCode(teacherCode, classId);
+        if (classDO == null) {
+            throw new BusinessException(null, "该课程不存在或无权访问");
+        }
+
+        return this.baseMapper.getClassStudentList(classId, type);
     }
 }

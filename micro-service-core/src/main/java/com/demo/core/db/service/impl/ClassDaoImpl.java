@@ -48,4 +48,13 @@ public class ClassDaoImpl extends ServiceImpl<ClassDOMapper, ClassDO> implements
         classDO.setTeacherName(user.getName());
         return this.save(classDO);
     }
+
+    @Override
+    public ClassDO getClassByIdAndCode(String teacherCode, Integer classId) {
+        return this.baseMapper.selectOne(
+                new QueryWrapper<ClassDO>()
+                        .eq("teacher_code", teacherCode)
+                        .eq("class_id", classId)
+        );
+    }
 }

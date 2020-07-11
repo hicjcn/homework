@@ -2,12 +2,14 @@ package com.demo.restapi.controller;
 
 
 import com.demo.core.db.entity.ClassStudentDO;
+import com.demo.core.db.entity.VO.ClassStudentVO;
 import com.demo.core.db.service.IClassStudentDao;
 import com.demo.core.entity.ResultBean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -23,6 +25,15 @@ public class ClassStudentController {
 
     @Resource
     private IClassStudentDao iClassStudentDao;
+
+    /**
+     * 教师获取班级列表
+     */
+    @GetMapping("/getTeacherClassList")
+    public ResultBean<List<ClassStudentVO>> getTeacherClassList(HttpServletRequest request, @RequestParam Integer classId, @RequestParam Integer type) {
+        String teacherCode = request.getHeader("User-Token");
+        return ResultBean.success(iClassStudentDao.getClassStudentList(teacherCode, classId, type));
+    }
 
     /**
      * 提交申请

@@ -26,7 +26,14 @@ public interface IClassDao extends IService<ClassDO> {
 
     /**
      * 创建班级
+     *
+     * @param classDO
      */
     boolean createClass(ClassDO classDO);
+
+    /**
+     * 根据教师与课程ID获取课程
+     */
+    ClassDO getClassByIdAndCode(String teacherCode, Integer classId);
 
 }

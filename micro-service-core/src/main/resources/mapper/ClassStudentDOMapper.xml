@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.core.db.mapper.ClassStudentDOMapper">
+    
+    <select id="getClassStudentList" resultType="com.demo.core.db.entity.VO.ClassStudentVO">
+        SELECT
+            t1.cs_id AS csId
+            , t1.class_id AS classId
+            , t1.student_code AS studentCode
+            , t2.name AS studentName
+            , t1.status AS status
+        FROM class_student t1, user t2
+        WHERE t1.user_code = t2.student_code
+        AND t1.class_id = #{classId}
+        AND t1.status = #{status}
+    </select>
 
 </mapper>
