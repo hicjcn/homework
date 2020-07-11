@@ -35,10 +35,10 @@ public class Swagger2Config {
                 //页面标题
                 .title("Micro Service")
                 //条款地址
-                .termsOfServiceUrl("https://www.jcera.cn/")
+                .termsOfServiceUrl("https://www.demo.com/")
                 .version("1.0")
                 //描述
-                .description("Micro Service by Springboot for hicjcn")
+                .description("Micro Service by Springboot")
                 .build();
     }
 }
