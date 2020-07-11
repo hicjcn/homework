@@ -5,6 +5,8 @@ import Layout from '@/components/layout'
 import Login from '@/view/login'
 import Register from '@/view/register'
 import Home from '@/view/Home'
+import TClass from '@/view/teacher/class'
+import TListStudent from '@/view/teacher/listStudent'
 import SClass from '@/view/student/class'
 
 Vue.use(Router)
@@ -29,9 +31,19 @@ const router = new Router({
             component: Layout,
             children: [
                 {
-                    path: '/',
+                    path: '',
                     name: 'THome',
                     component: Home
+                },
+                {
+                    path: 'class',
+                    name: 'TClass',
+                    component: TClass
+                },
+                {
+                    path: 'listStudent',
+                    name: 'TListStudent',
+                    component: TListStudent
                 }
             ]
         },
@@ -41,12 +53,12 @@ const router = new Router({
             component: Layout,
             children: [
                 {
-                    path: '/',
+                    path: '',
                     name: 'SHome',
                     component: Home
                 },
                 {
-                    path: '/class',
+                    path: 'class',
                     name: 'SClass',
                     component: SClass
                 }

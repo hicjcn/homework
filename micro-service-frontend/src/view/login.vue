@@ -6,7 +6,7 @@
                 <el-input v-model="formInline.userCode" placeholder="用户名"/>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="formInline.password" placeholder="密码"/>
+                <el-input v-model="formInline.password" placeholder="密码" show-password/>
             </el-form-item>
             <el-form-item label="类型">
                 <el-select style="width: 100%" v-model="formInline.userType" placeholder="类型">
@@ -48,7 +48,7 @@
                         this.$cookies.set("usertype", this.formInline.userType,60 * 60 * 24)
                         if (this.formInline.userType === '1') {
                             // 教师跳转
-
+                            this.$router.push({ name: "THome" })
                         } else {
                             // 学生跳转
                             this.$router.push({ name: "SHome" })
