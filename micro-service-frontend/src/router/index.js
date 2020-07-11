@@ -48,10 +48,12 @@ router.beforeEach((to, from, next) => {
     if (whitelist.indexOf(to.name) >= 0) {
         // 白名单直接进入
         next()
+        return
     }
     // 检查是否登录
     if (VueCookies.get("username")) {
         next()
+        return
     }
     // 未登录去注册
     next({ name: 'Login' })
