@@ -34,6 +34,8 @@ public class ClassStudentDaoImpl extends ServiceImpl<ClassStudentDOMapper, Class
             throw new BusinessException(null, "申请信息不存在");
         }
 
+        classStudentDO.setStatus(1);
+
         ClassStudentDO applyInfo = this.baseMapper.selectOne(
                 new QueryWrapper<ClassStudentDO>()
                         .eq("class_id", classStudentDO.getClassId())
