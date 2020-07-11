@@ -49,8 +49,8 @@ public class ClassStudentController {
      * 审批通过
      */
     @PostMapping("/agreeApply/{id}")
-    public ResultBean agreeApply(@PathVariable("id") Integer id) {
-        iClassStudentDao.changeStudentStatus(id, 0);
+    public ResultBean agreeApply(@PathVariable("id") String id) {
+        iClassStudentDao.changeStudentStatus(Integer.valueOf(id), 0);
         return ResultBean.success(null);
     }
 
@@ -58,8 +58,8 @@ public class ClassStudentController {
      * 审批驳回
      */
     @PostMapping("/disagreeApply/{id}")
-    public ResultBean disagreeApply(@PathVariable("id") Integer id) {
-        iClassStudentDao.changeStudentStatus(id, 2);
+    public ResultBean disagreeApply(@PathVariable("id") String id) {
+        iClassStudentDao.changeStudentStatus(Integer.valueOf(id), 2);
         return ResultBean.success(null);
     }
 
