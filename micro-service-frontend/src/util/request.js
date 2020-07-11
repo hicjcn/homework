@@ -5,7 +5,7 @@ import { Notification } from 'element-ui';
 
 // 创建axios实例
 const httpService = axios.create({
-    baseURL: "http://localhost:8081", // url前缀
+    baseURL: "/api", // url前缀
     timeout: 3000 // 请求超时时间
 });
 
@@ -28,7 +28,7 @@ httpService.interceptors.response.use(
     response => {
         // 统一处理状态
         const res = response.data;
-        if (res.code !== 200) { // 需自定义
+        if (res.code !== '200') { // 需自定义
             // 显示异常
             Notification.warning({
                 title: '错误',

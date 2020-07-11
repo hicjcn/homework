@@ -1,9 +1,12 @@
 <template>
-    <el-card style="width: 40%; margin-left: 30%; margin-top: 20%;">
+    <el-card style="width: 40%; margin-left: 30%; margin-top: 10%;">
         <h3>网课系统-注册</h3>
         <el-form :model="formInline" class="demo-form-inline" label-width="80px">
             <el-form-item label="用户名">
-                <el-input v-model="formInline.user" placeholder="用户名"/>
+                <el-input v-model="formInline.userCode" placeholder="用户名" required/>
+            </el-form-item>
+            <el-form-item label="姓名">
+                <el-input v-model="formInline.name" placeholder="姓名"/>
             </el-form-item>
             <el-form-item label="密码">
                 <el-input v-model="formInline.password" placeholder="密码" show-password/>
@@ -12,9 +15,9 @@
                 <el-input v-model="formInline.password1" placeholder="重复密码" show-password/>
             </el-form-item>
             <el-form-item label="类型">
-                <el-select style="width: 100%" v-model="formInline.type" placeholder="类型">
-                    <el-option label="学生" value="s"/>
-                    <el-option label="教师" value="t"/>
+                <el-select style="width: 100%" v-model="formInline.userType" placeholder="类型">
+                    <el-option label="学生" value="0"/>
+                    <el-option label="教师" value="1"/>
                 </el-select>
             </el-form-item>
             <el-form-item>
@@ -33,10 +36,11 @@
         data() {
             return {
                 formInline: {
-                    user: '',
+                    userCode: '',
+                    name: '',
                     password: '',
                     password1: '',
-                    type: 's'
+                    userType: '0'
                 }
             }
         },
@@ -50,9 +54,9 @@
                     });
                     return
                 }
-                request.get("/reg", this.formInline)
+                request.post("/user/registry", this.formInline)
                     .then(res => {
-                        if (res.code === 200) {
+                        if (res.code === '200') {
                             // 注册成功去登录界面
                             this.$message({
                                 message: '注册成功，请登录',
