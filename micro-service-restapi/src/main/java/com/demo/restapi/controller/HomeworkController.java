@@ -2,6 +2,7 @@ package com.demo.restapi.controller;
 
 
 import com.demo.core.db.entity.HomeworkDO;
+import com.demo.core.db.entity.VO.HomeworkForStuVO;
 import com.demo.core.db.entity.VO.HomeworkVO;
 import com.demo.core.db.service.IHomeworkDao;
 import com.demo.core.entity.ResultBean;
@@ -42,8 +43,16 @@ public class HomeworkController {
      * 获取作业列表
      */
     @GetMapping("/getHomeworkList")
-    public ResultBean<List<HomeworkVO>> getHomeworkList(HttpServletRequest request, @RequestParam Integer classId) {
+    public ResultBean<List<HomeworkVO>> getHomeworkList(HttpServletRequest request, @RequestParam(required = false) Integer classId) {
         return ResultBean.success(iHomeworkDao.getHomeworkList(request.getHeader("User-Token"), classId));
+    }
+
+    /**
+     * 获取作业列表(学生)
+     */
+    @GetMapping("/getHomeworkListForStu")
+    public ResultBean<List<HomeworkForStuVO>> getHomeworkListForStu(HttpServletRequest request, @RequestParam(required = false) Integer classId) {
+        return ResultBean.success(iHomeworkDao.getHomeworkListForStu(request.getHeader("User-Token"), classId));
     }
 
 }

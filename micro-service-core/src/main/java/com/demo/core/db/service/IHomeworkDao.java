@@ -2,6 +2,7 @@ package com.demo.core.db.service;
 
 import com.demo.core.db.entity.HomeworkDO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.demo.core.db.entity.VO.HomeworkForStuVO;
 import com.demo.core.db.entity.VO.HomeworkVO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,5 +34,14 @@ public interface IHomeworkDao extends IService<HomeworkDO> {
      * @return
      */
     List<HomeworkVO> getHomeworkList(String teacherCode, Integer classId);
+
+    /**
+     * 查看作业列表（学生）
+     *
+     * @param studentCode
+     * @param classId
+     * @return
+     */
+    List<HomeworkForStuVO> getHomeworkListForStu(String studentCode, Integer classId);
 
 }

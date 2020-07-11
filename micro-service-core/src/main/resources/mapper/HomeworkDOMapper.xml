@@ -18,6 +18,32 @@
         <if test="classId != '' and classId != null">
             AND t1.class_id = #{classId}
         </if>
+        ORDER BY t2.create_time DESC
+    </select>
+
+    <select id="getHomeworkListForStu" resultType="com.demo.core.db.entity.VO.HomeworkForStuVO">
+        SELECT
+            t3.h_id AS hId
+            , t3.h_topic AS hTopic
+            , t3.create_time AS createTime
+            , t3.deadline
+            , t3.class_id AS classId
+            , t3.teacher_code AS teacherCode
+            , t1.class_name AS className
+            , t1.teacher_name AS teacherName
+            , t3.file_name AS fileName
+            , (
+                CASE
+                WHEN t3.h_id IN (SELECT h_id FROM homework_student) THEN 1
+                ELSE 0
+                END
+            ) AS hStatus
+        FROM class t1, class_student t2, homework t3
+        WHERE t2.class_id = t1.class_id
+            AND t3.class_id = t2.class_id
+            AND t2.student_code = #{studentCode}
+            AND t2.class_id = #{classId}
+        ORDER BY t3.create_time DESC
     </select>
 
 </mapper>

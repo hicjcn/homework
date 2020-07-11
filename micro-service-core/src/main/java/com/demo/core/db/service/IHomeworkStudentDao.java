@@ -13,4 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IHomeworkStudentDao extends IService<HomeworkStudentDO> {
 
+    /**
+     * 学生提交作业
+     */
+    void submitHomework(HomeworkStudentDO homeworkStudentDO);
+
 }

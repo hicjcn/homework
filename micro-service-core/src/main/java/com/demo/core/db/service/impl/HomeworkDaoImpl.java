@@ -2,6 +2,7 @@ package com.demo.core.db.service.impl;
 
 import com.demo.core.db.entity.ClassDO;
 import com.demo.core.db.entity.HomeworkDO;
+import com.demo.core.db.entity.VO.HomeworkForStuVO;
 import com.demo.core.db.entity.VO.HomeworkVO;
 import com.demo.core.db.mapper.HomeworkDOMapper;
 import com.demo.core.db.service.IClassDao;
@@ -56,5 +57,10 @@ public class HomeworkDaoImpl extends ServiceImpl<HomeworkDOMapper, HomeworkDO> i
     @Override
     public List<HomeworkVO> getHomeworkList(String teacherCode, Integer classId) {
         return this.baseMapper.getHomeworkList(teacherCode, classId);
+    }
+
+    @Override
+    public List<HomeworkForStuVO> getHomeworkListForStu(String studentCode, Integer classId) {
+        return this.baseMapper.getHomeworkListForStu(studentCode, classId);
     }
 }

@@ -17,4 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class HomeworkStudentDaoImpl extends ServiceImpl<HomeworkStudentDOMapper, HomeworkStudentDO> implements IHomeworkStudentDao {
 
+    @Override
+    public void submitHomework(HomeworkStudentDO homeworkStudentDO) {
+
+    }
 }
