@@ -8,6 +8,9 @@
             <el-form-item label="密码">
                 <el-input v-model="formInline.password" placeholder="密码"/>
             </el-form-item>
+            <el-form-item label="重复密码">
+                <el-input v-model="formInline.password1" placeholder="重复密码"/>
+            </el-form-item>
             <el-form-item label="类型">
                 <el-select style="width: 100%" v-model="formInline.type" placeholder="类型">
                     <el-option label="学生" value="s"/>
@@ -15,8 +18,8 @@
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">登录</el-button>
-                <el-button type="primary" @click="goReg">注册</el-button>
+                <el-button type="primary" @click="onSubmit">注册</el-button>
+                <el-button type="primary" @click="goReg">登录</el-button>
             </el-form-item>
         </el-form>
     </el-card>
@@ -30,6 +33,7 @@
                 formInline: {
                     user: '',
                     password: '',
+                    password1: '',
                     type: 's'
                 }
             }
@@ -39,7 +43,7 @@
                 console.log('submit!');
             },
             goReg() {
-                this.$router.push("/reg")
+                this.$router.push("/")
             }
         }
     }
