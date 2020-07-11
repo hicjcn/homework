@@ -40,7 +40,7 @@ public class ClassStudentController {
      */
     @PostMapping("/applyForClass")
     public ResultBean applyForClass(HttpServletRequest request, @RequestBody ClassStudentDO classStudentDO) {
-        classStudentDO.setTeacherCode(request.getHeader("User-Token"));
+        classStudentDO.setStudentCode(request.getHeader("User-Token"));
         iClassStudentDao.applyForClass(classStudentDO);
         return ResultBean.success(null);
     }
