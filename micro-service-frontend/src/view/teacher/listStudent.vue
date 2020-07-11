@@ -57,11 +57,11 @@
             },
             handleClick(row, pass) {
                 console.log(row, pass);
-                let url = '/classStudent/disagreeApply/' + row.csId
+                let url = '/classStudent/disagreeApply'
                 if (pass) {
-                    url = '/classStudent/agreeApply/' + + row.csId
+                    url = '/classStudent/agreeApply'
                 }
-                request.post(url, null).then(res => {
+                request.get(url, { id: row.csId }).then(res => {
                     if (res.code === '200') {
                         this.$message({
                             message: '处理成功',
