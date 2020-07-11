@@ -26,22 +26,30 @@ public class ClassController {
     private IClassDao iClassDao;
 
     /**
-     * 获取班级列表
+     * 教师获取班级列表
      */
-    @GetMapping("/getClassList")
-    public ResultBean getClassDOList(HttpServletRequest request, @RequestParam Map<String, String> params) {
+    @GetMapping("/getTeacherClassList")
+    public ResultBean getTeacherClassList(HttpServletRequest request, @RequestParam Map<String, String> params) {
         params.put("teacherCode", request.getHeader("User-Token"));
         return ResultBean.success(iClassDao.getClassDOList(params));
     }
 
     /**
-     * 注册
+     * 创建课程
      */
     @PostMapping("/createClass")
     public ResultBean registry(HttpServletRequest request, @RequestBody ClassDO classDO) {
         classDO.setTeacherCode(request.getHeader("User-Token"));
         iClassDao.createClass(classDO);
         return ResultBean.success(null);
+    }
+
+    /**
+     * 教师获取班级列表
+     */
+    @GetMapping("/getStudentClassList")
+    public ResultBean getStudentClassList(@RequestParam Map<String, String> params) {
+        return ResultBean.success(iClassDao.getClassDOList(params));
     }
 
 }

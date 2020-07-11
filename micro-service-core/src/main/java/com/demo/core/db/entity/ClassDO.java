@@ -39,6 +39,11 @@ public class ClassDO implements Serializable {
     private String teacherCode;
 
     /**
+     * 教师姓名
+     */
+    private String teacherName;
+
+    /**
      * 描述
      */
     private String describe;

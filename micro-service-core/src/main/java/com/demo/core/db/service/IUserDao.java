@@ -29,4 +29,13 @@ public interface IUserDao extends IService<UserDO> {
      */
     void login(UserDO user);
 
+    /**
+     * 根据编码获取用户
+     *
+     * @param code
+     * @param type
+     * @return
+     */
+    UserDO getUser(String code, int type);
+
 }
