@@ -6,3 +6,4 @@ spring:
     url: jdbc:mysql://mysql.mysql:3306/school?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: root
     password: oxZ2OSC6Hv
+
