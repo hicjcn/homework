@@ -46,7 +46,7 @@ public class ClassDaoImpl extends ServiceImpl<ClassDOMapper, ClassDO> implements
         }
 
         classDO.setTeacherName(user.getName());
-        return this.save(classDO);
+        return this.saveOrUpdate(classDO);
     }
 
     @Override
