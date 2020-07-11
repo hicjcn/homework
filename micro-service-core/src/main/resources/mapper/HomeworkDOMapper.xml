@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.core.db.mapper.HomeworkDOMapper">
+    
+    <select id="getHomeworkList" resultType="com.demo.core.db.entity.VO.HomeworkVO">
+        SELECT
+            t2.h_id AS hId,
+            t2.h_topic AS hTopic,
+            t2.create_time AS createTime,
+            t2.deadline AS deadline,
+            t2.class_id AS classId,
+            t1.class_name AS classNmae,
+            t2.teacher_code AS teacherCode,
+            t2.file_name AS fileName
+        FROM class t1, homework t2
+        WHERE t1.class_id = t2.class_id
+        AND t2.teacher_code = #{teacherCode}
+        <if test="classId != '' and classId != null">
+            AND t1.class_name LIKE '%' || #{className} || '%'
+        </if>
+    </select>
 
 </mapper>

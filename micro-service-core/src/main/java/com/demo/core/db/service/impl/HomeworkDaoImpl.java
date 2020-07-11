@@ -2,6 +2,7 @@ package com.demo.core.db.service.impl;
 
 import com.demo.core.db.entity.ClassDO;
 import com.demo.core.db.entity.HomeworkDO;
+import com.demo.core.db.entity.VO.HomeworkVO;
 import com.demo.core.db.mapper.HomeworkDOMapper;
 import com.demo.core.db.service.IClassDao;
 import com.demo.core.db.service.IHomeworkDao;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -43,7 +47,14 @@ public class HomeworkDaoImpl extends ServiceImpl<HomeworkDOMapper, HomeworkDO> i
             }
         }
 
+        homeworkDO.setCreateTime(LocalDateTime.now());
+
         this.saveOrUpdate(homeworkDO);
 
+    }
+
+    @Override
+    public List<HomeworkVO> getHomeworkList(String teacherCode, String className) {
+        return this.baseMapper.getHomeworkList(teacherCode, className);
     }
 }

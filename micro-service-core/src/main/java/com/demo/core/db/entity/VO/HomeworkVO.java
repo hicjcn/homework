@@ -36,8 +36,18 @@ public class HomeworkVO implements Serializable {
     private Integer classId;
 
     /**
+     * 班级名称
+     */
+    private Integer className;
+
+    /**
      * 教师ID
      */
     private String teacherCode;
+
+    /**
+     * 文件名
+     */
+    private String fileName;
 
 }

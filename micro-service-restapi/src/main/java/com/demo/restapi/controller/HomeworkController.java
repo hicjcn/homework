@@ -2,17 +2,16 @@ package com.demo.restapi.controller;
 
 
 import com.demo.core.db.entity.HomeworkDO;
+import com.demo.core.db.entity.VO.HomeworkVO;
 import com.demo.core.db.service.IHomeworkDao;
 import com.demo.core.entity.ResultBean;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -37,6 +36,14 @@ public class HomeworkController {
         homeworkDO.setTeacherCode(request.getHeader("User-Token"));
         iHomeworkDao.releaseHomework(homeworkDO, file);
         return ResultBean.success(null);
+    }
+
+    /**
+     * 获取作业列表
+     */
+    @GetMapping("/getHomeworkList")
+    public ResultBean<List<HomeworkVO>> getHomeworkList(HttpServletRequest request, @RequestParam String className) {
+        return ResultBean.success(iHomeworkDao.getHomeworkList(request.getHeader("User-Token"), className));
     }
 
 }
