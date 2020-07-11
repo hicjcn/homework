@@ -52,8 +52,9 @@
             <el-table-column
                     fixed="right"
                     label="操作"
-                    width="100">
+                    width="150">
                 <template slot-scope="scope">
+                    <el-button @click="update(scope.row)" type="text" size="small">修改</el-button>
                     <el-button @click="handleClick(scope.row)" type="text" size="small">查看学生列表</el-button>
                 </template>
             </el-table-column>
@@ -74,6 +75,10 @@
                         this.tableData = res.data
                     }
                 })
+            },
+            update(row) {
+                this.formInline = row
+                this.dialogVisible = true
             },
             handleClick(row) {
                 console.log(row);
