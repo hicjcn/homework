@@ -7,6 +7,7 @@ import Register from '@/view/register'
 import Home from '@/view/Home'
 import TClass from '@/view/teacher/class'
 import TListStudent from '@/view/teacher/listStudent'
+import THomework from '@/view/teacher/homework'
 import SClass from '@/view/student/class'
 
 Vue.use(Router)
@@ -44,6 +45,11 @@ const router = new Router({
                     path: 'listStudent',
                     name: 'TListStudent',
                     component: TListStudent
+                },
+                {
+                    path: 'homework',
+                    name: 'THomework',
+                    component: THomework
                 }
             ]
         },

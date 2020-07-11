@@ -6,6 +6,7 @@ import { Notification } from 'element-ui';
 // 创建axios实例
 const httpService = axios.create({
     baseURL: "/api", // url前缀
+    withCredentials: true,
     timeout: 3000 // 请求超时时间
 });
 

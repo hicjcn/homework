@@ -4,8 +4,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from './router'
 import VueCookies from 'vue-cookies'
+import moment from 'moment'
 
-
+Vue.prototype.$moment = moment
 Vue.config.productionTip = false
 
 Vue.use(VueCookies)
