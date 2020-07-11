@@ -19,10 +19,10 @@ public interface IClassDao extends IService<ClassDO> {
     /**
      * 查看班级列表
      *
-     * @param params
+     * @param teacherCode
      * @return
      */
-    List<ClassDO> getClassDOList(Map<String, String> params);
+    List<ClassDO> getClassDOList(String teacherCode);
 
     /**
      * 创建班级

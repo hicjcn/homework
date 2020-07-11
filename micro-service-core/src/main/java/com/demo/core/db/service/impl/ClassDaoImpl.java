@@ -30,15 +30,10 @@ public class ClassDaoImpl extends ServiceImpl<ClassDOMapper, ClassDO> implements
     private IUserDao iUserDao;
 
     @Override
-    public List<ClassDO> getClassDOList(Map<String, String> params) {
-        String teacherCode = params.get("teacherCode");
-        String teacherName = params.get("teacherName");
-        String className = params.get("className");
+    public List<ClassDO> getClassDOList(String teacherCode) {
         return this.baseMapper.selectList(
                 new QueryWrapper<ClassDO>()
                         .eq(StringUtils.isNotBlank(teacherCode),"teacher_code", teacherCode)
-                        .like(StringUtils.isNotBlank(className), "class_name", className)
-                        .like(StringUtils.isNotBlank(className), "teacher_name", teacherName)
         );
     }
 

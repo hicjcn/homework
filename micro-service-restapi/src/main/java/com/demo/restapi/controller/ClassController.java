@@ -29,9 +29,9 @@ public class ClassController {
      * 教师获取班级列表
      */
     @GetMapping("/getTeacherClassList")
-    public ResultBean getTeacherClassList(HttpServletRequest request, @RequestParam Map<String, String> params) {
-        params.put("teacherCode", request.getHeader("User-Token"));
-        return ResultBean.success(iClassDao.getClassDOList(params));
+    public ResultBean getTeacherClassList(HttpServletRequest request) {
+        String teacherCode = request.getHeader("User-Token");
+        return ResultBean.success(iClassDao.getClassDOList(teacherCode));
     }
 
     /**
@@ -48,8 +48,8 @@ public class ClassController {
      * 教师获取班级列表
      */
     @GetMapping("/getStudentClassList")
-    public ResultBean getStudentClassList(@RequestParam Map<String, String> params) {
-        return ResultBean.success(iClassDao.getClassDOList(params));
+    public ResultBean getStudentClassList() {
+        return ResultBean.success(iClassDao.getClassDOList(null));
     }
 
 }

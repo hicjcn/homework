@@ -54,7 +54,7 @@ public class HomeworkStudentDO implements Serializable {
     /**
      * 作业描述
      */
-    private String descrbe;
+    private String hsDescribe;
 
 
 }
