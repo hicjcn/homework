@@ -60,7 +60,8 @@
             handleClick(row) {
                 console.log(row);
                 request.post('/classStudent/applyForClass', {
-                    classId: row.classId
+                    classId: row.classId,
+                    teacherCode: row.teacherCode
                 }).then(res => {
                     if (res.code === '200') {
                         this.$message({

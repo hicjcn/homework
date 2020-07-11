@@ -3,8 +3,8 @@
         <h1>班级学生列表-{{classData.className}}</h1>
         <el-select v-model="selectedType" placeholder="请选择" @change="refreshData">
             <el-option label="通过" value="0"/>
-            <el-option label="驳回" value="1"/>
-            <el-option label="审核中" value="2"/>
+            <el-option label="驳回" value="2"/>
+            <el-option label="审核中" value="1"/>
         </el-select>
         <el-table
                 :data="tableData"
@@ -12,28 +12,16 @@
                 style="width: 100%; margin-top: 10px;">
             <el-table-column
                     fixed
-                    prop="classId"
-                    label="编号"
-                    width="150">
+                    prop="csId"
+                    label="编号">
             </el-table-column>
             <el-table-column
-                    prop="className"
-                    label="名称"
-                    width="120">
+                    prop="studentCode"
+                    label="学生编号">
             </el-table-column>
             <el-table-column
-                    prop="teacherCode"
-                    label="教师编号"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    prop="teacherName"
-                    label="教师"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    prop="classDescribe"
-                    label="班级描述">
+                    prop="studentName"
+                    label="学生">
             </el-table-column>
             <el-table-column
                     fixed="right"
@@ -57,7 +45,10 @@
         name: "ListStudent",
         methods: {
             refreshData() {
-                request.get('/class/getTeacherClassList', null)
+                request.get('/classStudent/getClassStudentList', {
+                    classId: this.classData.classId,
+                    type: this.selectedType
+                })
                 .then(res => {
                     if (res.code === '200') {
                         this.tableData = res.data
@@ -66,6 +57,19 @@
             },
             handleClick(row, pass) {
                 console.log(row, pass);
+                let url = '/classStudent/disagreeApply/' + row.csId
+                if (pass) {
+                    url = '/classStudent/agreeApply/' + + row.csId
+                }
+                request.post(url, null).then(res => {
+                    if (res.code === '200') {
+                        this.$message({
+                            message: '处理成功',
+                            type: 'success'
+                        })
+                        this.refreshData()
+                    }
+                })
             }
         },
         data() {
