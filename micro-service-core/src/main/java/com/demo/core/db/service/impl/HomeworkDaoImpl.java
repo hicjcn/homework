@@ -54,7 +54,7 @@ public class HomeworkDaoImpl extends ServiceImpl<HomeworkDOMapper, HomeworkDO> i
     }
 
     @Override
-    public List<HomeworkVO> getHomeworkList(String teacherCode, String className) {
-        return this.baseMapper.getHomeworkList(teacherCode, className);
+    public List<HomeworkVO> getHomeworkList(String teacherCode, Integer classId) {
+        return this.baseMapper.getHomeworkList(teacherCode, classId);
     }
 }

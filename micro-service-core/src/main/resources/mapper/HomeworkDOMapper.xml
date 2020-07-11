@@ -16,7 +16,7 @@
         WHERE t1.class_id = t2.class_id
         AND t2.teacher_code = #{teacherCode}
         <if test="classId != '' and classId != null">
-            AND t1.class_name LIKE '%' || #{className} || '%'
+            AND t1.class_id = #{classId}
         </if>
     </select>
 

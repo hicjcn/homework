@@ -29,9 +29,9 @@ public interface IHomeworkDao extends IService<HomeworkDO> {
      * 查看作业列表
      *
      * @param teacherCode
-     * @param className
+     * @param classId
      * @return
      */
-    List<HomeworkVO> getHomeworkList(String teacherCode, String className);
+    List<HomeworkVO> getHomeworkList(String teacherCode, Integer classId);
 
 }
