@@ -29,7 +29,7 @@ public class ClassStudentController {
     /**
      * 教师获取班级列表
      */
-    @GetMapping("/getTeacherClassList")
+    @GetMapping("/getClassStudentList")
     public ResultBean<List<ClassStudentVO>> getTeacherClassList(HttpServletRequest request, @RequestParam Integer classId, @RequestParam Integer type) {
         String teacherCode = request.getHeader("User-Token");
         return ResultBean.success(iClassStudentDao.getClassStudentList(teacherCode, classId, type));
