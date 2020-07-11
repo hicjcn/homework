@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.jcera</groupId>
+        <groupId>com.demo</groupId>
         <artifactId>micro-service</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -15,7 +15,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.jcera</groupId>
+            <groupId>com.demo</groupId>
             <artifactId>micro-service-core</artifactId>
             <version>1.0.0</version>
         </dependency>
