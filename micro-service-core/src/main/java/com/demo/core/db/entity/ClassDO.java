@@ -46,7 +46,7 @@ public class ClassDO implements Serializable {
     /**
      * 描述
      */
-    private String describe;
+    private String classDescribe;
 
 
 }
