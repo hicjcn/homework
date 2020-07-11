@@ -33,7 +33,7 @@
             },
             handleSelect(key) {
                 console.log(key, this.$cookies.get("usertype"))
-                if ("s" === this.$cookies.get("usertype")) {
+                if ("0" === this.$cookies.get("usertype")) {
                     if (key === '2') {
                         this.$router.push({name: "SHome"})
                     } else if (key === '3') {
