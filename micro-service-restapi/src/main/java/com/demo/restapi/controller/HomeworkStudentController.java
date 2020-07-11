@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-07-11
  */
 @RestController
-@RequestMapping("/db/homework-student-do")
+@RequestMapping("/homeworkStudent")
 public class HomeworkStudentController {
 
 }

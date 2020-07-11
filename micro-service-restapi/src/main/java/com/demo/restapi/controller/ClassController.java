@@ -2,15 +2,12 @@ package com.demo.restapi.controller;
 
 
 import com.demo.core.db.entity.ClassDO;
-import com.demo.core.db.entity.UserDO;
 import com.demo.core.db.service.IClassDao;
 import com.demo.core.entity.ResultBean;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +19,7 @@ import java.util.Map;
  * @since 2020-07-11
  */
 @RestController
-@RequestMapping("/db/class-do")
+@RequestMapping("/class")
 public class ClassController {
 
     @Resource
@@ -40,7 +37,7 @@ public class ClassController {
     /**
      * 注册
      */
-    @PostMapping("/registry")
+    @PostMapping("/createClass")
     public ResultBean registry(HttpServletRequest request, @RequestBody ClassDO classDO) {
         classDO.setTeacherCode(request.getHeader("User-Token"));
         iClassDao.createClass(classDO);
