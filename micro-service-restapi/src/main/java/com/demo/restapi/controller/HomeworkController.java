@@ -42,8 +42,8 @@ public class HomeworkController {
      * 获取作业列表
      */
     @GetMapping("/getHomeworkList")
-    public ResultBean<List<HomeworkVO>> getHomeworkList(HttpServletRequest request, @RequestParam String className) {
-        return ResultBean.success(iHomeworkDao.getHomeworkList(request.getHeader("User-Token"), className));
+    public ResultBean<List<HomeworkVO>> getHomeworkList(HttpServletRequest request, @RequestParam Integer classId) {
+        return ResultBean.success(iHomeworkDao.getHomeworkList(request.getHeader("User-Token"), classId));
     }
 
 }

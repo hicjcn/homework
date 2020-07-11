@@ -21,9 +21,9 @@ public interface HomeworkDOMapper extends BaseMapper<HomeworkDO> {
      * 查看作业列表
      *
      * @param teacherCode
-     * @param className
+     * @param classId
      * @return
      */
-    List<HomeworkVO> getHomeworkList(@Param("teacherCode") String teacherCode, @Param("className") String className);
+    List<HomeworkVO> getHomeworkList(@Param("teacherCode") String teacherCode, @Param("classId") Integer classId);
 
 }
