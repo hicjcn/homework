@@ -20,6 +20,11 @@ public class HomeworkForStuVO extends HomeworkVO {
     private Integer hStatus;
 
     /**
+     * 学生提交作业ID
+     */
+    private Integer hsId;
+
+    /**
      * 提交时间
      */
     private LocalDateTime submitTime;

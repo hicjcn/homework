@@ -81,9 +81,13 @@ public class HomeworkStudentDaoImpl extends ServiceImpl<HomeworkStudentDOMapper,
 
     @Override
     public List<HomeworkStudentDO> getStudentHomeworkList(String teacherCode, Integer hId) {
+        HomeworkDO homeworkDO = iHomeworkDao.getOne(new QueryWrapper<HomeworkDO>().eq("teacher_code", teacherCode).eq("h_id", hId));
+        if (homeworkDO == null) {
+            throw new BusinessException(null, "无权查看该作业列表学生提交明细");
+        }
+
         return this.baseMapper.selectList(
                 new QueryWrapper<HomeworkStudentDO>()
-                        .eq("teacher_code", teacherCode)
                         .eq("h_id", hId)
         );
     }
