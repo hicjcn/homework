@@ -122,7 +122,7 @@
             handleClick(row) {
                 console.log(row);
                 // 跳转到学生列表
-                this.$router.push({ name: "TListStudent", params: row })
+                this.$router.push({ name: "TListHomework", params: row })
             },
             onSubmit() {
                 if (!this.formInline.classId) {

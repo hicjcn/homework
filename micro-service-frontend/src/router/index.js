@@ -8,6 +8,7 @@ import Home from '@/view/Home'
 import TClass from '@/view/teacher/class'
 import TListStudent from '@/view/teacher/listStudent'
 import THomework from '@/view/teacher/homework'
+import TListHomework from '@/view/teacher/listHomework'
 import SClass from '@/view/student/class'
 import SHomework from '@/view/student/homework'
 
@@ -51,6 +52,11 @@ const router = new Router({
                     path: 'homework',
                     name: 'THomework',
                     component: THomework
+                },
+                {
+                    path: 'listHomework',
+                    name: 'TListHomework',
+                    component: TListHomework
                 }
             ]
         },
