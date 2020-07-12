@@ -58,7 +58,7 @@ public class HomeworkStudentDaoImpl extends ServiceImpl<HomeworkStudentDOMapper,
             throw new BusinessException(null, "超过截至时间");
         }
 
-        UserDO user = iUserDao.getUser(studentCode, 2);
+        UserDO user = iUserDao.getUser(studentCode, 0);
         if (user == null) {
             throw new BusinessException(null, "该学生不存在");
         }
