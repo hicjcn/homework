@@ -42,7 +42,9 @@
         WHERE t2.class_id = t1.class_id
             AND t3.class_id = t2.class_id
             AND t2.student_code = #{studentCode}
+        <if test="classId != '' and classId != null">
             AND t2.class_id = #{classId}
+        </if>
         ORDER BY t3.create_time DESC
     </select>
 
