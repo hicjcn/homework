@@ -1,7 +1,9 @@
 package com.demo.core.db.entity.VO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class HomeworkForStuVO extends HomeworkVO {
 
