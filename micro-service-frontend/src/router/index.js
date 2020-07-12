@@ -9,6 +9,7 @@ import TClass from '@/view/teacher/class'
 import TListStudent from '@/view/teacher/listStudent'
 import THomework from '@/view/teacher/homework'
 import SClass from '@/view/student/class'
+import SHomework from '@/view/student/homework'
 
 Vue.use(Router)
 
@@ -67,6 +68,11 @@ const router = new Router({
                     path: 'class',
                     name: 'SClass',
                     component: SClass
+                },
+                {
+                    path: 'homework',
+                    name: 'SHomework',
+                    component: SHomework
                 }
             ]
         }

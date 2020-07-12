@@ -38,6 +38,8 @@
                         this.$router.push({name: "SHome"})
                     } else if (key === '3') {
                         this.$router.push({name: "SClass"})
+                    } else if (key === '4') {
+                        this.$router.push({name: "SHomework"})
                     }
                 } else {
                     if (key === '2') {
