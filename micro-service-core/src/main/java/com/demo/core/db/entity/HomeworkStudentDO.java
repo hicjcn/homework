@@ -32,6 +32,11 @@ public class HomeworkStudentDO implements Serializable {
     private String studentCode;
 
     /**
+     * 学生姓名
+     */
+    private String studentName;
+
+    /**
      * 作业ID
      */
     private Integer hId;

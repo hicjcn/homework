@@ -41,4 +41,13 @@ public interface IClassStudentDao extends IService<ClassStudentDO> {
      */
     List<ClassStudentVO> getClassStudentList(String teacherCode, Integer classId, Integer type);
 
+    /**
+     * 根据课程与学生Code获取数据
+     *
+     * @param classId
+     * @param studentCode
+     * @return
+     */
+    ClassStudentDO getRelByIdAndCode(Integer classId, String studentCode);
+
 }

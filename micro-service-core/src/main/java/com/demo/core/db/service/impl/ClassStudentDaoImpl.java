@@ -84,4 +84,13 @@ public class ClassStudentDaoImpl extends ServiceImpl<ClassStudentDOMapper, Class
 
         return this.baseMapper.getClassStudentList(classId, type);
     }
+
+    @Override
+    public ClassStudentDO getRelByIdAndCode(Integer classId, String studentCode) {
+        return this.getOne(
+                new QueryWrapper<ClassStudentDO>()
+                        .eq("class_id", classId)
+                        .eq("student_code", studentCode)
+        );
+    }
 }
