@@ -54,7 +54,7 @@
                     prop="fileName"
                     label="附件">
                 <template slot-scope="scope">
-                    {{scope.row.fileName}}<el-link type="primary" :href="'/api/file/download?name=' + scope.row.fileName">下载</el-link>
+                    {{scope.row.fileName}}<el-link v-if="scope.row.fileName" type="primary" :href="'/api/file/download?name=' + scope.row.fileName">下载</el-link>
                 </template>
             </el-table-column>
             <el-table-column

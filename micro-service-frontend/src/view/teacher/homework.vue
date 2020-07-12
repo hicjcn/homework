@@ -69,7 +69,7 @@
                     prop="fileName"
                     label="附件">
                 <template slot-scope="scope">
-                    {{scope.row.fileName}}<el-link type="primary" :href="'/api/file/download?name=' + scope.row.fileName">下载</el-link>
+                    {{scope.row.fileName}}<el-link type="primary" v-if="scope.row.fileName" :href="'/api/file/download?name=' + scope.row.fileName">下载</el-link>
                 </template>
             </el-table-column>
             <el-table-column
@@ -121,7 +121,7 @@
             },
             handleClick(row) {
                 console.log(row);
-                // 跳转到学生列表
+                // 跳转到学生提交的列表
                 this.$router.push({ name: "TListHomework", params: row })
             },
             onSubmit() {
@@ -147,10 +147,14 @@
                     return
                 }
                 let formData = new FormData();
-                formData.append("hId", this.formInline.hId);
-                formData.append("teacherCode", this.formInline.teacherCode);
+                if (this.formInline.hId) {
+                    formData.append("hId", this.formInline.hId);
+                }
+                formData.append("teacherCode", this.$cookies.get('username'));
                 formData.append("classId", this.formInline.classId);
-                formData.append("createTime", this.formInline.createTime);
+                if (this.formInline.createTime) {
+                    formData.append("createTime", this.formInline.createTime);
+                }
                 formData.append("deadline", this.$moment(this.formInline.deadline).format('YYYY-MM-DD HH:mm:ss'));
                 formData.append("hTopic", this.formInline.hTopic);
                 formData.append("file", this.formInline.file);
