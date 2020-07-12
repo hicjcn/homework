@@ -1,18 +1,17 @@
 <template>
     <div>
         <h1>作业列表</h1>
-        <el-button type="primary" @click="dialogVisible = true">添加作业</el-button>
         <el-dialog
                 title="提交作业"
                 :visible.sync="dialogVisible"
                 width="50%">
             <el-form :model="formInline" class="demo-form-inline" label-width="100px">
                 <el-form-item label="作业">
-                    <el-input v-model="formInline.hTopic" type="textarea"
+                    <el-input v-model="formInline.hsDescribe" type="textarea"
                               :rows="4" placeholder="提交作业的描述"/>
                 </el-form-item>
                 <el-form-item label="已提交文件">
-                    {{formInline.hTopic}}
+                    {{formInline.hsFileName}}
                 </el-form-item>
                 <el-form-item label="附件">
                     <input @change="getFile($event)" type="file" placeholder="附件"/>
@@ -117,11 +116,6 @@
                 this.formInline = row
                 this.dialogVisible = true
             },
-            handleClick(row) {
-                console.log(row);
-                // 跳转到学生列表
-                this.$router.push({ name: "TListStudent", params: row })
-            },
             onSubmit() {
                 if (!this.formInline.classId) {
                     this.$message({
@@ -145,18 +139,14 @@
                     return
                 }
                 let formData = new FormData();
-                formData.append("hId", this.formInline.hId);
-                formData.append("teacherCode", this.formInline.teacherCode);
-                formData.append("classId", this.formInline.classId);
-                formData.append("createTime", this.formInline.createTime);
-                formData.append("deadline", this.$moment(this.formInline.deadline).format('YYYY-MM-DD HH:mm:ss'));
-                formData.append("hTopic", this.formInline.hTopic);
+                formData.append("hsId", this.formInline.hsId);
+                formData.append("hsDescribe", this.formInline.hsDescribe);
                 formData.append("file", this.formInline.file);
-                request.post('/homework/releaseHomework', formData)
+                request.post('/homeworkStudent/submitHomework', formData)
                 .then(res => {
                     if (res.code === '200') {
                         this.$message({
-                            message: '添加成功',
+                            message: '提交成功',
                             type: 'success'
                         });
                         this.dialogVisible = false
