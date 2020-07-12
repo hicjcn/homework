@@ -54,7 +54,7 @@ public class HomeworkStudentDaoImpl extends ServiceImpl<HomeworkStudentDOMapper,
 
         // 校对时间
         LocalDateTime subTime = LocalDateTime.now();
-        if (homeworkDO.getDeadline().isAfter(subTime)) {
+        if (!homeworkDO.getDeadline().isAfter(subTime)) {
             throw new BusinessException(null, "超过截至时间");
         }
 
