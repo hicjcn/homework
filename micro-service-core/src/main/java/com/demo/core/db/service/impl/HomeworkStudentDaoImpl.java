@@ -1,5 +1,6 @@
 package com.demo.core.db.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.core.db.entity.ClassStudentDO;
 import com.demo.core.db.entity.HomeworkDO;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -73,6 +75,37 @@ public class HomeworkStudentDaoImpl extends ServiceImpl<HomeworkStudentDOMapper,
         }
 
         this.saveOrUpdate(homeworkStudentDO);
+
+    }
+
+    @Override
+    public List<HomeworkStudentDO> getStudentHomeworkList(String teacherCode, Integer hId) {
+        return this.baseMapper.selectList(
+                new QueryWrapper<HomeworkStudentDO>()
+                        .eq("teacher_code", teacherCode)
+                        .eq("h_id", hId)
+        );
+    }
+
+    @Override
+    public void setHomeworkGrade(String teacherCode, Integer hsId, Float grade) {
+        if (hsId == null || grade == null) {
+            throw new BusinessException(null, "非法操作");
+        }
+
+        HomeworkStudentDO homeworkStudentDO = this.getById(hsId);
+        if (homeworkStudentDO == null) {
+            throw new BusinessException(null, "该学生作业不存在");
+        }
+
+        // 校验权限
+        HomeworkDO homeworkDO = iHomeworkDao.getById(homeworkStudentDO.getHId());
+        if (homeworkDO == null || !homeworkDO.getTeacherCode().equals(teacherCode)) {
+            throw new BusinessException(null, "无权对该作业下的学生作业打分");
+        }
+
+        homeworkStudentDO.setGrade(grade);
+        this.updateById(homeworkStudentDO);
 
     }
 }
