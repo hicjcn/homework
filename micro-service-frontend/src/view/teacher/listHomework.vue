@@ -7,7 +7,7 @@
                 style="width: 100%; margin-top: 10px;">
             <el-table-column
                     fixed
-                    prop="csId"
+                    prop="hsId"
                     label="编号">
             </el-table-column>
             <el-table-column
@@ -19,13 +19,24 @@
                     label="学生">
             </el-table-column>
             <el-table-column
+                    prop="hsDescribe"
+                    label="提交作业">
+            </el-table-column>
+            <el-table-column
+                    prop="fileName"
+                    label="附件">
+                <template slot-scope="scope">
+                    {{scope.row.hsFileName}}<el-link type="primary" v-if="scope.row.hsFileName" :href="'/api/file/download?name=' + scope.row.hsFileName">下载</el-link>
+                </template>
+            </el-table-column>
+            <el-table-column
                     fixed="right"
                     label="操作"
                     width="200">
                 <template slot-scope="scope">
                     <span>
-                        <el-input v-model="scope.row.grade" placeholder="请输入分数"/>
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">提交</el-button>
+                        <el-input style="width: 100px;" type="number" v-model="scope.row.grade" placeholder="请输入分数"/>
+                        <el-button @click="handleClick(scope.row)">提交</el-button>
                     </span>
                 </template>
             </el-table-column>

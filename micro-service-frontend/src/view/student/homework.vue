@@ -76,6 +76,11 @@
                 </template>
             </el-table-column>
             <el-table-column
+                    prop="grade"
+                    label="分数"
+                    width="80">
+            </el-table-column>
+            <el-table-column
                     fixed="right"
                     label="操作"
                     width="150">
@@ -139,7 +144,10 @@
                     return
                 }
                 let formData = new FormData();
-                formData.append("hsId", this.formInline.hsId);
+                if (this.formInline.hsId) {
+                    formData.append("hsId", this.formInline.hsId);
+                }
+                formData.append("hId", this.formInline.hId);
                 formData.append("hsDescribe", this.formInline.hsDescribe);
                 formData.append("file", this.formInline.file);
                 request.post('/homeworkStudent/submitHomework', formData)
