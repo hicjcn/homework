@@ -62,6 +62,7 @@ public class HomeworkStudentDaoImpl extends ServiceImpl<HomeworkStudentDOMapper,
         if (user == null) {
             throw new BusinessException(null, "该学生不存在");
         }
+        homeworkStudentDO.setSubmitTime(subTime);
         homeworkStudentDO.setStudentName(user.getName());
 
         // 保存文件
