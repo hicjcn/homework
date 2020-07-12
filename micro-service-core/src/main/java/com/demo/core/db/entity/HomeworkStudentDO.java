@@ -49,7 +49,7 @@ public class HomeworkStudentDO implements Serializable {
     /**
      * 文件名
      */
-    private String fileName;
+    private String hsFileName;
 
     /**
      * 作业描述
