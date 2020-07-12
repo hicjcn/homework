@@ -11,6 +11,6 @@ public class HomeworkVO extends HomeworkDO {
     /**
      * 班级名称
      */
-    private Integer className;
+    private String className;
 
 }
